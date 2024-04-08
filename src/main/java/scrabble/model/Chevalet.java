@@ -15,4 +15,9 @@ public class Chevalet {
 	public Tuile piocher() {
 		return this.sac.piocher();
 	}
+	
+	public void echanger(Tuile tuile) {
+		tuiles.remove(tuile);
+		this.sac.ajouter(tuile);
+	}
 }

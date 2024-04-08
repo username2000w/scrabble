@@ -63,4 +63,8 @@ public class Sac {
     // On retire et récupère la première tuile du sac.
     return this.tuiles.remove(0);
   }
+  
+  public void ajouter(Tuile tuile) {
+	  tuiles.add(tuile);
+  }
 }

@@ -6,4 +6,8 @@ public class Tuile {
   public Tuile(LettreAlphabet lettre) {
     this.lettre = lettre;
   }
+
+  public LettreAlphabet getLettre() {
+    return this.lettre;
+  }
 }

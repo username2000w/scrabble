@@ -1,17 +1,29 @@
 package scrabble.model;
 
+import java.util.ArrayList;
+
 public class Sac {
-  private Tuile[] tuiles;  
+  private ArrayList<Tuile> tuiles;  
 
   private void faireJetonsPour(int nombreDeJetons, LettreAlphabet lettre) {
     for (int i = 0; i < nombreDeJetons; i++) {
-      this.tuiles[i] = new Tuile(lettre);
+      this.tuiles.add(new Tuile(lettre));
     }
   }
 
-  public Sac () {
-    this.tuiles = new Tuile[102];
+  private void mélanger() {
+    for (int i = 0; i < this.tuiles.size(); i++) {
+      int index = (int) (Math.random() * this.tuiles.size());
+      Tuile temp = this.tuiles.get(i);
+      this.tuiles.set(i, this.tuiles.get(index));
+      this.tuiles.set(index, temp);
+    }
+  }
+
+  public Sac() {
+    this.tuiles = new ArrayList<>();
     
+    // On ajout tous les jetons dans le sac.
     this.faireJetonsPour(15, LettreAlphabet.E);
     this.faireJetonsPour(9, LettreAlphabet.A);
     this.faireJetonsPour(8, LettreAlphabet.I);
@@ -38,5 +50,17 @@ public class Sac {
     this.faireJetonsPour(1, LettreAlphabet.X);
     this.faireJetonsPour(1, LettreAlphabet.Y);
     this.faireJetonsPour(1, LettreAlphabet.Z);
+
+    // On mélange le contenu du sac.
+    this.mélanger();
+  }
+
+  public Tuile piocher () {
+    if (this.tuiles.size() == 0) {
+      return null;
+    }
+
+    // On retire et récupère la première tuile du sac.
+    return this.tuiles.remove(0);
   }
 }

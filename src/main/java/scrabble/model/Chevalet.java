@@ -24,4 +24,8 @@ public class Chevalet {
 	public Tuile getTuileAvecIndex(int index) {
 		return this.tuiles.get(index);
 	}
+
+	public ArrayList<Tuile> getTuiles() {
+		return this.tuiles;
+	}
 }

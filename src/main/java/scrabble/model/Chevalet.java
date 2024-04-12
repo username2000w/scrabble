@@ -7,17 +7,17 @@ public class Chevalet {
 	private ArrayList<Tuile> tuiles;
 	private Sac sac;
 	
-	public Chevalet(ArrayList<Tuile> tuiles, Sac sac) {
-		this.tuiles = tuiles;
+	public Chevalet(Sac sac) {
 		this.sac = sac;
 	}
 	
-	public Tuile piocher() {
-		return this.sac.piocher();
+	public void piocher() {
+		if (this.tuiles.size() < 7)
+			this.tuiles.add(this.sac.piocher());
 	}
 	
 	public void echanger(Tuile tuile) {
-		tuiles.remove(tuile);
+		this.tuiles.remove(tuile);
 		this.sac.ajouter(tuile);
 	}
 }

@@ -20,4 +20,8 @@ public class Chevalet {
 		this.tuiles.remove(tuile);
 		this.sac.ajouter(tuile);
 	}
+	
+	public Tuile getTuileAvecIndex(int index) {
+		return this.tuiles.get(index);
+	}
 }

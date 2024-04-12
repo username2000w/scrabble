@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Chevalet {
-	private ArrayList<Tuile> tuiles;
+	private ArrayList<Tuile> tuiles = new ArrayList<Tuile>();
 	private Sac sac;
 	
 	public Chevalet(Sac sac) {
@@ -12,8 +12,9 @@ public class Chevalet {
 	}
 	
 	public void piocher() {
-		if (this.tuiles.size() < 7)
-			this.tuiles.add(this.sac.piocher());
+		if (this.tuiles.size() < 7) {
+			this.tuiles.add(this.sac.piocher());	
+		}			
 	}
 	
 	public void echanger(Tuile tuile) {

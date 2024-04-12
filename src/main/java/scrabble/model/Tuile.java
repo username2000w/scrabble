@@ -10,4 +10,8 @@ public class Tuile {
   public LettreAlphabet getLettre() {
     return this.lettre;
   }
+  
+  public String description() {
+	return this.lettre.toString() + + this.lettre.getPoints();
+  }
 }

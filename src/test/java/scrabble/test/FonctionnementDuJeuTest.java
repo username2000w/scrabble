@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import scrabble.model.Chevalet;
 import scrabble.model.Sac;
 
-class BonFonctionnementDuJeu {
+class FonctionnementDuJeuTest {
 	Sac sac;
 	Chevalet chevalet;
 

@@ -60,15 +60,16 @@ public class Sac {
     this.melanger();
   }
 
+  /** Piocher la première tuile actuellement dans le sac. */
   public Tuile piocher () {
     if (this.tuiles.size() == 0) {
       return null;
     }
 
-    // On retire et récupère la première tuile du sac.
     return this.tuiles.remove(0);
   }
   
+  /** Ajouter une tuile à la fin du sac. */
   public void ajouter(Tuile tuile) {
 	  tuiles.add(tuile);
   }

@@ -8,8 +8,8 @@ public class Joueur {
 		this.chevalet = chevalet;
 		this.nom = nom;
 
-		for (int i = 0; i<7 ; i++) {
-			this.chevalet.piocher();
+		for (int tuileIndex = 0; tuileIndex < 7 ; tuileIndex++) {
+			this.chevalet.piocher(tuileIndex);
 		}
 	}
 
@@ -17,8 +17,12 @@ public class Joueur {
 		return nom;
 	}
 	
-	public void echanger(Tuile tuile) {
-		this.chevalet.echanger(tuile);
-		this.chevalet.piocher();
+	public void echanger(int tuileIndex) {
+		this.chevalet.echanger(tuileIndex);
+		this.chevalet.piocher(tuileIndex);
 	}
+
+  public void afficherChevalet() {
+    this.chevalet.afficherTuiles();
+  }
 }

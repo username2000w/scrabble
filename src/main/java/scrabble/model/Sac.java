@@ -2,6 +2,10 @@ package scrabble.model;
 
 import java.util.ArrayList;
 
+/**
+ * Lors de l'instanciation, le sac est rempli de tuiles de scrabble
+ * qui sont ensuite mélangées.
+ */
 public class Sac {
   private ArrayList<Tuile> tuiles;  
 
@@ -43,6 +47,7 @@ public class Sac {
     this.faireJetonsPour(2, LettreAlphabet.F);
     this.faireJetonsPour(2, LettreAlphabet.H);
     this.faireJetonsPour(2, LettreAlphabet.V);
+    this.faireJetonsPour(2, LettreAlphabet.JOKER);
     this.faireJetonsPour(1, LettreAlphabet.J);
     this.faireJetonsPour(1, LettreAlphabet.Q);
     this.faireJetonsPour(1, LettreAlphabet.K);
@@ -66,5 +71,9 @@ public class Sac {
   
   public void ajouter(Tuile tuile) {
 	  tuiles.add(tuile);
+  }
+
+  public int getNombreDeTuiles() {
+    return this.tuiles.size();
   }
 }

@@ -26,7 +26,8 @@ public enum LettreAlphabet {
   W(10),
   X(10),
   Y(10),
-  Z(10);
+  Z(10),
+  JOKER(0);
 
   private int points;
   

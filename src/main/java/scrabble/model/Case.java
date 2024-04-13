@@ -1,42 +1,53 @@
 package scrabble.model;
 
+/**
+ * Case du plateau de jeu.
+ * 
+ * Celle-ci peut contenir une tuile et un bonus.
+ * Lors de l'instanciation, la case est vide (`null`).
+ */
 public class Case {
 	private Bonus bonus;
 	private Tuile tuile;
 	
-	
 	public Case() {
-		this.bonus = null; //TODO Ajouter le bonus à la v2
+		this.bonus = null;
 		this.tuile = null;
 	}
 
-
+  /**
+   * Indique si la case est vide.
+   * @return `true` si la case est vide, `false` sinon.
+   */
 	public Boolean estVide() {
-		if (this.getTuile() == null) {
-			return true;
-		}
-		return false;
+		return this.tuile == null;
 	}
-
-	
 
 	public Tuile getTuile() {
 		return this.tuile;
 	}
 
+  /**
+   * Récupère directement la lettre de la tuile de la case.
+   * C'est un alias de `getTuile().getLettre()`.
+   * 
+   * @return La lettre de la tuile de la case. `null` si la case est vide.
+   * @see Tuile#getLettre()
+   */
+  public LettreAlphabet getLettre() {
+    if (this.estVide()) return null;
+    return this.tuile.getLettre();
+  }
 
 	public void setTuile(Tuile tuile) {
 		this.tuile = tuile;
 	}
-
-
 	
 	public Bonus getBonus() {
 		return bonus;
 	}
 
-
-	public void setBonus(Bonus bonus) {
+  public void setBonus(Bonus bonus) {
 		this.bonus = bonus;
 	}
 }

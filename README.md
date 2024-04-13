@@ -1,1 +1,11 @@
-J'ai créé le readme juste pour faire un un truc dans ce projet. GG merci
+# Scrabble (SAE)
+
+## Développement
+
+```bash
+# Pour démarrer la classe principale (`scrabble.application.ScrabbleConsoleApplication`)
+mvn exec:java
+
+# Pour exécuter les tests (situés @ `./src/test/java/scrabble/test/*)
+mvn test
+```

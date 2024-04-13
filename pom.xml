@@ -9,26 +9,25 @@
 	<!-- Indiquer l'encodage et la version du JDK à utiliser -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.17</maven.compiler.source>
-		<maven.compiler.target>1.17</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<dependencies>
-		<!-- Dépendance vers JUnit 5 -->
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.8.2</version>
-			<scope>test</scope>
-		</dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.1</version>
+      <scope>test</scope>
+    </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!-- Pour être compatible avec JUnit 5 -->
 			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
+				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>

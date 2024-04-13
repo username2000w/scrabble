@@ -11,7 +11,7 @@ import scrabble.model.Tuile;
 
 public class SacTest {
   @Test
-  void contient102Tuiles() {
+  void testContient102Tuiles() {
     Sac sac = new Sac();
     int nbTuiles = sac.getNombreDeTuiles();
 
@@ -19,7 +19,7 @@ public class SacTest {
   }
 
   @Test
-  void piocherRetireUneTuile() {
+  void testPiocherRetireUneTuile() {
     Sac sac = new Sac();
     
     // On retire une tuile.
@@ -38,7 +38,7 @@ public class SacTest {
    * On vérifie que le sac a bien été mélangé sur deux instances différentes.
    */
   @Test
-  void melangePasIdentique() {
+  void testMelangePasIdentique() {
     Sac sac1 = new Sac();
     Sac sac2 = new Sac();
 

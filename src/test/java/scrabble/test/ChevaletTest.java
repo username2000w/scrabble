@@ -18,7 +18,7 @@ public class ChevaletTest {
   }
 
   @Test
-  void tailleInitiale() {
+  void testTailleInitiale() {
     int nombreDeTuiles = chevalet.getTuiles().size();
     Boolean estVide = chevalet.getTuiles().isEmpty();
 

@@ -12,6 +12,6 @@ public class Tuile {
   }
   
   public String description() {
-	return this.lettre.toString() + + this.lettre.getPoints();
+	  return this.lettre.toString() + this.lettre.getPoints();
   }
 }

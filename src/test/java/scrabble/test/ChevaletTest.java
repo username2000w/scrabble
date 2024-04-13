@@ -20,7 +20,9 @@ public class ChevaletTest {
   @Test
   void tailleInitiale() {
     int nombreDeTuiles = chevalet.getTuiles().size();
-    // Lors de l'instanciation, on a 7 tuiles qui sont piochées.
-    assertEquals(7, nombreDeTuiles);
+    Boolean estVide = chevalet.getTuiles().isEmpty();
+
+    assertEquals(0, nombreDeTuiles);
+    assertEquals(true, estVide);
   }
 }

@@ -15,7 +15,7 @@ public class Sac {
     }
   }
 
-  private void mélanger() {
+  private void melanger() {
     for (int i = 0; i < this.tuiles.size(); i++) {
       int index = (int) (Math.random() * this.tuiles.size());
       Tuile temp = this.tuiles.get(i);
@@ -57,7 +57,7 @@ public class Sac {
     this.faireJetonsPour(1, LettreAlphabet.Z);
 
     // On mélange le contenu du sac.
-    this.mélanger();
+    this.melanger();
   }
 
   public Tuile piocher () {

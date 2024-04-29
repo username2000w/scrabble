@@ -7,7 +7,7 @@ public class Joueur {
 	public Joueur(Chevalet chevalet, String nom) {
 		this.chevalet = chevalet;
 		this.nom = nom;
-		completerChevalet();
+		chevalet.completerChevalet();
 	}
 
 	public String getNom() {
@@ -23,9 +23,5 @@ public class Joueur {
     this.chevalet.afficherTuiles();
   }
   
-  	public void completerChevalet() {
-  		for (int tuileIndex = this.chevalet.getTuiles().size(); tuileIndex < 7; tuileIndex++) {
-			this.chevalet.piocher(tuileIndex);
-		}
-  	}
+  	
 }

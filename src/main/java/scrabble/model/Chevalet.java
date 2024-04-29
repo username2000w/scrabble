@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Chevalet {
 	private ArrayList<Tuile> tuiles;
 	private Sac sac;
+	private final int TAILLE = 7;
 	
 	public Chevalet(Sac sac) {
     this.tuiles = new ArrayList<>();
@@ -12,7 +13,7 @@ public class Chevalet {
 	}
 	
 	public void piocher(int tuileIndex) {
-		if (this.tuiles.size() < 7) {
+		if (this.tuiles.size() < TAILLE) {
 			this.tuiles.add(tuileIndex, this.sac.piocher());	
 		}			
 	}
@@ -31,9 +32,15 @@ public class Chevalet {
 	}
 
   public void afficherTuiles() {
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < TAILLE; i++) {
       System.out.print(this.getTuileAvecIndex(i).getLettre() + " ");
     }
     System.out.print("\n");
   }
+  
+  public void completerChevalet() {
+		for (int tuileIndex = this.getTuiles().size(); tuileIndex < TAILLE; tuileIndex++) {
+			this.piocher(tuileIndex);
+		}
+	}
 }

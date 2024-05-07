@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.model.utils.exception.SacVideException;
+
 import java.util.ArrayList;
 
 /**
@@ -61,9 +63,9 @@ public class Sac {
   }
 
   /** Piocher la première tuile actuellement dans le sac. */
-  public LettreAlphabet piocher () {
+  public LettreAlphabet piocher () throws SacVideException {
     if (this.lettres.isEmpty()) {
-      return null;
+      throw new SacVideException("Le sac est vide.");
     }
 
     return this.lettres.remove(0);

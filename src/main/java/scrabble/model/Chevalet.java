@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.model.utils.exception.SacVideException;
+
 import java.util.ArrayList;
 
 public class Chevalet {
@@ -14,8 +16,12 @@ public class Chevalet {
 	
 	public void piocher(int tuileIndex) {
 		if (this.lettres.size() < TAILLE) {
-			this.lettres.add(tuileIndex, this.sac.piocher());	
-		}			
+			try {
+				this.lettres.add(tuileIndex, this.sac.piocher());
+			} catch (SacVideException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	public void echanger(int tuileIndex) {

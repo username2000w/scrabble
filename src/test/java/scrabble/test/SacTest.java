@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import scrabble.model.LettreAlphabet;
 import scrabble.model.Sac;
 import scrabble.model.Tuile;
+import scrabble.model.utils.exception.SacVideException;
 
 public class SacTest {
   @Test

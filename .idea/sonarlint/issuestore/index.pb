@@ -13,3 +13,11 @@ j
 :src/main/java/scrabble/application/ScrabbleJeuxEssais.java,4\4\44e3825135d3be9eaa148d3e6a2ee972e56c78af
 X
 (src/test/java/scrabble/test/SacTest.java,2\c\2c0cd10a3219b240a49dd0b654566a13ab43183f
+V
+&src/main/java/scrabble/model/Case.java,3\e\3ebd1d0ee85d4d9f97fffafacde18276656691f7
+w
+Gsrc/main/java/scrabble/model/utils/exception/HorsPlateaauException.java,d\9\d9a7c05f7a8dc92448c042dd521fe0537a32f0a1
+Y
+)src/main/java/scrabble/model/Plateau.java,6\4\6479bb97b7169720e6ee0e5e3e3ce60b5e3242f1
+v
+Fsrc/main/java/scrabble/model/utils/exception/HorsPlateauException.java,0\a\0a51a6287905532d2d82a7b84ed701895e887e3a

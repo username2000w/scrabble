@@ -47,10 +47,8 @@ public class Joueur {
 	
 
 	
-	Tuile tuile = chevalet.getTuileAvecLettre(choixlettre);
+	LettreAlphabet lettre = chevalet.getTuileAvecLettre(choixlettre);
 	
-	plateau.placerlettre(tuile, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
   }
-  
-  	
 }

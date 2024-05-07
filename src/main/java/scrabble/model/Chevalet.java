@@ -50,10 +50,10 @@ public class Chevalet {
 		}
 	}
   
-  public Tuile getTuileAvecLettre(String lettre) {
-	  for (Tuile tuile : tuiles) {
-	      if (lettre.equals(tuile.getLettre().toString())) {
-	    	  return tuile;
+  public LettreAlphabet getTuileAvecLettre(String lettre_voulu) {
+	  for (LettreAlphabet lettre : lettres) {
+	      if (lettre_voulu.equals(lettre.toString())) {
+	    	  return lettre;
 	      }
 	    }
 	  return null;

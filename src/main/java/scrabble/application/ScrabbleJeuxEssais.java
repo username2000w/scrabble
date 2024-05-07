@@ -2,13 +2,14 @@ package scrabble.application;
 
 import scrabble.model.Chevalet;
 import scrabble.model.Joueur;
+import scrabble.model.Plateau;
 import scrabble.model.Sac;
 
 public class ScrabbleJeuxEssais {
   public static void main(String[] args) {
     Sac sac = new Sac();
     Chevalet chevalet = new Chevalet(sac);
-    Joueur joueur = new Joueur(chevalet, "Joueur 1");
+    Joueur joueur = new Joueur(chevalet, "Joueur 1", new Plateau());
 
     System.out.println("On affiche les tuiles du joueur au début.");
     afficherTuiles(joueur);

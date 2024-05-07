@@ -16,19 +16,11 @@ public class ScrabbleConsoleApplication {
 
         Sac sac = new Sac();
         Chevalet chevalet = new Chevalet(sac);
-        Joueur joueur = new Joueur(chevalet, "Joueur 1");
+        Joueur joueur = new Joueur(chevalet, "Joueur 1", plateau);
 
         System.out.println(joueur.getNom() + " a les tuiles suivantes :");
         joueur.afficherChevalet();
 
-        while (true) {
-            try {
-                LettreAlphabet lettre = sac.piocher();
-                System.out.println("Le joueur a pioché la lettre : " + lettre.toString());
-            } catch (SacVideException e) {
-                System.out.println(e.getMessage());
-                break;
-            }
-        }
+        joueur.jouerlettre();
 	}
 }

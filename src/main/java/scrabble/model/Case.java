@@ -23,31 +23,20 @@ public class Case {
 		return this.lettre == null;
 	}
 
-	public LettreAlphabet getTuile() {
+	public LettreAlphabet getLettre() {
+		if (Boolean.TRUE.equals(this.estVide())) return null;
 		return this.lettre;
 	}
 
-  /**
-   * Récupère directement la lettre de la tuile de la case.
-   * C'est un alias de `getTuile().getLettre()`.
-   * 
-   * @return La lettre de la tuile de la case. `null` si la case est vide.
-   * @see Tuile#getLettre()
-   */
-  public LettreAlphabet getLettre() {
-    if (this.estVide()) return null;
-    return this.lettre;
-  }
-
-	public void setTuile(LettreAlphabet tuile) {
-		this.lettre = tuile;
+	public void setLettre(LettreAlphabet lettre) {
+		this.lettre = lettre;
 	}
 	
 	public Bonus getBonus() {
 		return bonus;
 	}
 
-  public void setBonus(Bonus bonus) {
+	public void setBonus(Bonus bonus) {
 		this.bonus = bonus;
 	}
 }

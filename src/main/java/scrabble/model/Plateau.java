@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.model.utils.exception.HorsPlateauException;
+
 public class Plateau {
 	private Case[][] plateau = new Case[15][15]; 
 	
@@ -35,7 +37,7 @@ public class Plateau {
     }
   }
   
-  public void placerlettre(Tuile tuile,int x, int y) {
-	  this.plateau[y][x].setTuile(tuile);
+  public void placerlettre(LettreAlphabet lettre,int x, int y) throws HorsPlateauException {
+	  this.plateau[y][x].setLettre(lettre);
   }
 }

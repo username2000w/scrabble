@@ -34,4 +34,8 @@ public class Plateau {
       System.out.println();
     }
   }
+  
+  public void placerlettre(Tuile tuile,int x, int y) {
+	  this.plateau[y][x].setTuile(tuile);
+  }
 }

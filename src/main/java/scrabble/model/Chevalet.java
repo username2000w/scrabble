@@ -49,4 +49,13 @@ public class Chevalet {
 			this.piocher(tuileIndex);
 		}
 	}
+  
+  public Tuile getTuileAvecLettre(String lettre) {
+	  for (Tuile tuile : tuiles) {
+	      if (lettre.equals(tuile.getLettre().toString())) {
+	    	  return tuile;
+	      }
+	    }
+	  return null;
+  }
 }

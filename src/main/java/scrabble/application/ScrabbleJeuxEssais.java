@@ -10,14 +10,14 @@ public class ScrabbleJeuxEssais {
     Chevalet chevalet = new Chevalet(sac);
     Joueur joueur = new Joueur(chevalet, "Joueur 1");
 
-    // On affiche les tuiles du joueur au début.
+    System.out.println("On affiche les tuiles du joueur au début.");
     afficherTuiles(joueur);
 
-    // On échange la première tuile et on affiche.
+    System.out.println("On échange la première tuile et on affiche.");
     joueur.echanger(0);
     afficherTuiles(joueur);
 
-    // On échange la troisième tuile et on affiche.
+    System.out.println("On échange la troisième tuile et on affiche.");
     joueur.echanger(2);
     afficherTuiles(joueur);
   }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import scrabble.model.LettreAlphabet;
 import scrabble.model.Sac;
 import scrabble.model.Tuile;
 
@@ -43,18 +44,18 @@ public class SacTest {
     Sac sac2 = new Sac();
 
     // On pioche toutes les tuiles du sac 1.
-    ArrayList<Tuile> tuilesSac1 = new ArrayList<>();
+    ArrayList<LettreAlphabet> lettreSac1 = new ArrayList<>();
     while (sac1.getNombreDeTuiles() > 0) {
-      tuilesSac1.add(sac1.piocher());
+    	lettreSac1.add(sac1.piocher());
     }
 
     // On pioche toutes les tuiles du sac 2.
-    ArrayList<Tuile> tuilesSac2 = new ArrayList<>();
+    ArrayList<LettreAlphabet> lettreSac2 = new ArrayList<>();
     while (sac2.getNombreDeTuiles() > 0) {
-      tuilesSac2.add(sac2.piocher());
+    	lettreSac2.add(sac2.piocher());
     }
 
     // On vérifie que les deux listes de tuiles sont différentes.
-    assertEquals(false, tuilesSac1.equals(tuilesSac2));
+    assertEquals(false, lettreSac1.equals(lettreSac2));
   }
 }

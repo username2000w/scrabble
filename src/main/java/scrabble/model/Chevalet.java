@@ -3,43 +3,43 @@ package scrabble.model;
 import java.util.ArrayList;
 
 public class Chevalet {
-	private ArrayList<Tuile> tuiles;
+	private ArrayList<LettreAlphabet> lettres;
 	private Sac sac;
-	private final int TAILLE = 7;
+	private static final int TAILLE = 7;
 	
 	public Chevalet(Sac sac) {
-    this.tuiles = new ArrayList<>();
+    this.lettres = new ArrayList<>();
 		this.sac = sac;
 	}
 	
 	public void piocher(int tuileIndex) {
-		if (this.tuiles.size() < TAILLE) {
-			this.tuiles.add(tuileIndex, this.sac.piocher());	
+		if (this.lettres.size() < TAILLE) {
+			this.lettres.add(tuileIndex, this.sac.piocher());	
 		}			
 	}
 	
 	public void echanger(int tuileIndex) {
-		Tuile tuile = this.tuiles.remove(tuileIndex);
-		this.sac.ajouter(tuile);
+		LettreAlphabet lettre = this.lettres.remove(tuileIndex);
+		this.sac.ajouter(lettre);
 	}
 	
-	public Tuile getTuileAvecIndex(int tuileIndex) {
-		return this.tuiles.get(tuileIndex);
+	public LettreAlphabet getLettreAvecIndex(int tuileIndex) {
+		return this.lettres.get(tuileIndex);
 	}
 
-	public ArrayList<Tuile> getTuiles() {
-		return this.tuiles;
+	public ArrayList<LettreAlphabet> getLettres() {
+		return this.lettres;
 	}
 
   public void afficherTuiles() {
     for (int i = 0; i < TAILLE; i++) {
-      System.out.print(this.getTuileAvecIndex(i).getLettre() + " ");
+      System.out.print(this.getLettreAvecIndex(i).toString() + " ");
     }
     System.out.print("\n");
   }
   
   public void completerChevalet() {
-		for (int tuileIndex = this.getTuiles().size(); tuileIndex < TAILLE; tuileIndex++) {
+		for (int tuileIndex = this.getLettres().size(); tuileIndex < TAILLE; tuileIndex++) {
 			this.piocher(tuileIndex);
 		}
 	}

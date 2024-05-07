@@ -8,11 +8,11 @@ package scrabble.model;
  */
 public class Case {
 	private Bonus bonus;
-	private Tuile tuile;
+	private LettreAlphabet lettre;
 	
 	public Case() {
 		this.bonus = null;
-		this.tuile = null;
+		this.lettre = null;
 	}
 
   /**
@@ -20,11 +20,11 @@ public class Case {
    * @return `true` si la case est vide, `false` sinon.
    */
 	public Boolean estVide() {
-		return this.tuile == null;
+		return this.lettre == null;
 	}
 
-	public Tuile getTuile() {
-		return this.tuile;
+	public LettreAlphabet getTuile() {
+		return this.lettre;
 	}
 
   /**
@@ -36,11 +36,11 @@ public class Case {
    */
   public LettreAlphabet getLettre() {
     if (this.estVide()) return null;
-    return this.tuile.getLettre();
+    return this.lettre;
   }
 
-	public void setTuile(Tuile tuile) {
-		this.tuile = tuile;
+	public void setTuile(LettreAlphabet tuile) {
+		this.lettre = tuile;
 	}
 	
 	public Bonus getBonus() {

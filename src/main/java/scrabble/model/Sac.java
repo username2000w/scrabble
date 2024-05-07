@@ -7,25 +7,25 @@ import java.util.ArrayList;
  * qui sont ensuite mélangées.
  */
 public class Sac {
-  private ArrayList<Tuile> tuiles;  
+  private ArrayList<LettreAlphabet> lettres;  
 
   private void faireJetonsPour(int nombreDeJetons, LettreAlphabet lettre) {
     for (int i = 0; i < nombreDeJetons; i++) {
-      this.tuiles.add(new Tuile(lettre));
+      this.lettres.add(lettre);
     }
   }
 
   private void melanger() {
-    for (int i = 0; i < this.tuiles.size(); i++) {
-      int index = (int) (Math.random() * this.tuiles.size());
-      Tuile temp = this.tuiles.get(i);
-      this.tuiles.set(i, this.tuiles.get(index));
-      this.tuiles.set(index, temp);
+    for (int i = 0; i < this.lettres.size(); i++) {
+      int index = (int) (Math.random() * this.lettres.size());
+      LettreAlphabet temp = this.lettres.get(i);
+      this.lettres.set(i, this.lettres.get(index));
+      this.lettres.set(index, temp);
     }
   }
 
   public Sac() {
-    this.tuiles = new ArrayList<>();
+    this.lettres = new ArrayList<>();
     
     // On ajout tous les jetons dans le sac.
     this.faireJetonsPour(15, LettreAlphabet.E);
@@ -61,20 +61,20 @@ public class Sac {
   }
 
   /** Piocher la première tuile actuellement dans le sac. */
-  public Tuile piocher () {
-    if (this.tuiles.size() == 0) {
+  public LettreAlphabet piocher () {
+    if (this.lettres.isEmpty()) {
       return null;
     }
 
-    return this.tuiles.remove(0);
+    return this.lettres.remove(0);
   }
   
   /** Ajouter une tuile à la fin du sac. */
-  public void ajouter(Tuile tuile) {
-	  tuiles.add(tuile);
+  public void ajouter(LettreAlphabet tuile) {
+	  lettres.add(tuile);
   }
 
   public int getNombreDeTuiles() {
-    return this.tuiles.size();
+    return this.lettres.size();
   }
 }

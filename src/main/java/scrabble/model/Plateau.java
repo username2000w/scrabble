@@ -12,7 +12,7 @@ public class Plateau {
 	    		  plateau[i][j] = new Case(Bonus.ETOILE);
 	            }
 	    	  else {
-	    		  plateau[i][j] = new Case(null);	    		  
+	    		  plateau[i][j] = new Case(null);  
 	    	  }
 	      }
 		}
@@ -22,12 +22,18 @@ public class Plateau {
     for (int i = 0; i < 15; i++) {
       for (int j = 0; j < 15; j++) {
         LettreAlphabet lettre = plateau[i][j].getLettre();
-
-        if (lettre == null) { // si la case est vide, on affiche un carré vide.
-          System.out.print("□ ");
+        Bonus bonus = plateau[i][j].getBonus();
+        
+        if (bonus == null) {
+        	if (lettre == null) { // si la case est vide, on affiche un carré vide.
+        		System.out.print("□ ");
+        	}
+        	else {
+        		System.out.print(lettre + " ");
+        	}
         }
         else {
-          System.out.print(lettre + " ");
+        	System.out.print(bonus.toString());
         }
       }
 

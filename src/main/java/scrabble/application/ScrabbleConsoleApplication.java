@@ -22,5 +22,7 @@ public class ScrabbleConsoleApplication {
         joueur.afficherChevalet();
 
         joueur.jouerlettre();
+        
+        plateau.afficher();
 	}
 }

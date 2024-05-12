@@ -24,7 +24,7 @@ public class Plateau {
   public void afficher() {
     for (int i = 0; i < TAILLE_PLATEAU_VERTICALE; i++) {
       for (int j = 0; j < TAILLE_PLATEAU_HORIZONTALE; j++) {
-        LettreAlphabet lettre = plateau[i][j].getLettre();
+        LettreAlphabetFrancais lettre = plateau[i][j].getLettre();
         Bonus bonus = plateau[i][j].getBonus();
         
         if (bonus == null) {
@@ -45,7 +45,7 @@ public class Plateau {
     }
   }
   
-  public void placerlettre(LettreAlphabet lettre,int x, int y) throws HorsPlateauException {
+  public void placerlettre(LettreAlphabetFrancais lettre,int x, int y) throws HorsPlateauException {
 	  this.plateau[y][x].setLettre(lettre);
   }
 }

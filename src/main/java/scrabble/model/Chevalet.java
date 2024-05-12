@@ -5,7 +5,7 @@ import scrabble.model.utils.exception.SacVideException;
 import java.util.ArrayList;
 
 public class Chevalet {
-	private ArrayList<LettreAlphabet> lettres;
+	private ArrayList<LettreAlphabetFrancais> lettres;
 	private Sac sac;
 	private static final int TAILLE = 7;
 	
@@ -25,15 +25,15 @@ public class Chevalet {
 	}
 	
 	public void echanger(int tuileIndex) {
-		LettreAlphabet lettre = this.lettres.remove(tuileIndex);
+		LettreAlphabetFrancais lettre = this.lettres.remove(tuileIndex);
 		this.sac.ajouter(lettre);
 	}
 	
-	public LettreAlphabet getLettreAvecIndex(int tuileIndex) {
+	public LettreAlphabetFrancais getLettreAvecIndex(int tuileIndex) {
 		return this.lettres.get(tuileIndex);
 	}
 
-	public ArrayList<LettreAlphabet> getLettres() {
+	public ArrayList<LettreAlphabetFrancais> getLettres() {
 		return this.lettres;
 	}
 
@@ -50,8 +50,8 @@ public class Chevalet {
 		}
 	}
   
-  public LettreAlphabet getTuileAvecLettre(String lettre_voulu) {
-	  for (LettreAlphabet lettre : lettres) {
+  public LettreAlphabetFrancais getTuileAvecLettre(String lettre_voulu) {
+	  for (LettreAlphabetFrancais lettre : lettres) {
 	      if (lettre_voulu.equals(lettre.toString())) {
 	    	  return lettre;
 	      }

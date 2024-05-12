@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * qui sont ensuite mélangées.
  */
 public class Sac {
-  private ArrayList<LettreAlphabet> lettres;  
+  private ArrayList<LettreAlphabetFrancais> lettres;  
 
-  private void faireJetonsPour(int nombreDeTuile, LettreAlphabet lettre) {
+  private void faireJetonsPour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
     for (int i = 0; i < nombreDeTuile; i++) {
       this.lettres.add(lettre);
     }
@@ -20,7 +20,7 @@ public class Sac {
   private void melanger() {
     for (int i = 0; i < this.lettres.size(); i++) {
       int index = (int) (Math.random() * this.lettres.size());
-      LettreAlphabet temp = this.lettres.get(i);
+      LettreAlphabetFrancais temp = this.lettres.get(i);
       this.lettres.set(i, this.lettres.get(index));
       this.lettres.set(index, temp);
     }
@@ -30,40 +30,40 @@ public class Sac {
     this.lettres = new ArrayList<>();
     
     // On ajout tous les jetons dans le sac.
-    this.faireJetonsPour(15, LettreAlphabet.E);
-    this.faireJetonsPour(9, LettreAlphabet.A);
-    this.faireJetonsPour(8, LettreAlphabet.I);
-    this.faireJetonsPour(6, LettreAlphabet.N);
-    this.faireJetonsPour(6, LettreAlphabet.O);
-    this.faireJetonsPour(6, LettreAlphabet.R);
-    this.faireJetonsPour(6, LettreAlphabet.S);
-    this.faireJetonsPour(6, LettreAlphabet.T);
-    this.faireJetonsPour(6, LettreAlphabet.U);
-    this.faireJetonsPour(5, LettreAlphabet.L);
-    this.faireJetonsPour(3, LettreAlphabet.D);
-    this.faireJetonsPour(2, LettreAlphabet.G);
-    this.faireJetonsPour(3, LettreAlphabet.M);
-    this.faireJetonsPour(2, LettreAlphabet.B);
-    this.faireJetonsPour(2, LettreAlphabet.C);
-    this.faireJetonsPour(2, LettreAlphabet.P);
-    this.faireJetonsPour(2, LettreAlphabet.F);
-    this.faireJetonsPour(2, LettreAlphabet.H);
-    this.faireJetonsPour(2, LettreAlphabet.V);
-    this.faireJetonsPour(2, LettreAlphabet.JOKER);
-    this.faireJetonsPour(1, LettreAlphabet.J);
-    this.faireJetonsPour(1, LettreAlphabet.Q);
-    this.faireJetonsPour(1, LettreAlphabet.K);
-    this.faireJetonsPour(1, LettreAlphabet.W);
-    this.faireJetonsPour(1, LettreAlphabet.X);
-    this.faireJetonsPour(1, LettreAlphabet.Y);
-    this.faireJetonsPour(1, LettreAlphabet.Z);
+    this.faireJetonsPour(15, LettreAlphabetFrancais.E);
+    this.faireJetonsPour(9, LettreAlphabetFrancais.A);
+    this.faireJetonsPour(8, LettreAlphabetFrancais.I);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.N);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.O);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.R);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.S);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.T);
+    this.faireJetonsPour(6, LettreAlphabetFrancais.U);
+    this.faireJetonsPour(5, LettreAlphabetFrancais.L);
+    this.faireJetonsPour(3, LettreAlphabetFrancais.D);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.G);
+    this.faireJetonsPour(3, LettreAlphabetFrancais.M);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.B);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.C);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.P);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.F);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.H);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.V);
+    this.faireJetonsPour(2, LettreAlphabetFrancais.JOKER);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.J);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.Q);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.K);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.W);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.X);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.Y);
+    this.faireJetonsPour(1, LettreAlphabetFrancais.Z);
 
     // On mélange le contenu du sac.
     this.melanger();
   }
 
   /** Piocher la première tuile actuellement dans le sac. */
-  public LettreAlphabet piocher () throws SacVideException {
+  public LettreAlphabetFrancais piocher () throws SacVideException {
     if (this.lettres.isEmpty()) {
       throw new SacVideException("Le sac est vide.");
     }
@@ -72,7 +72,7 @@ public class Sac {
   }
   
   /** Ajouter une tuile à la fin du sac. */
-  public void ajouter(LettreAlphabet tuile) {
+  public void ajouter(LettreAlphabetFrancais tuile) {
 	  lettres.add(tuile);
   }
 

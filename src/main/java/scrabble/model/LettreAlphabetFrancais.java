@@ -1,6 +1,6 @@
 package scrabble.model;
 
-public enum LettreAlphabet {
+public enum LettreAlphabetFrancais {
   A(1),
   B(3),
   C(3),
@@ -31,7 +31,7 @@ public enum LettreAlphabet {
 
   private int points;
   
-  private LettreAlphabet(int points) {
+  private LettreAlphabetFrancais(int points) {
     this.points = points;
   }
   

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import scrabble.model.LettreAlphabet;
+import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
 import scrabble.model.Tuile;
 import scrabble.model.utils.exception.SacVideException;
@@ -45,13 +45,13 @@ public class SacTest {
     Sac sac2 = new Sac();
 
     // On pioche toutes les tuiles du sac 1.
-    ArrayList<LettreAlphabet> lettreSac1 = new ArrayList<>();
+    ArrayList<LettreAlphabetFrancais> lettreSac1 = new ArrayList<>();
     while (sac1.getNombreDeTuiles() > 0) {
     	lettreSac1.add(sac1.piocher());
     }
 
     // On pioche toutes les tuiles du sac 2.
-    ArrayList<LettreAlphabet> lettreSac2 = new ArrayList<>();
+    ArrayList<LettreAlphabetFrancais> lettreSac2 = new ArrayList<>();
     while (sac2.getNombreDeTuiles() > 0) {
     	lettreSac2.add(sac2.piocher());
     }

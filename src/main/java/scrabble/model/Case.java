@@ -8,7 +8,7 @@ package scrabble.model;
  */
 public class Case {
 	private final Bonus bonus;
-	private LettreAlphabet lettre;
+	private LettreAlphabetFrancais lettre;
 	
 	public Case(Bonus bonus) {
 		this.bonus = bonus;
@@ -22,12 +22,12 @@ public class Case {
 		return this.lettre == null;
 	}
 
-	public LettreAlphabet getLettre() {
+	public LettreAlphabetFrancais getLettre() {
 		if (Boolean.TRUE.equals(this.estVide())) return null;
 		return this.lettre;
 	}
 
-	public void setLettre(LettreAlphabet lettre) {
+	public void setLettre(LettreAlphabetFrancais lettre) {
 		this.lettre = lettre;
 	}
 	

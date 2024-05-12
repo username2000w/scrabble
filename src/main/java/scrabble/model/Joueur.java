@@ -49,7 +49,7 @@ public class Joueur {
 	
 
 	
-	LettreAlphabet lettre = chevalet.getTuileAvecLettre(choixlettre);
+	LettreAlphabetFrancais lettre = chevalet.getTuileAvecLettre(choixlettre);
 	
 	try {
 		plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));

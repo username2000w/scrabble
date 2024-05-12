@@ -12,7 +12,7 @@ public class Joueur {
 		this.chevalet = chevalet;
 		this.nom = nom;
 		this.plateau = plateau;
-		chevalet.completerChevalet();
+		chevalet.remplirChevalet();
 	}
 
 	public String getNom() {

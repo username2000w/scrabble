@@ -44,7 +44,7 @@ public class Chevalet {
     System.out.print("\n");
   }
   
-  public void completerChevalet() {
+  public void remplirChevalet() {
 		for (int tailleActuelle = this.getLettres().size(); tailleActuelle < TAILLE; tailleActuelle++) {
 			this.piocher();
 		}

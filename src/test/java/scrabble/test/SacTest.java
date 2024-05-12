@@ -1,6 +1,7 @@
 package scrabble.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 
@@ -8,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
-import scrabble.model.Tuile;
-import scrabble.model.utils.exception.SacVideException;
 
 public class SacTest {
   @Test
@@ -57,6 +56,6 @@ public class SacTest {
     }
 
     // On vérifie que les deux listes de tuiles sont différentes.
-    assertEquals(false, lettreSac1.equals(lettreSac2));
+    assertFalse(lettreSac1.equals(lettreSac2));
   }
 }

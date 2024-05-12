@@ -5,7 +5,7 @@ import scrabble.model.utils.exception.HorsPlateauException;
 
 public class Joueur {
 	private Chevalet chevalet;
-	private String nom;
+	private final String nom;
 	private Plateau plateau;
 	
 	public Joueur(Chevalet chevalet, String nom, Plateau plateau) {

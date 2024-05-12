@@ -14,10 +14,10 @@ public class Chevalet {
 		this.sac = sac;
 	}
 	
-	public void piocher(int tuileIndex) {
+	public void piocher() {
 		if (this.lettres.size() < TAILLE) {
 			try {
-				this.lettres.add(tuileIndex, this.sac.piocher());
+				this.lettres.add(this.sac.piocher());
 			} catch (SacVideException e) {
 				System.out.println(e.getMessage());
 			}
@@ -45,8 +45,8 @@ public class Chevalet {
   }
   
   public void completerChevalet() {
-		for (int tuileIndex = this.getLettres().size(); tuileIndex < TAILLE; tuileIndex++) {
-			this.piocher(tuileIndex);
+		for (int tailleActuelle = this.getLettres().size(); tailleActuelle < TAILLE; tailleActuelle++) {
+			this.piocher();
 		}
 	}
   

@@ -19,7 +19,7 @@ public class Joueur {
 	
 	public void echanger(int tuileIndex) {
 		this.chevalet.echanger(tuileIndex);
-		this.chevalet.piocher(tuileIndex);
+		this.chevalet.piocher();
 	}
 
   public void afficherChevalet() {
@@ -49,6 +49,6 @@ public class Joueur {
 	
 	LettreAlphabet lettre = chevalet.getTuileAvecLettre(choixlettre);
 	
-	plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	//plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
   }
 }

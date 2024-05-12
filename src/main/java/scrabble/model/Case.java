@@ -7,12 +7,11 @@ package scrabble.model;
  * Lors de l'instanciation, la case est vide (`null`).
  */
 public class Case {
-	private Bonus bonus;
+	private final Bonus bonus;
 	private LettreAlphabet lettre;
 	
-	public Case() {
-		this.bonus = null;
-		this.lettre = null;
+	public Case(Bonus bonus) {
+		this.bonus = bonus;
 	}
 
   /**
@@ -34,10 +33,6 @@ public class Case {
 	
 	public Bonus getBonus() {
 		return bonus;
-	}
-
-	public void setBonus(Bonus bonus) {
-		this.bonus = bonus;
 	}
 }
 

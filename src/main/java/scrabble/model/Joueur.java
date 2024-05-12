@@ -1,6 +1,8 @@
 package scrabble.model;
 import java.util.Scanner;
 
+import scrabble.model.utils.exception.HorsPlateauException;
+
 public class Joueur {
 	private Chevalet chevalet;
 	private String nom;
@@ -49,6 +51,14 @@ public class Joueur {
 	
 	LettreAlphabet lettre = chevalet.getTuileAvecLettre(choixlettre);
 	
-	//plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	try {
+		plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	} catch (NumberFormatException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (HorsPlateauException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 }

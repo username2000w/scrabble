@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Sac {
   private ArrayList<LettreAlphabet> lettres;  
 
-  private void faireJetonsPour(int nombreDeJetons, LettreAlphabet lettre) {
-    for (int i = 0; i < nombreDeJetons; i++) {
+  private void faireJetonsPour(int nombreDeTuile, LettreAlphabet lettre) {
+    for (int i = 0; i < nombreDeTuile; i++) {
       this.lettres.add(lettre);
     }
   }

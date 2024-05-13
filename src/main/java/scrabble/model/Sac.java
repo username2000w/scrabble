@@ -11,11 +11,7 @@ import java.util.ArrayList;
 public class Sac {
   private ArrayList<LettreAlphabetFrancais> lettres;  
 
-  private void faireJetonsPour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
-    for (int i = 0; i < nombreDeTuile; i++) {
-      this.lettres.add(lettre);
-    }
-  }
+
 
   private void melanger() {
     for (int i = 0; i < this.lettres.size(); i++) {
@@ -30,33 +26,9 @@ public class Sac {
     this.lettres = new ArrayList<>();
     
     // On ajout tous les jetons dans le sac.
-    this.faireJetonsPour(15, LettreAlphabetFrancais.E);
-    this.faireJetonsPour(9, LettreAlphabetFrancais.A);
-    this.faireJetonsPour(8, LettreAlphabetFrancais.I);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.N);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.O);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.R);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.S);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.T);
-    this.faireJetonsPour(6, LettreAlphabetFrancais.U);
-    this.faireJetonsPour(5, LettreAlphabetFrancais.L);
-    this.faireJetonsPour(3, LettreAlphabetFrancais.D);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.G);
-    this.faireJetonsPour(3, LettreAlphabetFrancais.M);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.B);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.C);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.P);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.F);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.H);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.V);
-    this.faireJetonsPour(2, LettreAlphabetFrancais.JOKER);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.J);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.Q);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.K);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.W);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.X);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.Y);
-    this.faireJetonsPour(1, LettreAlphabetFrancais.Z);
+    SacDeJeuFrancais sacDeJeuFrancais = new SacDeJeuFrancais();
+    this.lettres = new ArrayList<>(sacDeJeuFrancais.getLettres());
+     
 
     // On mélange le contenu du sac.
     this.melanger();
@@ -69,6 +41,7 @@ public class Sac {
     }
 
     return this.lettres.remove(0);
+    
   }
   
   /** Ajouter une tuile à la fin du sac. */

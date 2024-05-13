@@ -2,16 +2,20 @@ package scrabble.model;
 
 /**
  * Case du plateau de jeu.
- * 
+ *
  * Celle-ci peut contenir une tuile et un bonus.
  * Lors de l'instanciation, la case est vide (`null`).
  */
 public class Case {
 	private final Bonus bonus;
 	private LettreAlphabetFrancais lettre;
-	
+
 	public Case(Bonus bonus) {
 		this.bonus = bonus;
+	}
+
+	public Case() {
+		this.bonus = null;
 	}
 
   /**
@@ -30,7 +34,7 @@ public class Case {
 	public void setLettre(LettreAlphabetFrancais lettre) {
 		this.lettre = lettre;
 	}
-	
+
 	public Bonus getBonus() {
 		return bonus;
 	}

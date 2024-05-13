@@ -34,7 +34,7 @@ public class Plateau {
 						System.out.print(lettre + " ");
 					}
 				} else {
-					System.out.print(bonus.toString());
+					System.out.print(bonus);
 				}
 			}
 		}

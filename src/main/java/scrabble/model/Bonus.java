@@ -9,7 +9,7 @@ public enum Bonus {
 	
 	private String symbole;
 	
-	private Bonus(String symbole) {
+	Bonus(String symbole) {
 		this.symbole = symbole;
 	}
 	

@@ -31,7 +31,7 @@ public enum LettreAlphabetFrancais {
 
   private int points;
   
-  private LettreAlphabetFrancais(int points) {
+  LettreAlphabetFrancais(int points) {
     this.points = points;
   }
   

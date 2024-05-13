@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SacDeJeuFrancais {
 	 
-	private ArrayList<LettreAlphabetFrancais> lettres = new ArrayList<>();  
+	private ArrayList<LettreAlphabetFrancais> lettres = new ArrayList<>();
 	
 	private void faireTuilespour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
 		for (int i = 0; i < nombreDeTuile; i++) {

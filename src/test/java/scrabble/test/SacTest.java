@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
+import scrabble.model.utils.exception.SacVideException;
 
 public class SacTest {
   @Test
   void testContient102Tuiles() {
     Sac sac = new Sac();
     int nbTuiles = sac.getNombreDeTuiles();
-
     assertEquals(102, nbTuiles);
   }
 
@@ -24,13 +24,21 @@ public class SacTest {
     Sac sac = new Sac();
     
     // On retire une tuile.
-    sac.piocher();
+    try {
+      sac.piocher();
+    } catch (SacVideException e) {
+      System.out.println(e.getMessage());
+    }
     assertEquals(102 - 1, sac.getNombreDeTuiles());
     
     // On en retire encore trois.
-    sac.piocher();
-    sac.piocher();
-    sac.piocher();
+    try {
+      for (int i = 0; i < 3; ++i) {
+        sac.piocher();
+      }
+    } catch (SacVideException e) {
+      System.out.println(e.getMessage());
+    }
     assertEquals(102 - 1 - 3, sac.getNombreDeTuiles());
   }
 
@@ -46,13 +54,21 @@ public class SacTest {
     // On pioche toutes les tuiles du sac 1.
     ArrayList<LettreAlphabetFrancais> lettreSac1 = new ArrayList<>();
     while (sac1.getNombreDeTuiles() > 0) {
-    	lettreSac1.add(sac1.piocher());
+      try {
+        lettreSac1.add(sac1.piocher());
+      } catch (SacVideException e) {
+        System.out.println(e.getMessage());
+      }
     }
 
     // On pioche toutes les tuiles du sac 2.
     ArrayList<LettreAlphabetFrancais> lettreSac2 = new ArrayList<>();
     while (sac2.getNombreDeTuiles() > 0) {
-    	lettreSac2.add(sac2.piocher());
+      try {
+        lettreSac2.add(sac2.piocher());
+      } catch (SacVideException e) {
+        System.out.println(e.getMessage());
+      }
     }
 
     // On vérifie que les deux listes de tuiles sont différentes.

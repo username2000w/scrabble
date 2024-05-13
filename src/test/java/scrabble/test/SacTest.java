@@ -74,4 +74,17 @@ public class SacTest {
     // On vérifie que les deux listes de tuiles sont différentes.
     assertFalse(lettreSac1.equals(lettreSac2));
   }
+
+  @Test
+  void testSacVide() {
+    Sac sac = new Sac();
+    try {
+      for (int i = 0; i < 102; ++i) {
+        sac.piocher();
+      }
+    } catch (SacVideException e) {
+      // On vérifie si on a bien une exception SacVideException.
+      assertEquals("Le sac est vide.", e.getMessage());
+    }
+  }
 }

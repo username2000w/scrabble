@@ -15,6 +15,7 @@ public class SacDeJeuFrancais {
 	public SacDeJeuFrancais() {
 	
 		this.faireTuilespour(15, LettreAlphabetFrancais.E);
+		this.faireTuilespour(9, LettreAlphabetFrancais.A);
 	    this.faireTuilespour(8, LettreAlphabetFrancais.I);
 	    this.faireTuilespour(6, LettreAlphabetFrancais.N);
 	    this.faireTuilespour(6, LettreAlphabetFrancais.O);

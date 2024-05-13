@@ -1,8 +1,5 @@
 package scrabble.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
 import scrabble.model.utils.exception.SacVideException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SacTest {
   @Test
@@ -72,19 +71,18 @@ public class SacTest {
     }
 
     // On vérifie que les deux listes de tuiles sont différentes.
-    assertFalse(lettreSac1.equals(lettreSac2));
+      assertNotEquals(lettreSac1, lettreSac2);
   }
 
   @Test
   void testSacVide() {
     Sac sac = new Sac();
-    try {
-      for (int i = 0; i < 102; ++i) {
+      sac.viderSac();
+      try {
         sac.piocher();
+      } catch (SacVideException e) {
+        // On vérifie que le message d'erreur est bien celui attendu.
+        assertEquals("Le sac est vide.", e.getMessage());
       }
-    } catch (SacVideException e) {
-      // On vérifie si on a bien une exception SacVideException.
-      assertEquals("Le sac est vide.", e.getMessage());
-    }
   }
 }

@@ -15,7 +15,7 @@ public class Case {
 	}
 
 	public Case() {
-		this.bonus = null;
+		this(null);
 	}
 
   /**

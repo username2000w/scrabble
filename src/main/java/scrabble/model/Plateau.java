@@ -37,10 +37,10 @@ public class Plateau {
 					System.out.print(bonus);
 				}
 			}
+			// Retour à la ligne.
+			System.out.println();
 		}
 
-		// Retour à la ligne.
-		System.out.println();
 	}
 
 	public void placerlettre(LettreAlphabetFrancais lettre,int x, int y) throws HorsPlateauException {

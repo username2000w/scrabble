@@ -61,7 +61,44 @@ public class Joueur {
       System.out.println("Impossible de placer une lettre ici, une lettre est déjà placée.");
       return;
   }
-  	
+  
+  if (tour != 0) {
+	  
+	    if (!plateau.getPlateau()[posy][posx-1].estVide()) {
+	    	 try {
+	    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	    		} catch (NumberFormatException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		} catch (HorsPlateauException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	    
+	    }
+	    
+	    else {
+	    	if (!plateau.getPlateau()[posy-1][posx].estVide()){
+		    	 try {
+		    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+		    		} catch (NumberFormatException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    		} catch (HorsPlateauException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    		}
+		    }
+		    else {
+		    	System.out.println("erruer vertical");
+		    	return;
+		    }
+	    	
+	    }
+	    
+	    
+  	}
+	
 	  try {
 			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
 		} catch (NumberFormatException e) {

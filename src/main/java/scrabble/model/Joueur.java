@@ -43,6 +43,12 @@ public class Joueur {
             choixlettre = scanner4.nextLine();
         }
 
+        if (choixlettre.equals("JOKER")) {
+            System.out.print("[JOKER] Quel lettre voulez-vous jouer ? : ");
+            scanner = new Scanner(System.in);
+            choixlettre = scanner.nextLine();;
+        }
+
         System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
         Scanner scanner2 = new Scanner(System.in);
         String pos_x_lettre = scanner2.nextLine();

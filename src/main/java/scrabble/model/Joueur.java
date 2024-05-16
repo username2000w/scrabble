@@ -61,11 +61,7 @@ public class Joueur {
       System.out.println("Impossible de placer une lettre ici, une lettre est déjà placée.");
       return;
   }
-  
- 
-	    
-	   
-	
+  	
 	  try {
 			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
 		} catch (NumberFormatException e) {

@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.model.utils.exception.HorsPlateauException;
+
 /**
  * Case du plateau de jeu.
  *
@@ -40,3 +42,8 @@ public class Case {
 	}
 }
 
+
+
+
+
+	

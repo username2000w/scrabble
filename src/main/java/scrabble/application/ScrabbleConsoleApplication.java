@@ -21,7 +21,7 @@ public class ScrabbleConsoleApplication {
         System.out.println(joueur.getNom() + " a les tuiles suivantes :");
         joueur.afficherChevalet();
 
-        joueur.jouerlettre();
+        joueur.jouerMot();
         
         plateau.afficher();
 	}

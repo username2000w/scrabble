@@ -157,4 +157,46 @@ public class Joueur {
         }
 
     }
+
+    public int calculerScoreMot(int xDebut, int yDebut) {
+        int score = 0;
+        Case[][] plateau = this.plateau.getPlateau();
+
+        // score de la case initiale
+        score += plateau[yDebut][xDebut].getLettre().getPoints();
+
+        for (int y = yDebut; !plateau[yDebut+1][xDebut].estVide();y++) {
+            score += plateau[yDebut+1][xDebut].getLettre().getPoints();
+
+            if (!plateau[y+1][xDebut-1].estVide()) {
+                for (int x = xDebut;!plateau[y+1][x-1].estVide();x--) {
+                    score += plateau[y+1][x-1].getLettre().getPoints();
+                }
+            }
+
+            if (!plateau[y+1][xDebut+1].estVide()) {
+                for (int x = xDebut;!plateau[y+1][x+1].estVide();x++) {
+                    score += plateau[y+1][x+1].getLettre().getPoints();
+                }
+            }
+        }
+
+        for (int x = xDebut;!plateau[yDebut][xDebut+1].estVide();x++) {
+            score += plateau[yDebut][xDebut+1].getLettre().getPoints();
+
+            if (!plateau[yDebut-1][x+1].estVide()) {
+                for (int y = yDebut;!plateau[y-1][x+1].estVide();y--) {
+                    score += plateau[y-1][x+1].getLettre().getPoints();
+                }
+            }
+
+            if (!plateau[yDebut+1][x+1].estVide()) {
+                for (int y = yDebut;!plateau[y+1][x+1].estVide();y++) {
+                    score += plateau[y+1][x+1].getLettre().getPoints();
+                }
+            }
+        }
+
+        return score;
+    }
 }

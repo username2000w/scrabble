@@ -6,6 +6,7 @@ public class Plateau {
 	private static final int TAILLE_PLATEAU_HORIZONTALE = 15;
 	private static final int TAILLE_PLATEAU_VERTICALE = 15;
 
+
 	private Case[][] plateau = new Case[TAILLE_PLATEAU_VERTICALE][TAILLE_PLATEAU_HORIZONTALE];
 
 	public Plateau() {
@@ -46,5 +47,9 @@ public class Plateau {
 	public void placerlettre(LettreAlphabetFrancais lettre,int x, int y) throws HorsPlateauException {
 		this.plateau[y][x].setLettre(lettre);
 	}
+	
+	
+	public Case[][] getPlateau() {
+		return plateau;
+	}
 }
-

@@ -65,21 +65,8 @@ public class Joueur {
   if (tour != 0) {
 	  
 	    if (!plateau.getPlateau()[posy][posx-1].estVide()) {
-	    	 try {
-	    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
-	    		} catch (NumberFormatException e) {
-	    			// TODO Auto-generated catch block
-	    			e.printStackTrace();
-	    		} catch (HorsPlateauException e) {
-	    			// TODO Auto-generated catch block
-	    			e.printStackTrace();
-	    		}
-	    
-	    }
-	    
-	    else {
-	    	if (!plateau.getPlateau()[posy-1][posx].estVide()){
-		    	 try {
+	    	 if (tour<2) {
+	    		 try {
 		    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
 		    		} catch (NumberFormatException e) {
 		    			// TODO Auto-generated catch block
@@ -88,12 +75,61 @@ public class Joueur {
 		    			// TODO Auto-generated catch block
 		    			e.printStackTrace();
 		    		}
-		    }
-		    else {
-		    	System.out.println("erruer vertical");
-		    	return;
-		    }
+	    	 }
 	    	
+	    
+	    	else {
+	    		if (!plateau.getPlateau()[posy-1][posx-1].estVide() || !plateau.getPlateau()[posy+1][posx-1].estVide()){
+	    			System.out.println("Le mot est vertical on ne peut pas le continué horizontalement");
+	    			return;
+	    	}
+	    		else {
+	    			try {
+		    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+		    		} catch (NumberFormatException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    		} catch (HorsPlateauException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    		}
+	    		}
+	    	}
+	    }
+	    
+  
+	    
+	    else {
+	    	if (!plateau.getPlateau()[posy-1][posx].estVide()){
+	    		 if (tour<2) {
+		    		try {
+			    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+			    		} catch (NumberFormatException e) {
+			    			// TODO Auto-generated catch block
+			    			e.printStackTrace();
+			    		} catch (HorsPlateauException e) {
+			    			// TODO Auto-generated catch block
+			    			e.printStackTrace();
+			    		}
+			    }
+	    		 else {
+	 	    		if (!plateau.getPlateau()[posy-1][posx-1].estVide() || !plateau.getPlateau()[posy-1][posx+1].estVide()){
+	 	    			System.out.println("Le mot est horizontal on ne peut pas le continué verticalment");
+	 	    			return;
+	 	    	}
+	 	    		else {
+	 	    			try {
+	 		    			plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+	 		    		} catch (NumberFormatException e) {
+	 		    			// TODO Auto-generated catch block
+	 		    			e.printStackTrace();
+	 		    		} catch (HorsPlateauException e) {
+	 		    			// TODO Auto-generated catch block
+	 		    			e.printStackTrace();
+	 		    		}
+	 	    		}
+	    		 }
+	    	}
 	    }
 	    
 	    
@@ -108,7 +144,7 @@ public class Joueur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	  
+	    
   }
   
 	 

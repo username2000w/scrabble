@@ -1,5 +1,6 @@
 package scrabble.application;
 
+import scrabble.gui.Console;
 import scrabble.model.Chevalet;
 import scrabble.model.Joueur;
 import scrabble.model.Plateau;
@@ -25,6 +26,6 @@ public class ScrabbleJeuxEssais {
 
   private static void afficherTuiles(Joueur joueur) {
     System.out.println(joueur.getNom() + " a les tuiles suivantes :");
-    joueur.afficherChevalet();
+    Console.afficherChevalet(joueur.getChevalet());
   }
 }

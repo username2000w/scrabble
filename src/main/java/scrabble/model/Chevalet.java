@@ -29,6 +29,14 @@ public class Chevalet {
 		this.sac.ajouter(lettre);
 	}
 	
+	public void retirerLettre(LettreAlphabetFrancais lettre) {
+	    if (lettres.contains(lettre)) {
+	        lettres.remove(lettre);
+	    } else {
+	        System.out.println("La lettre spécifiée n'est pas présente dans le chevalet.");
+	    }
+	}
+	
 	public LettreAlphabetFrancais getLettreAvecIndex(int tuileIndex) {
 		return this.lettres.get(tuileIndex);
 	}

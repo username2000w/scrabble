@@ -28,11 +28,17 @@ public class Joueur {
     public void afficherChevalet() {
         this.chevalet.afficherTuiles();
     }
+    
+    public void retirerLettreDuChevalet(LettreAlphabetFrancais lettre) {
+        this.chevalet.retirerLettre(lettre);
+    }
 
     int tour = 0;
+
     public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre) {
         try {
             plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+            retirerLettreDuChevalet(lettre);
         } catch (NumberFormatException e) {
             // Gérer l'exception NumberFormatException
             e.printStackTrace();
@@ -121,7 +127,7 @@ public class Joueur {
 
     }
     
-   
+    
 
     public void jouerMot() {
         System.out.println("Quel Mot voulez-vous jouer ? : ");

@@ -2,6 +2,7 @@ package scrabble.model;
 
 import java.util.Scanner;
 
+import scrabble.gui.Console;
 import scrabble.model.utils.exception.HorsPlateauException;
 
 public class Joueur {
@@ -23,10 +24,6 @@ public class Joueur {
     public void echanger(int tuileIndex) {
         this.chevalet.echanger(tuileIndex);
         this.chevalet.piocher();
-    }
-
-    public void afficherChevalet() {
-        this.chevalet.afficherTuiles();
     }
     
     public void retirerLettreDuChevalet(LettreAlphabetFrancais lettre) {
@@ -141,12 +138,10 @@ public class Joueur {
 
             choix = scanner.nextInt();
             if (choix == 1) {
-                afficherChevalet();
+                Console.afficherChevalet(this.chevalet);
                 tour++;
-
             }
         }
-
     }
 
     public int calculerScoreMot(int xDebut, int yDebut) {
@@ -189,5 +184,9 @@ public class Joueur {
         }
 
         return score;
+    }
+
+    public Chevalet getChevalet() {
+        return chevalet;
     }
 }

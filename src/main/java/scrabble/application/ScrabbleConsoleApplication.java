@@ -1,5 +1,6 @@
 package scrabble.application;
 
+import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.exception.SacVideException;
 
@@ -12,17 +13,17 @@ public class ScrabbleConsoleApplication {
 		System.out.println("-------------------------------------------------------");
 
         Plateau plateau = new Plateau();
-        plateau.afficher();
+        Console.afficherPlateau(plateau);
 
         Sac sac = new Sac();
         Chevalet chevalet = new Chevalet(sac);
         Joueur joueur = new Joueur(chevalet, "Joueur 1", plateau);
 
         System.out.println(joueur.getNom() + " a les tuiles suivantes :");
-        joueur.afficherChevalet();
+        Console.afficherChevalet(joueur.getChevalet());
 
         joueur.jouerMot();
-        
-        plateau.afficher();
+
+        Console.afficherPlateau(plateau);
 	}
 }

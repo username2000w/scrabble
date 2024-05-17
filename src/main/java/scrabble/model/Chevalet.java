@@ -45,12 +45,12 @@ public class Chevalet {
 		return this.lettres;
 	}
 
-  public void afficherTuiles() {
-    for (int i = 0; i < TAILLE; i++) {
-      System.out.print(this.getLettreAvecIndex(i).toString() + " ");
-    }
-    System.out.print("\n");
-  }
+	public void afficherTuiles() {
+	    for (int i = 0; i < this.lettres.size(); i++) {
+	        System.out.print(this.getLettreAvecIndex(i).toString() + " ");
+	    }
+	    System.out.print("\n");
+	}
   
   public void remplirChevalet() {
 		for (int tailleActuelle = this.getLettres().size(); tailleActuelle < TAILLE; tailleActuelle++) {

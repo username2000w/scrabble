@@ -52,4 +52,8 @@ public class Plateau {
 	public Case[][] getPlateau() {
 		return plateau;
 	}
+	
+	public void setCase(int x, int y, Case nouvelleCase) {
+	    plateau[x][y] = nouvelleCase;
+	}
 }

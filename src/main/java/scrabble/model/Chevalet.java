@@ -22,6 +22,7 @@ public class Chevalet {
 
     public void echanger(Sac sac, int tuileIndex) {
         LettreAlphabetFrancais lettre = this.lettres.remove(tuileIndex);
+        sac.ajouter(lettre);
         this.piocher(sac);
     }
 

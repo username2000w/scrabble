@@ -15,13 +15,13 @@ public class ChevaletTest {
   @BeforeEach
   void init() {
     Sac sac = new Sac();
-    chevalet = new Chevalet(sac);
+    chevalet = new Chevalet();
   }
 
   @Test
   void testTailleInitiale() {
     int nombreDeTuiles = chevalet.getLettres().size();
-    Boolean estVide = chevalet.getLettres().isEmpty();
+    boolean estVide = chevalet.getLettres().isEmpty();
 
     assertEquals(0, nombreDeTuiles);
     assertTrue(estVide);

@@ -1,7 +1,5 @@
 package scrabble.model;
 
-import scrabble.model.utils.exception.SacVideException;
-
 public class MaitreDuJeu {
 
     private Sac sac;

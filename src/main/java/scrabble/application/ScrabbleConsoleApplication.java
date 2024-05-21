@@ -2,7 +2,6 @@ package scrabble.application;
 
 import scrabble.gui.Console;
 import scrabble.model.*;
-import scrabble.model.utils.exception.SacVideException;
 
 public class ScrabbleConsoleApplication {
 

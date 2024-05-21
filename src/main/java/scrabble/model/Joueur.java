@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import scrabble.gui.Console;
 import scrabble.model.utils.exception.HorsPlateauException;
-import scrabble.model.utils.exception.SacVideException;
 
 public class Joueur {
     private Chevalet chevalet;

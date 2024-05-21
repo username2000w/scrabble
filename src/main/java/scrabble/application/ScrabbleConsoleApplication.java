@@ -16,8 +16,8 @@ public class ScrabbleConsoleApplication {
         Console.afficherPlateau(plateau);
 
         Sac sac = new Sac();
-        Chevalet chevalet = new Chevalet(sac);
-        Joueur joueur = new Joueur(chevalet, "Joueur 1", plateau);
+        Chevalet chevalet = new Chevalet();
+        Joueur joueur = new Joueur(chevalet, "Joueur 1", plateau, sac);
 
         System.out.println(joueur.getNom() + " a les tuiles suivantes :");
         Console.afficherChevalet(joueur.getChevalet());

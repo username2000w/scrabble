@@ -9,18 +9,18 @@ import scrabble.model.Sac;
 public class ScrabbleJeuxEssais {
   public static void main(String[] args) {
     Sac sac = new Sac();
-    Chevalet chevalet = new Chevalet(sac);
-    Joueur joueur = new Joueur(chevalet, "Joueur 1", new Plateau());
+    Chevalet chevalet = new Chevalet();
+    Joueur joueur = new Joueur(chevalet, "Joueur 1", new Plateau(), sac);
 
     System.out.println("On affiche les tuiles du joueur au début.");
     afficherTuiles(joueur);
 
     System.out.println("On échange la première tuile et on affiche.");
-    joueur.echanger(0);
+    joueur.echanger(sac,0);
     afficherTuiles(joueur);
 
     System.out.println("On échange la troisième tuile et on affiche.");
-    joueur.echanger(2);
+    joueur.echanger(sac,2);
     afficherTuiles(joueur);
   }
 

@@ -1,5 +1,7 @@
 package scrabble.application;
 
+import java.util.ArrayList;
+
 import scrabble.gui.Console;
 import scrabble.model.*;
 
@@ -21,7 +23,9 @@ public class ScrabbleConsoleApplication {
         System.out.println(joueur.getNom() + " a les tuiles suivantes :");
         Console.afficherChevalet(joueur.getChevalet());
 
-        joueur.jouerMot();
+        ArrayList<Integer> coordonnees = joueur.jouerMot();
+        
+        System.out.println(joueur.calculerScoreMot(coordonnees.get(0), coordonnees.get(1)));
 
         Console.afficherPlateau(plateau);
 	}

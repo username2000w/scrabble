@@ -6,27 +6,23 @@ import java.util.ArrayList;
 
 public class Chevalet {
     private ArrayList<LettreAlphabetFrancais> lettres;
-    private Sac sac;
     private static final int TAILLE = 7;
 
-    public Chevalet(Sac sac) {
+    public Chevalet() {
         this.lettres = new ArrayList<>();
-        this.sac = sac;
     }
 
-    public void piocher() {
-        if (this.lettres.size() < TAILLE) {
-            try {
-                this.lettres.add(this.sac.piocher());
-            } catch (SacVideException e) {
-                System.out.println(e.getMessage());
-            }
+    public void piocher(Sac sac) throws SacVideException {
+        try {
+            this.lettres.add(sac.piocher());
+        } catch (SacVideException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void echanger(int tuileIndex) {
+    public void echanger(Sac sac, int tuileIndex) throws SacVideException {
         LettreAlphabetFrancais lettre = this.lettres.remove(tuileIndex);
-        this.sac.ajouter(lettre);
+        this.piocher(sac);
     }
 
     public void retirerLettre(LettreAlphabetFrancais lettre) {
@@ -45,9 +41,9 @@ public class Chevalet {
         return this.lettres;
     }
 
-    public void remplirChevalet() {
+    public void remplirChevalet(Sac sac) throws SacVideException {
         for (int tailleActuelle = this.getLettres().size(); tailleActuelle < TAILLE; tailleActuelle++) {
-            this.piocher();
+            this.piocher(sac);
         }
     }
 

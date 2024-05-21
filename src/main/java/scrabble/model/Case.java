@@ -45,6 +45,10 @@ public class Case {
 	public Bonus getBonus() {
 		return bonus;
 	}
+	
+	public void viderCase() {
+        this.lettre = null; // Supprime la lettre de la case, rendant la case vide
+    }
 }
 
 

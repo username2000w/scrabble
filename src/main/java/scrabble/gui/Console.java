@@ -13,14 +13,14 @@ public class Console {
                 LettreAlphabetFrancais lettre = plateau.getPlateau()[i][j].getLettre();
                 Bonus bonus = plateau.getPlateau()[i][j].getBonus();
 
-                if (bonus == null) {
-                    if (lettre == null) { // si la case est vide, on affiche un carré vide.
+                if (lettre == null) {
+                    if (bonus == null) { // si la case est vide, on affiche un carré vide.
                         System.out.print("□ ");
                     } else {
-                        System.out.print(lettre + " ");
+                    	System.out.print(bonus);                    	
                     }
                 } else {
-                    System.out.print(bonus);
+                	System.out.print(lettre + " ");
                 }
             }
             // Retour à la ligne.

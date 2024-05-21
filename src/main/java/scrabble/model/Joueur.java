@@ -175,7 +175,7 @@ public class Joueur {
         // score de la case initiale
         score += plateau[yDebut][xDebut].getLettre().getPoints();
 
-        for (int y = yDebut; !plateau[yDebut + 1][xDebut].estVide(); y++) {
+        for (int y = yDebut; !plateau[y + 1][xDebut].estVide(); y++) {
             score += plateau[yDebut + 1][xDebut].getLettre().getPoints();
 
             if (!plateau[y + 1][xDebut - 1].estVide()) {
@@ -191,7 +191,7 @@ public class Joueur {
             }
         }
 
-        for (int x = xDebut; !plateau[yDebut][xDebut + 1].estVide(); x++) {
+        for (int x = xDebut; !plateau[yDebut][x + 1].estVide(); x++) {
             score += plateau[yDebut][xDebut + 1].getLettre().getPoints();
 
             if (!plateau[yDebut - 1][x + 1].estVide()) {

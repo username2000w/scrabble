@@ -12,7 +12,7 @@ public class Chevalet {
         this.lettres = new ArrayList<>();
     }
 
-    public void piocher(Sac sac) throws SacVideException {
+    public void piocher(Sac sac) {
         try {
             this.lettres.add(sac.piocher());
         } catch (SacVideException e) {
@@ -20,7 +20,7 @@ public class Chevalet {
         }
     }
 
-    public void echanger(Sac sac, int tuileIndex) throws SacVideException {
+    public void echanger(Sac sac, int tuileIndex) {
         LettreAlphabetFrancais lettre = this.lettres.remove(tuileIndex);
         this.piocher(sac);
     }
@@ -41,7 +41,7 @@ public class Chevalet {
         return this.lettres;
     }
 
-    public void remplirChevalet(Sac sac) throws SacVideException {
+    public void remplirChevalet(Sac sac) {
         for (int tailleActuelle = this.getLettres().size(); tailleActuelle < TAILLE; tailleActuelle++) {
             this.piocher(sac);
         }

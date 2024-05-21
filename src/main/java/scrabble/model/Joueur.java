@@ -4,26 +4,27 @@ import java.util.Scanner;
 
 import scrabble.gui.Console;
 import scrabble.model.utils.exception.HorsPlateauException;
+import scrabble.model.utils.exception.SacVideException;
 
 public class Joueur {
     private Chevalet chevalet;
     private final String nom;
     private Plateau plateau;
 
-    public Joueur(Chevalet chevalet, String nom, Plateau plateau) {
+    public Joueur(Chevalet chevalet, String nom, Plateau plateau, Sac sac) {
         this.chevalet = chevalet;
         this.nom = nom;
         this.plateau = plateau;
-        chevalet.remplirChevalet();
+        chevalet.remplirChevalet(sac);
     }
 
     public String getNom() {
         return nom;
     }
 
-    public void echanger(int tuileIndex) {
-        this.chevalet.echanger(tuileIndex);
-        this.chevalet.piocher();
+    public void echanger(Sac sac, int tuileIndex) {
+        this.chevalet.echanger(sac, tuileIndex);
+        this.chevalet.piocher(sac);
     }
 
     public void retirerLettreDuChevalet(LettreAlphabetFrancais lettre) {

@@ -31,6 +31,8 @@ public class Joueur {
     }
 
     int tour = 0;
+    
+    
 
     public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre) {
     	try {
@@ -122,23 +124,32 @@ public class Joueur {
 
     }
 
-
     public void jouerMot() {
         System.out.println("Quel Mot voulez-vous jouer ? : ");
         Scanner scanner = new Scanner(System.in);
         int choix = 0;
-
         while (choix != 2) {
+        	
             jouerlettre();
             System.out.println("1. Continuez à placer une lettre ");
             System.out.println("2. finir le tour ");
-
+            
             choix = scanner.nextInt();
             if (choix == 1) {
-                Console.afficherChevalet(this.chevalet);
+                Console.afficherChevalet(chevalet);
                 tour++;
+
             }
         }
+        
+        if (plateau.getPlateau()[7][7].estVide()) {
+            System.out.println("Le premier mot doit commencer sur l'étoile");
+            plateau.supprimerToutesLettres();
+
+        }
+        
+        
+
     }
 
     public int calculerScoreMot(int xDebut, int yDebut) {

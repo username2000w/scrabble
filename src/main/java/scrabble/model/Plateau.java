@@ -32,4 +32,12 @@ public class Plateau {
 	public void setCase(int x, int y, Case nouvelleCase) {
 	    plateau[x][y] = nouvelleCase;
 	}
+	
+	public void supprimerToutesLettres() {
+        for (int y = 0; y < plateau.length; y++) {
+            for (int x = 0; x < plateau[y].length; x++) {
+                plateau[y][x].viderCase();
+            }
+        }
+    }
 }

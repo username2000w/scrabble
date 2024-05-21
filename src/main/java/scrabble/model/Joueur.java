@@ -33,14 +33,10 @@ public class Joueur {
     int tour = 0;
 
     public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre) {
-        try {
+    	try {
             plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
-            retirerLettreDuChevalet(lettre);
-        } catch (NumberFormatException e) {
-            // Gérer l'exception NumberFormatException
-            e.printStackTrace();
-        } catch (HorsPlateauException e) {
-            // Gérer l'exception HorsPlateauException
+            chevalet.retirerLettre(lettre);
+        } catch (NumberFormatException | HorsPlateauException e) {
             e.printStackTrace();
         }
     }
@@ -85,7 +81,7 @@ public class Joueur {
         if (tour != 0) {
 
             if (!plateau.getPlateau()[posy][posx - 1].estVide()) {
-                if (tour < 2) {
+                if (tour == 1) {
                     placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
 
                 } else {
@@ -99,7 +95,7 @@ public class Joueur {
                 }
             } else {
                 if (!plateau.getPlateau()[posy - 1][posx].estVide()) {
-                    if (tour < 2) {
+                    if (tour == 1) {
                         placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
 
                     } else {
@@ -111,13 +107,17 @@ public class Joueur {
 
                         }
                     }
+                }else {
+                	 System.out.println("La lettre doit suivre la première lettre ");
                 }
             }
 
 
+        }else {
+        	 placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
         }
 
-        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+       
 
 
     }

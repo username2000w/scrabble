@@ -48,9 +48,9 @@ public class Chevalet {
         }
     }
 
-    public LettreAlphabetFrancais getTuileAvecLettre(String lettre_voulu) {
+    public LettreAlphabetFrancais getTuileAvecLettre(String lettreVoulue) {
         for (LettreAlphabetFrancais lettre : lettres) {
-            if (lettre_voulu.equals(lettre.toString())) {
+            if (lettreVoulue.equals(lettre.toString())) {
                 return lettre;
             }
         }

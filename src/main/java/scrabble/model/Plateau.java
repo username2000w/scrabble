@@ -25,8 +25,8 @@ public class Plateau {
 		this.plateau[y][x].setLettre(lettre);
 	}
 
-	public void placerlettreJoker(int x, int y, String lettre) throws HorsPlateauException {
-		this.plateau[y][x].setLettreJoker(lettre);
+	public void placerlettreJoker(int x, int y, String affichage) throws HorsPlateauException {
+		this.plateau[y][x].setLettreJoker(affichage);
 	}
 
 	public Case[][] getPlateau() {

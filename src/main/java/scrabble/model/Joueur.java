@@ -1,7 +1,6 @@
 package scrabble.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import scrabble.gui.Console;
@@ -35,25 +34,21 @@ public class Joueur {
     int tour = 0;
 
 
+    private String joker = "";
+    private String affichage = "";
 
-    public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre) {
+    public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre, String affichage) {
     	try {
-            plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
-            chevalet.retirerLettre(lettre);
-        } catch (NumberFormatException | HorsPlateauException e) {
-            e.printStackTrace();
-        }
-    }
+            if (joker.equals("JOKER")) {
+                plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), affichage);
+                retirerLettreDuChevalet(LettreAlphabetFrancais.JOKER);
+                joker = "";
+            } else {
+                plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));
+                chevalet.retirerLettre(lettre);
+            }
 
-    public void placerEtRetirerJoker(String pos_x_lettre, String pos_y_lettre, String lettre) {
-        try {
-            plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), lettre);
-            retirerLettreDuChevalet(LettreAlphabetFrancais.JOKER);
-        } catch (NumberFormatException e) {
-            // Gérer l'exception NumberFormatException
-            e.printStackTrace();
-        } catch (HorsPlateauException e) {
-            // Gérer l'exception HorsPlateauException
+        } catch (NumberFormatException | HorsPlateauException e) {
             e.printStackTrace();
         }
     }
@@ -73,7 +68,9 @@ public class Joueur {
         if (choixlettre.equals("JOKER")) {
             System.out.print("[JOKER] Quel lettre voulez-vous jouer ? : ");
             scanner = new Scanner(System.in);
+            joker = "JOKER";
             choixlettre = scanner.nextLine().toUpperCase();
+            affichage = choixlettre;
         }
 
         System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
@@ -88,9 +85,9 @@ public class Joueur {
         int posy = Integer.parseInt(pos_y_lettre);
 
         LettreAlphabetFrancais lettre = chevalet.getTuileAvecLettre(choixlettre);
-
-
-
+        if (joker.equals("JOKER")) {
+            lettre = chevalet.getTuileAvecLettre("JOKER");
+        }
 
         if (!plateau.getPlateau()[posy][posx].estVide()) {
             System.out.println("Impossible de placer une lettre ici, une lettre est déjà placée.");
@@ -101,37 +98,37 @@ public class Joueur {
 
             if (!plateau.getPlateau()[posy][posx - 1].estVide()) {
                 if (tour == 1) {
-                    placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+                    placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
 
                 } else {
                     if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy + 1][posx - 1].estVide()) {
                         System.out.println("Le mot est vertical on ne peut pas le continué horizontalement");
                         return null;
                     } else {
-                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
 
                     }
                 }
             } else {
                 if (!plateau.getPlateau()[posy - 1][posx].estVide()) {
                     if (tour == 1) {
-                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
 
                     } else {
                         if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy - 1][posx + 1].estVide()) {
                             System.out.println("Le mot est horizontal on ne peut pas le continué verticalment");
                             return null;
                         } else {
-                            placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+                            placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
 
                         }
                     }
-                }else {
+                } else {
                 	 System.out.println("La lettre doit suivre la première lettre ");
                 }
             }
-        }else {
-        	 placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
+        } else {
+        	 placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
         	 ArrayList<Integer> coordonnees = new ArrayList<>();
              coordonnees.add(posx);
              coordonnees.add(posy);

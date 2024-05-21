@@ -20,7 +20,7 @@ public class Console {
                     	System.out.print(bonus);                    	
                     }
                 } else {
-                	System.out.print(lettre + " ");
+                	System.out.print(lettre.afficherLettre() + " ");
                 }
             }
             // Retour à la ligne.

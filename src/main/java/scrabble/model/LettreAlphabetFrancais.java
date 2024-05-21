@@ -32,21 +32,25 @@ public enum LettreAlphabetFrancais {
     private int points;
     private String affichage;
 
-    LettreAlphabetFrancais(int points, String affichage) {
-        this.points = points;
-        this.affichage = affichage;
+    public String jokerString(String affichage) {
+        return this.affichage;
     }
 
     LettreAlphabetFrancais(int points) {
         this.points = points;
     }
 
+    LettreAlphabetFrancais(int points, String affichage) {
+        this.points = points;
+        this.affichage = affichage;
+    }
+
     public int getPoints() {
         return this.points;
     }
 
-    public int setPoints(int points) {
-        return this.points = points;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getAffichage() {
@@ -55,5 +59,13 @@ public enum LettreAlphabetFrancais {
 
     public void setAffichage(String affichage) {
         this.affichage = affichage;
+    }
+
+    public String afficherLettre() {
+        if (this.points == 0) {
+            return this.affichage;
+        } else {
+            return this.name();
+        }
     }
 }

@@ -45,6 +45,19 @@ public class Joueur {
         }
     }
 
+    public void placerEtRetirerJoker(String pos_x_lettre, String pos_y_lettre, String lettre) {
+        try {
+            plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), lettre);
+            retirerLettreDuChevalet(LettreAlphabetFrancais.JOKER);
+        } catch (NumberFormatException e) {
+            // Gérer l'exception NumberFormatException
+            e.printStackTrace();
+        } catch (HorsPlateauException e) {
+            // Gérer l'exception HorsPlateauException
+            e.printStackTrace();
+        }
+    }
+
     public void jouerlettre() {
         System.out.print("Quel lettre voulez-vous jouer ? : ");
         Scanner scanner = new Scanner(System.in);
@@ -72,7 +85,6 @@ public class Joueur {
         Scanner scanner3 = new Scanner(System.in);
         String pos_y_lettre = scanner3.nextLine();
         int posy = Integer.parseInt(pos_y_lettre);
-
 
         LettreAlphabetFrancais lettre = chevalet.getTuileAvecLettre(choixlettre);
 
@@ -113,12 +125,9 @@ public class Joueur {
                     }
                 }
             }
-
-
         }
 
         placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre);
-
 
     }
 

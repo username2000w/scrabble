@@ -55,33 +55,28 @@ public class Joueur {
 
     public ArrayList<Integer> jouerlettre() {
         System.out.print("Quel lettre voulez-vous jouer ? : ");
-        Scanner scanner = new Scanner(System.in);
-        String choixlettre = scanner.nextLine().toUpperCase();
+        String choixlettre = Console.inputStringScanner().toUpperCase();
 
 
         while (chevalet.getTuileAvecLettre(choixlettre) == null) {
             System.out.print("Quel lettre voulez-vous jouer ? : ");
-            Scanner scanner4 = new Scanner(System.in);
-            choixlettre = scanner4.nextLine().toUpperCase();
+            choixlettre = Console.inputStringScanner().toUpperCase();
         }
 
         if (choixlettre.equals("JOKER")) {
             System.out.print("[JOKER] Quel lettre voulez-vous jouer ? : ");
-            scanner = new Scanner(System.in);
             joker = "JOKER";
-            choixlettre = scanner.nextLine().toUpperCase();
+            choixlettre = Console.inputStringScanner().toUpperCase();
             affichage = choixlettre;
         }
 
         System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
-        Scanner scanner2 = new Scanner(System.in);
-        String pos_x_lettre = scanner2.nextLine();
+        String pos_x_lettre = Console.inputStringScanner();
         int posx = Integer.parseInt(pos_x_lettre);
 
 
         System.out.print("Où voulez-vous la placer ? ( ↕ Verticalement ) : ");
-        Scanner scanner3 = new Scanner(System.in);
-        String pos_y_lettre = scanner3.nextLine();
+        String pos_y_lettre = Console.inputStringScanner();
         int posy = Integer.parseInt(pos_y_lettre);
 
         LettreAlphabetFrancais lettre = chevalet.getTuileAvecLettre(choixlettre);
@@ -145,7 +140,6 @@ public class Joueur {
     	tour = 0;
 
         System.out.println("Quel Mot voulez-vous jouer ? : ");
-        Scanner scanner = new Scanner(System.in);
         int choix = 0;
         while (choix != 2) {
         	if (tour == 0) {
@@ -156,7 +150,7 @@ public class Joueur {
             System.out.println("1. Continuez à placer une lettre ");
             System.out.println("2. finir le tour ");
 
-            choix = scanner.nextInt();
+            choix = Console.inputIntScanner();
             if (choix == 1) {
                 Console.afficherChevalet(chevalet);
                 tour++;

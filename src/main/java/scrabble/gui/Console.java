@@ -5,6 +5,8 @@ import scrabble.model.Chevalet;
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Plateau;
 
+import java.util.Scanner;
+
 public class Console {
 
     public static void afficherPlateau(Plateau plateau) {
@@ -33,5 +35,21 @@ public class Console {
             System.out.print(chevalet.getLettreAvecIndex(i).toString() + " ");
         }
         System.out.print("\n");
+    }
+
+    public static String inputStringScanner() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        scanner.close();
+
+        return input;
+    }
+
+    public static int inputIntScanner() {
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
+        scanner.close();
+
+        return input;
     }
 }

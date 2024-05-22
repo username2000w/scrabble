@@ -29,7 +29,7 @@ public enum LettreAlphabetFrancais {
     Z(10),
     JOKER(0, "", "");
 
-    private int points;
+    private final int points;
     private String affichageJoker1;
     private String affichageJoker2;
 
@@ -45,18 +45,6 @@ public enum LettreAlphabetFrancais {
 
     public int getPoints() {
         return this.points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public String getJoker1() {
-        return this.affichageJoker1;
-    }
-
-    public String getJoker2() {
-        return this.affichageJoker2;
     }
 
     public void setJoker1(String affichage) {

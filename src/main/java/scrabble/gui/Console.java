@@ -40,7 +40,6 @@ public class Console {
     public static String inputStringScanner() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        scanner.close();
 
         return input;
     }
@@ -48,7 +47,6 @@ public class Console {
     public static int inputIntScanner() {
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
-        scanner.close();
 
         return input;
     }

@@ -37,9 +37,13 @@ public class Case {
 		this.lettre = lettre;
 	}
 
-	public void setLettreJoker(String affichage) {
+	public void setLettreJoker(String affichage, int comptJoker) {
 		this.lettre = LettreAlphabetFrancais.JOKER;
-		this.lettre.setAffichage(affichage);
+		if (comptJoker == 0) {
+			this.lettre.setJoker1(affichage);
+		} else {
+			this.lettre.setJoker2(affichage);
+		}
 	}
 
 	public Bonus getBonus() {

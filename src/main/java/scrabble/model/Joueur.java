@@ -36,12 +36,20 @@ public class Joueur {
 
     private String joker = "";
     private String affichage = "";
+    private int compteurJoker = 0;
 
     public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre, String affichage) {
     	try {
             if (joker.equals("JOKER")) {
-                plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), affichage);
+                if (compteurJoker == 0) {
+                    plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), affichage, compteurJoker);
+                } else if (compteurJoker == 1) {
+                    plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), affichage, compteurJoker);
+                } else {
+                    System.out.println("Vous ne pouvez pas placer plus de 2 jokers");
+                }
                 retirerLettreDuChevalet(LettreAlphabetFrancais.JOKER);
+                compteurJoker++;
                 joker = "";
             } else {
                 plateau.placerlettre(lettre, Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre));

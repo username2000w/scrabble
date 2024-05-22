@@ -27,22 +27,20 @@ public enum LettreAlphabetFrancais {
     X(10),
     Y(10),
     Z(10),
-    JOKER(0,"");
+    JOKER(0, "", "");
 
     private int points;
-    private String affichage;
-
-    public String jokerString(String affichage) {
-        return this.affichage;
-    }
+    private String affichageJoker1;
+    private String affichageJoker2;
 
     LettreAlphabetFrancais(int points) {
         this.points = points;
     }
 
-    LettreAlphabetFrancais(int points, String affichage) {
+    LettreAlphabetFrancais(int points, String joker1, String joker2) {
         this.points = points;
-        this.affichage = affichage;
+        this.affichageJoker1 = joker1;
+        this.affichageJoker2 = joker2;
     }
 
     public int getPoints() {
@@ -53,17 +51,27 @@ public enum LettreAlphabetFrancais {
         this.points = points;
     }
 
-    public String getAffichage() {
-        return this.affichage;
+    public String getJoker1() {
+        return this.affichageJoker1;
     }
 
-    public void setAffichage(String affichage) {
-        this.affichage = affichage;
+    public String getJoker2() {
+        return this.affichageJoker2;
     }
 
-    public String afficherLettre() {
-        if (this.points == 0) {
-            return this.affichage;
+    public void setJoker1(String affichage) {
+        this.affichageJoker1 = affichage;
+    }
+
+    public void setJoker2(String affichage) {
+        this.affichageJoker2 = affichage;
+    }
+
+    public String afficherLettre(int compt) {
+        if (this == LettreAlphabetFrancais.JOKER && compt == 0) {
+            return this.affichageJoker1;
+        } else if (this == LettreAlphabetFrancais.JOKER && compt == 1) {
+            return this.affichageJoker2;
         } else {
             return this.name();
         }

@@ -8,6 +8,8 @@ import scrabble.model.Plateau;
 public class Console {
 
     public static void afficherPlateau(Plateau plateau) {
+        int compteurJoker = 0;
+
         for (int i = 0; i < Plateau.TAILLE_PLATEAU_VERTICALE; i++) {
             for (int j = 0; j < Plateau.TAILLE_PLATEAU_HORIZONTALE; j++) {
                 LettreAlphabetFrancais lettre = plateau.getPlateau()[i][j].getLettre();
@@ -20,7 +22,10 @@ public class Console {
                     	System.out.print(bonus);                    	
                     }
                 } else {
-                	System.out.print(lettre.afficherLettre() + " ");
+                	System.out.print(lettre.afficherLettre(compteurJoker) + " ");
+                    if (lettre.name().equals("JOKER")) {
+                        compteurJoker++;
+                    }
                 }
             }
             // Retour à la ligne.

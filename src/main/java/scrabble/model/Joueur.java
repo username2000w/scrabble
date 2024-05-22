@@ -9,13 +9,13 @@ import scrabble.model.utils.exception.HorsPlateauException;
 public class Joueur {
     private Chevalet chevalet;
     private final String nom;
-    private Plateau plateau;
+    private int tour = 0;
+    private String joker = "";
+    private String affichage = "";
 
-    public Joueur(Chevalet chevalet, String nom, Plateau plateau, Sac sac) {
+    public Joueur(Chevalet chevalet, String nom) {
         this.chevalet = chevalet;
         this.nom = nom;
-        this.plateau = plateau;
-        chevalet.remplirChevalet(sac);
     }
 
     public String getNom() {
@@ -24,20 +24,14 @@ public class Joueur {
 
     public void echanger(Sac sac, int tuileIndex) {
         this.chevalet.echanger(sac, tuileIndex);
-        this.chevalet.piocher(sac);
     }
 
     public void retirerLettreDuChevalet(LettreAlphabetFrancais lettre) {
         this.chevalet.retirerLettre(lettre);
     }
 
-    int tour = 0;
 
-
-    private String joker = "";
-    private String affichage = "";
-
-    public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, String pos_x_lettre, String pos_y_lettre, String affichage) {
+    public void placerEtRetirerLettre(LettreAlphabetFrancais lettre, Plateau plateau, String pos_x_lettre, String pos_y_lettre, String affichage) {
     	try {
             if (joker.equals("JOKER")) {
                 plateau.placerlettreJoker(Integer.parseInt(pos_x_lettre), Integer.parseInt(pos_y_lettre), affichage);
@@ -53,7 +47,7 @@ public class Joueur {
         }
     }
 
-    public ArrayList<Integer> jouerlettre() {
+    public ArrayList<Integer> jouerlettre(Plateau plateau) {
         System.out.print("Quel lettre voulez-vous jouer ? : ");
         String choixlettre = Console.inputStringScanner().toUpperCase();
 
@@ -93,28 +87,28 @@ public class Joueur {
 
             if (!plateau.getPlateau()[posy][posx - 1].estVide()) {
                 if (tour == 1) {
-                    placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
+                    placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
 
                 } else {
                     if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy + 1][posx - 1].estVide()) {
                         System.out.println("Le mot est vertical on ne peut pas le continué horizontalement");
                         return null;
                     } else {
-                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
+                        placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
 
                     }
                 }
             } else {
                 if (!plateau.getPlateau()[posy - 1][posx].estVide()) {
                     if (tour == 1) {
-                        placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
+                        placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
 
                     } else {
                         if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy - 1][posx + 1].estVide()) {
                             System.out.println("Le mot est horizontal on ne peut pas le continué verticalment");
                             return null;
                         } else {
-                            placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
+                            placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
 
                         }
                     }
@@ -123,19 +117,16 @@ public class Joueur {
                 }
             }
         } else {
-        	 placerEtRetirerLettre(lettre, pos_x_lettre, pos_y_lettre, affichage);
+        	 placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
         	 ArrayList<Integer> coordonnees = new ArrayList<>();
              coordonnees.add(posx);
              coordonnees.add(posy);
              return coordonnees;
         }
 		return null;
-
-
-
     }
 
-    public ArrayList<Integer> jouerMot() {
+    public ArrayList<Integer> jouerMot(Plateau plateau) {
     	ArrayList<Integer> coordonnees = null;
     	tour = 0;
 
@@ -143,9 +134,9 @@ public class Joueur {
         int choix = 0;
         while (choix != 2) {
         	if (tour == 0) {
-        		coordonnees = jouerlettre();
+        		coordonnees = jouerlettre(plateau);
         	} else {
-        		jouerlettre();
+        		jouerlettre(plateau);
         	}
             System.out.println("1. Continuez à placer une lettre ");
             System.out.println("2. finir le tour ");
@@ -154,7 +145,6 @@ public class Joueur {
             if (choix == 1) {
                 Console.afficherChevalet(chevalet);
                 tour++;
-
             }
         }
 
@@ -163,54 +153,14 @@ public class Joueur {
             plateau.supprimerToutesLettres();
 
         }
-
-
 		return coordonnees;
-    }
-
-    public int calculerScoreMot(int xDebut, int yDebut) {
-        int score = 0;
-        Case[][] plateau = this.plateau.getPlateau();
-
-        // score de la case initiale
-        score += plateau[yDebut][xDebut].getLettre().getPoints();
-
-        for (int y = yDebut; !plateau[y + 1][xDebut].estVide(); y++) {
-            score += plateau[yDebut + 1][xDebut].getLettre().getPoints();
-
-            if (!plateau[y + 1][xDebut - 1].estVide()) {
-                for (int x = xDebut; !plateau[y + 1][x - 1].estVide(); x--) {
-                    score += plateau[y + 1][x - 1].getLettre().getPoints();
-                }
-            }
-
-            if (!plateau[y + 1][xDebut + 1].estVide()) {
-                for (int x = xDebut; !plateau[y + 1][x + 1].estVide(); x++) {
-                    score += plateau[y + 1][x + 1].getLettre().getPoints();
-                }
-            }
-        }
-
-        for (int x = xDebut; !plateau[yDebut][x + 1].estVide(); x++) {
-            score += plateau[yDebut][xDebut + 1].getLettre().getPoints();
-
-            if (!plateau[yDebut - 1][x + 1].estVide()) {
-                for (int y = yDebut; !plateau[y - 1][x + 1].estVide(); y--) {
-                    score += plateau[y - 1][x + 1].getLettre().getPoints();
-                }
-            }
-
-            if (!plateau[yDebut + 1][x + 1].estVide()) {
-                for (int y = yDebut; !plateau[y + 1][x + 1].estVide(); y++) {
-                    score += plateau[y + 1][x + 1].getLettre().getPoints();
-                }
-            }
-        }
-
-        return score;
     }
 
     public Chevalet getChevalet() {
         return chevalet;
+    }
+
+    public void remplirChevalet(Sac sac) {
+        this.chevalet.remplirChevalet(sac);
     }
 }

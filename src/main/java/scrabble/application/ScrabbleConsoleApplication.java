@@ -14,8 +14,6 @@ public class ScrabbleConsoleApplication {
 		System.out.println("-- développé par Maxime, Mikkel, Léo et Alexis       --");
 		System.out.println("-------------------------------------------------------");
 
-        ;
-
         MaitreDuJeu maitreDuJeu = new MaitreDuJeu();
         for (int tour = 0; maitreDuJeu.jouerTour(); tour++) { // GAME LOOP
             System.out.println("TOUR " + tour);

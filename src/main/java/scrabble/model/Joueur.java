@@ -12,6 +12,7 @@ public class Joueur {
     private int tour = 0;
     private String joker = "";
     private String affichage = "";
+    private int compteurJoker = 0;
 
     public Joueur(Chevalet chevalet, String nom) {
         this.chevalet = chevalet;

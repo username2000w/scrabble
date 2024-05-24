@@ -11,6 +11,7 @@ import scrabble.model.utils.exception.SacVideException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SacTest {
+
   @Test
   void testContient102Tuiles() {
     Sac sac = new Sac();

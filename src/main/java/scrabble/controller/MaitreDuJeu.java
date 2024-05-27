@@ -2,6 +2,7 @@ package scrabble.controller;
 
 import scrabble.gui.Console;
 import scrabble.model.*;
+import scrabble.model.utils.Coordonee;
 
 import java.util.ArrayList;
 
@@ -33,8 +34,8 @@ public class MaitreDuJeu {
         int choix = Console.inputIntScanner();
         switch (choix) {
             case 1:
-                ArrayList<Integer> coordonnees = joueur.jouerMot(plateau);
-                System.out.println("Vous avez marqué " + this.calculerScoreMot(coordonnees.get(0), coordonnees.get(1)) + " points.");
+                Coordonee coordonnees = joueur.jouerMot(plateau);
+                System.out.println("Vous avez marqué " + this.calculerScoreMot(coordonnees) + " points.");
                 joueur.remplirChevalet(sac);
                 break;
             case 2:
@@ -50,45 +51,47 @@ public class MaitreDuJeu {
         return true;
     }
 
-    public int calculerScoreMot(int xDebut, int yDebut) {
-        int score = 0;
+    public int calculerScoreMot(Coordonee coordoneeDebutMot) {
+        int ligneDebutMot = coordoneeDebutMot.getLigne();
+        int colonneDebutMot = coordoneeDebutMot.getColonne();
+        int scoreMot = 0;
         Case[][] plateau = this.plateau.getPlateau();
 
         // score de la case initiale
-        score += plateau[yDebut][xDebut].getLettre().getPoints();
+        scoreMot += plateau[ligneDebutMot][colonneDebutMot].getLettre().getPoints();
 
-        for (int y = yDebut; !plateau[y + 1][xDebut].estVide(); y++) {
-            score += plateau[yDebut + 1][xDebut].getLettre().getPoints();
+        for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonneDebutMot].estVide(); ligne++) {
+            scoreMot += plateau[ligneDebutMot + 1][colonneDebutMot].getLettre().getPoints();
 
-            if (!plateau[y + 1][xDebut - 1].estVide()) {
-                for (int x = xDebut; !plateau[y + 1][x - 1].estVide(); x--) {
-                    score += plateau[y + 1][x - 1].getLettre().getPoints();
+            if (!plateau[ligne + 1][colonneDebutMot - 1].estVide()) {
+                for (int colonne = colonneDebutMot; !plateau[ligne + 1][colonne - 1].estVide(); colonne--) {
+                    scoreMot += plateau[ligne + 1][colonne - 1].getLettre().getPoints();
                 }
             }
 
-            if (!plateau[y + 1][xDebut + 1].estVide()) {
-                for (int x = xDebut; !plateau[y + 1][x + 1].estVide(); x++) {
-                    score += plateau[y + 1][x + 1].getLettre().getPoints();
-                }
-            }
-        }
-
-        for (int x = xDebut; !plateau[yDebut][x + 1].estVide(); x++) {
-            score += plateau[yDebut][xDebut + 1].getLettre().getPoints();
-
-            if (!plateau[yDebut - 1][x + 1].estVide()) {
-                for (int y = yDebut; !plateau[y - 1][x + 1].estVide(); y--) {
-                    score += plateau[y - 1][x + 1].getLettre().getPoints();
-                }
-            }
-
-            if (!plateau[yDebut + 1][x + 1].estVide()) {
-                for (int y = yDebut; !plateau[y + 1][x + 1].estVide(); y++) {
-                    score += plateau[y + 1][x + 1].getLettre().getPoints();
+            if (!plateau[ligne + 1][colonneDebutMot + 1].estVide()) {
+                for (int colonne = colonneDebutMot; !plateau[ligne + 1][colonne + 1].estVide(); colonne++) {
+                    scoreMot += plateau[ligne + 1][colonne + 1].getLettre().getPoints();
                 }
             }
         }
 
-        return score;
+        for (int colonne = colonneDebutMot; !plateau[ligneDebutMot][colonne + 1].estVide(); colonne++) {
+            scoreMot += plateau[ligneDebutMot][colonneDebutMot + 1].getLettre().getPoints();
+
+            if (!plateau[ligneDebutMot - 1][colonne + 1].estVide()) {
+                for (int ligne = ligneDebutMot; !plateau[ligne - 1][colonne + 1].estVide(); ligne--) {
+                    scoreMot += plateau[ligne - 1][colonne + 1].getLettre().getPoints();
+                }
+            }
+
+            if (!plateau[ligneDebutMot + 1][colonne + 1].estVide()) {
+                for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonne + 1].estVide(); ligne++) {
+                    scoreMot += plateau[ligne + 1][colonne + 1].getLettre().getPoints();
+                }
+            }
+        }
+
+        return scoreMot;
     }
 }

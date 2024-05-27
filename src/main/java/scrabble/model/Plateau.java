@@ -1,5 +1,6 @@
 package scrabble.model;
 
+import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.exception.HorsPlateauException;
 
 public class Plateau {
@@ -15,18 +16,18 @@ public class Plateau {
 					plateau[i][j] = new Case(Bonus.ETOILE);
 				}
 				else {
-					plateau[i][j] = new Case(null);
+					plateau[i][j] = new Case();
 				}
 			}
 		}
 	}
 
-	public void placerlettre(LettreAlphabetFrancais lettre, int x, int y) throws HorsPlateauException {
-		this.plateau[y][x].setLettre(lettre);
+	public void placerlettre(LettreAlphabetFrancais lettre, Coordonee coordonee) throws HorsPlateauException {
+		this.plateau[coordonee.getLigne()][coordonee.getColonne()].setLettre(lettre);
 	}
 
-	public void placerlettreJoker(int x, int y, String affichage, int comptJoker) throws HorsPlateauException {
-		this.plateau[y][x].setLettreJoker(affichage, comptJoker);
+	public void placerlettreJoker(Coordonee coordonee, String affichage, int comptJoker) throws HorsPlateauException {
+		this.plateau[coordonee.getLigne()][coordonee.getColonne()].setLettreJoker(affichage, comptJoker);
 	}
 
 	public Case[][] getPlateau() {

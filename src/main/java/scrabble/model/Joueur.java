@@ -13,6 +13,8 @@ public class Joueur {
     private String joker = "";
     private String affichage = "";
     private int compteurJoker = 0;
+    private int position = 0;
+    
 
     public Joueur(Chevalet chevalet, String nom) {
         this.chevalet = chevalet;
@@ -86,7 +88,8 @@ public class Joueur {
             lettre = chevalet.getTuileAvecLettre("JOKER");
         }
 
-        if (!plateau.getPlateau()[posy][posx].estVide()) {
+        
+		if (!plateau.getPlateau()[posy][posx].estVide()) {
             System.out.println("Impossible de placer une lettre ici, une lettre est déjà placée.");
             return null;
         }
@@ -96,7 +99,7 @@ public class Joueur {
             if (!plateau.getPlateau()[posy][posx - 1].estVide()) {
                 if (tour == 1) {
                     placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
-
+                    position = 1;
                 } else {
                     if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy + 1][posx - 1].estVide()) {
                         System.out.println("Le mot est vertical on ne peut pas le continué horizontalement");
@@ -110,7 +113,7 @@ public class Joueur {
                 if (!plateau.getPlateau()[posy - 1][posx].estVide()) {
                     if (tour == 1) {
                         placerEtRetirerLettre(lettre, plateau, pos_x_lettre, pos_y_lettre, affichage);
-
+                        position = 2;
                     } else {
                         if (!plateau.getPlateau()[posy - 1][posx - 1].estVide() || !plateau.getPlateau()[posy - 1][posx + 1].estVide()) {
                             System.out.println("Le mot est horizontal on ne peut pas le continué verticalment");
@@ -161,7 +164,36 @@ public class Joueur {
             plateau.supprimerToutesLettres();
 
         }
-		return coordonnees;
+        
+        if (position == 1) {
+        	int xDebut = coordonnees.get(0);
+        	int yDebut = coordonnees.get(1);
+        	for (int y = yDebut; !plateau.getPlateau()[y + 1][xDebut].estVide(); y++) {
+        		if (!plateau.getPlateau()[y][xDebut - 1].estVide() || !plateau.getPlateau()[y][xDebut + 1].estVide()) {
+        			System.out.println("Le mot est coorectemnt placer");
+        		}else {
+        			if (plateau.getPlateau()[y-1][xDebut].estVide() || plateau.getPlateau()[y+1][xDebut].estVide() &&  plateau.getPlateau()[y][xDebut+1].estVide()){
+        				System.out.println("Le mot doit être en contacte avec un autre mot");
+        			}		
+        	
+        		}
+        	}
+        }else {
+        	if (position == 2) {
+            	int xDebut = coordonnees.get(0);
+            	int yDebut = coordonnees.get(1);
+            	for (int x = xDebut; !plateau.getPlateau()[yDebut + 1][x].estVide(); x++) {
+            		if (!plateau.getPlateau()[yDebut][x - 1].estVide() || !plateau.getPlateau()[yDebut][x + 1].estVide()) {
+            			System.out.println("Le mot est coorectemnt placer");
+            		}else {
+            			if (plateau.getPlateau()[yDebut][x - 1].estVide() || plateau.getPlateau()[yDebut][x + 1].estVide() &&  plateau.getPlateau()[yDebut+1][x].estVide()){
+            				System.out.println("Le mot doit être en contacte avec un autre mot");
+            			}
+            		}
+            	}
+        	}
+        }
+        return coordonnees;
     }
 
     public Chevalet getChevalet() {

@@ -146,6 +146,7 @@ public class MaitreDuJeu {
             lettre = joueur.getChevalet().getTuileAvecLettre("JOKER");
         }
         mot.ajouterLettre(lettre);
+		joueur.retirerLettreDuChevalet(lettre);
     }
 		
     
@@ -184,6 +185,7 @@ public class MaitreDuJeu {
                 for (int y = ligneDebutMot; y == NombreLettrePosee; y++) {
                     if (!plateau.getPlateau()[y][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[y][colonneDebutMot + 1].estVide()) {
                         System.out.println("Le mot est coorectemnt placer");
+                        placerMot( mot, plateau);
                     } else {
                         if (plateau.getPlateau()[y-1][colonneDebutMot].estVide() || plateau.getPlateau()[y+1][colonneDebutMot].estVide() &&  plateau.getPlateau()[y][colonneDebutMot+1].estVide()){
                             System.out.println("Le mot doit être en contacte avec un autre mot");
@@ -197,6 +199,7 @@ public class MaitreDuJeu {
                     for (int x = colonneDebutMot; x == NombreLettrePosee; x++) {
                         if (!plateau.getPlateau()[ligneDebutDebut][x - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][x + 1].estVide()) {
                             System.out.println("Le mot est coorectemnt placer");
+                            placerMot( mot, plateau);
                         } else {
                             if (plateau.getPlateau()[ligneDebutDebut][x - 1].estVide() || plateau.getPlateau()[ligneDebutDebut][x + 1].estVide() &&  plateau.getPlateau()[ligneDebutDebut+1][x].estVide()){
                                 System.out.println("Le mot doit être en contacte avec un autre mot");
@@ -211,11 +214,12 @@ public class MaitreDuJeu {
         	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
         		|| !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()) {
         			System.out.println("La lettre est coorectemnt placer");
+        			placerMot( mot, plateau);
         	} else {
                 System.out.println("Le mot doit être en contacte avec un autre mot");
             }
         }
-        placerMot( mot, plateau);
+       
         
         if (plateau.getPlateau()[7][7].estVide()) {
             System.out.println("Le premier mot doit commencer sur l'étoile");

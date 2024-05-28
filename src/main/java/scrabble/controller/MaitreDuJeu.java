@@ -98,7 +98,34 @@ public class MaitreDuJeu {
     public void jouerLettre(Plateau plateau, Joueur joueur, int NombreLettrePosee, Mot mot) {
         boolean joker = false;
         String affichage = "";
+        
+        int posColonne = 0;
+        int posLigne = 0;
+        int choixSensMot = 0;
 
+        if (NombreLettrePosee == 0) {
+	
+	        System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
+	        String posColonneLettre = Console.inputStringScanner();
+	        posColonne = Integer.parseInt(posColonneLettre);
+	
+	        System.out.print("Où voulez-vous la placer ? ( ↕ Verticalement ) : ");
+	        String posLigneLettre = Console.inputStringScanner();
+	        posLigne = Integer.parseInt(posLigneLettre);
+	        
+	        mot.setCoordoneeDebut(new Coordonee(posLigne, posColonne));
+	        
+	        System.out.println("Dans quel sens voulez-vous que le mot continue ?");
+	        System.out.println("1. Horizontalement");
+	        System.out.println("2. Verticalment");
+	        String choixSens = Console.inputStringScanner();
+	        choixSensMot = Integer.parseInt(choixSens);
+	        switch (choixSensMot) {
+	        	case 1: mot.setDirection(Direction.HORIZONTAL);
+	        	case 2: mot.setDirection(Direction.VERTICAL);
+	        }
+        }
+        
         System.out.print("Quel lettre voulez-vous jouer ? : ");
         String choixlettre = Console.inputStringScanner().toUpperCase();
 
@@ -113,59 +140,15 @@ public class MaitreDuJeu {
             choixlettre = Console.inputStringScanner().toUpperCase();
             affichage = choixlettre;
         }
-
-        System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
-        String posColonneLettre = Console.inputStringScanner();
-        int posColonne = Integer.parseInt(posColonneLettre);
-
-        System.out.print("Où voulez-vous la placer ? ( ↕ Verticalement ) : ");
-        String posLigneLettre = Console.inputStringScanner();
-        int posLigne = Integer.parseInt(posLigneLettre);
-
+        
         LettreAlphabetFrancais lettre = joueur.getChevalet().getTuileAvecLettre(choixlettre);
         if (Boolean.TRUE.equals(joker)) {
             lettre = joueur.getChevalet().getTuileAvecLettre("JOKER");
         }
-
-
-        if (!plateau.getPlateau()[posLigne][posColonne].estVide()) {
-            System.out.println("Impossible de placer une lettre ici, une lettre est déjà placée.");
-        } else {
-            if (NombreLettrePosee != 0) {
-                if (!plateau.getPlateau()[posLigne][posColonne - 1].estVide()) {
-                    if (NombreLettrePosee == 1) {
-                        joueur.placerEtRetirerLettre(lettre, plateau, new Coordonee(posLigne, posColonne), affichage);
-                        mot.setDirection(Direction.HORIZONTAL);
-                    } else {
-                        if (!plateau.getPlateau()[posLigne - 1][posColonne - 1].estVide() || !plateau.getPlateau()[posLigne + 1][posColonne - 1].estVide()) {
-                            System.out.println("Le mot est vertical on ne peut pas le continué horizontalement");
-                        } else {
-                            joueur.placerEtRetirerLettre(lettre, plateau, new Coordonee(posLigne, posColonne), affichage);
-                        }
-                    }
-                } else {
-                    if (!plateau.getPlateau()[posLigne - 1][posColonne].estVide()) {
-                        if (NombreLettrePosee == 1) {
-                            joueur.placerEtRetirerLettre(lettre, plateau, new Coordonee(posLigne, posColonne), affichage);
-                            mot.setDirection(Direction.VERTICAL);
-                        } else {
-                            if (!plateau.getPlateau()[posLigne - 1][posColonne - 1].estVide() || !plateau.getPlateau()[posLigne - 1][posColonne + 1].estVide()) {
-                                System.out.println("Le mot est horizontal on ne peut pas le continué verticalment");
-                            } else {
-                                joueur.placerEtRetirerLettre(lettre, plateau, new Coordonee(posLigne, posColonne), affichage);
-                            }
-                        }
-                    } else {
-                        System.out.println("La lettre doit suivre la première lettre ");
-                    }
-                }
-            } else {
-                joueur.placerEtRetirerLettre(lettre, plateau, new Coordonee(posLigne, posColonne), affichage);
-                Coordonee coordonnees = new Coordonee(posLigne, posColonne);
-                mot.setCoordoneeDebut(coordonnees);
-            }
-        }
+        mot.ajouterLettre(lettre);
     }
+		
+    
 
     public Mot jouerMot(Plateau plateau, Joueur joueur) {
         Chevalet chevalet = joueur.getChevalet();
@@ -193,16 +176,12 @@ public class MaitreDuJeu {
             }
         }
 
-        if (plateau.getPlateau()[7][7].estVide()) {
-            System.out.println("Le premier mot doit commencer sur l'étoile");
-            plateau.supprimerToutesLettres();
-        }
-
+        
         if (NombreLettrePosee != 0 ) {
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 int colonneDebutMot = coordonnees.getColonne();
                 int ligneDebutMot = coordonnees.getLigne();
-                for (int y = ligneDebutMot; !plateau.getPlateau()[y + 1][colonneDebutMot].estVide(); y++) {
+                for (int y = ligneDebutMot; y == NombreLettrePosee; y++) {
                     if (!plateau.getPlateau()[y][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[y][colonneDebutMot + 1].estVide()) {
                         System.out.println("Le mot est coorectemnt placer");
                     } else {
@@ -215,7 +194,7 @@ public class MaitreDuJeu {
                 if (directionMot.equals(Direction.VERTICAL)) {
                     int colonneDebutMot = coordonnees.getColonne();
                     int ligneDebutDebut = coordonnees.getLigne();
-                    for (int x = colonneDebutMot; !plateau.getPlateau()[ligneDebutDebut + 1][x].estVide(); x++) {
+                    for (int x = colonneDebutMot; x == NombreLettrePosee; x++) {
                         if (!plateau.getPlateau()[ligneDebutDebut][x - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][x + 1].estVide()) {
                             System.out.println("Le mot est coorectemnt placer");
                         } else {
@@ -236,6 +215,13 @@ public class MaitreDuJeu {
                 System.out.println("Le mot doit être en contacte avec un autre mot");
             }
         }
+        placerMot( mot, plateau);
+        
+        if (plateau.getPlateau()[7][7].estVide()) {
+            System.out.println("Le premier mot doit commencer sur l'étoile");
+            plateau.supprimerToutesLettres();
+        }
+
         return mot;
     }
 

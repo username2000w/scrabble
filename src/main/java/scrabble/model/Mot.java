@@ -42,4 +42,8 @@ public class Mot {
     public ArrayList<LettreAlphabetFrancais> getMot() {
         return mot;
     }
+    
+    public int nombreDeLettre() {
+    	return mot.size();
+    }
 }

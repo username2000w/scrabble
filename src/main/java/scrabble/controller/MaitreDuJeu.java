@@ -4,6 +4,7 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.exception.HorsPlateauException;
 
 public class MaitreDuJeu {
     private Sac sac;
@@ -173,19 +174,17 @@ public class MaitreDuJeu {
         Coordonee coordonnees = null;
         Direction directionMot = null;
 
-        System.out.println("Quel Mot voulez-vous jouer ? : ");
+        System.out.println("Vous allez jouer un mot.");
         int choix = 0;
         while (choix != 2) {
+            jouerLettre(plateau, joueur, NombreLettrePosee, mot);
             if (NombreLettrePosee == 0) {
-                jouerLettre(plateau, joueur, NombreLettrePosee, mot);
                 coordonnees = mot.getCoordoneeDebut();
-                directionMot = mot.getDirection();
-            } else {
-                jouerLettre(plateau, joueur, NombreLettrePosee, mot);
-                directionMot = mot.getDirection();
             }
+            directionMot = mot.getDirection();
+
             System.out.println("1. Continuez à placer une lettre ");
-            System.out.println("2. finir le tour ");
+            System.out.println("2. finir le mot ");
 
             choix = Console.inputIntScanner();
             if (choix == 1) {
@@ -210,7 +209,6 @@ public class MaitreDuJeu {
                         if (plateau.getPlateau()[y-1][colonneDebutMot].estVide() || plateau.getPlateau()[y+1][colonneDebutMot].estVide() &&  plateau.getPlateau()[y][colonneDebutMot+1].estVide()){
                             System.out.println("Le mot doit être en contacte avec un autre mot");
                         }
-
                     }
                 }
             } else {
@@ -228,17 +226,42 @@ public class MaitreDuJeu {
                     }
                 }
             }
-        }else {
+        } else {
         	int colonneDebutMot = coordonnees.getColonne();
             int ligneDebutDebut = coordonnees.getLigne();
         	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
         		|| !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()) {
         			System.out.println("La lettre est coorectemnt placer");
-        	}else {
-            
+        	} else {
                 System.out.println("Le mot doit être en contacte avec un autre mot");
             }
         }
         return mot;
+    }
+
+    public void placerMot(Mot mot, Plateau plateau) {
+        Direction directionMot = mot.getDirection();
+
+        Coordonee coordonnees = mot.getCoordoneeDebut();
+        int ligneDebutMot = coordonnees.getLigne();
+        int colonneDebutMot = coordonnees.getColonne();
+
+        for (LettreAlphabetFrancais lettre : mot.getMot()) {
+            if (directionMot.equals(Direction.HORIZONTAL)) {
+                try {
+                    plateau.placerlettre(lettre, new Coordonee(ligneDebutMot, colonneDebutMot));
+                } catch (HorsPlateauException e) {
+                    throw new RuntimeException(e);
+                }
+                colonneDebutMot++;
+            } else {
+                try {
+                    plateau.placerlettre(lettre, new Coordonee(ligneDebutMot, colonneDebutMot));
+                } catch (HorsPlateauException e) {
+                    throw new RuntimeException(e);
+                }
+                ligneDebutMot++;
+            }
+        }
     }
 }

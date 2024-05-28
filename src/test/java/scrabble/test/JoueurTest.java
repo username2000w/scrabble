@@ -15,4 +15,6 @@ public class JoueurTest {
 
         assertEquals("Joueur 1", joueur.getNom());
     }
+
+
 }

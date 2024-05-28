@@ -239,8 +239,6 @@ public class MaitreDuJeu {
                 System.out.println("Le mot doit être en contacte avec un autre mot");
             }
         }
-        	
-        
         return mot;
     }
 }

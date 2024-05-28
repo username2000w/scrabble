@@ -10,13 +10,13 @@ public class Plateau {
 	private Case[][] plateau = new Case[TAILLE_PLATEAU_VERTICALE][TAILLE_PLATEAU_HORIZONTALE];
 
 	public Plateau() {
-		for (int i = 0; i < TAILLE_PLATEAU_VERTICALE; i++) {
-			for (int j = 0; j < TAILLE_PLATEAU_HORIZONTALE; j++) {
-				if (j == 7 && i == 7) {
-					plateau[i][j] = new Case(Bonus.ETOILE);
+		for (int ligne = 0; ligne < TAILLE_PLATEAU_VERTICALE; ligne++) {
+			for (int colonne = 0; colonne < TAILLE_PLATEAU_HORIZONTALE; colonne++) {
+				if (colonne == 7 && ligne == 7) {
+					plateau[ligne][colonne] = new Case(Bonus.ETOILE);
 				}
 				else {
-					plateau[i][j] = new Case();
+					plateau[ligne][colonne] = new Case();
 				}
 			}
 		}
@@ -34,14 +34,14 @@ public class Plateau {
 		return plateau;
 	}
 	
-	public void setCase(int x, int y, Case nouvelleCase) {
-	    plateau[x][y] = nouvelleCase;
+	public void setCase(int ligne, int colonne , Case nouvelleCase) {
+	    plateau[ligne][colonne] = nouvelleCase;
 	}
 	
 	public void supprimerToutesLettres() {
-        for (int y = 0; y < plateau.length; y++) {
-            for (int x = 0; x < plateau[y].length; x++) {
-                plateau[y][x].viderCase();
+        for (int ligne = 0; ligne < plateau.length; ligne++) {
+            for (int colonne = 0; colonne < plateau[ligne].length; colonne++) {
+                plateau[ligne][colonne].viderCase();
             }
         }
     }

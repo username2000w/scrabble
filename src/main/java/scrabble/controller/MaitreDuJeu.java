@@ -228,7 +228,19 @@ public class MaitreDuJeu {
                     }
                 }
             }
+        }else {
+        	int colonneDebutMot = coordonnees.getColonne();
+            int ligneDebutDebut = coordonnees.getLigne();
+        	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
+        		|| !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()) {
+        			System.out.println("La lettre est coorectemnt placer");
+        	}else {
+            
+                System.out.println("Le mot doit être en contacte avec un autre mot");
+            }
         }
+        	
+        
         return mot;
     }
 }

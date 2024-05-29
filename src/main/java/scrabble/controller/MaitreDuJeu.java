@@ -247,7 +247,11 @@ public class MaitreDuJeu {
 
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 try {
-                    if (plateau.getPlateau()[ligne][colonne].estVide()){
+                    if (plateau.getPlateau()[ligne][colonne].estVide()) {
+                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
+                    } else {
+                        colonne++;
+                        System.out.println("Une lettre est déjà présente à cet endroit, on décale la lettre.");
                         plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
                     }
                 } catch (HorsPlateauException e) {
@@ -256,7 +260,11 @@ public class MaitreDuJeu {
                 colonne++;
             } else {
                 try {
-                    if (plateau.getPlateau()[ligne][colonne].estVide()){
+                    if (plateau.getPlateau()[ligne][colonne].estVide()) {
+                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
+                    } else {
+                        ligne++;
+                        System.out.println("Une lettre est déjà présente à cet endroit, on décale la lettre.");
                         plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
                     }
                 } catch (HorsPlateauException e) {

@@ -98,23 +98,23 @@ public class MaitreDuJeu {
     public void jouerLettre(Plateau plateau, Joueur joueur, int NombreLettrePosee, Mot mot) {
         boolean joker = false;
         String affichage = "";
-        
+
         int posColonne = 0;
         int posLigne = 0;
         int choixSensMot = 0;
 
         if (NombreLettrePosee == 0) {
-	
+
 	        System.out.print("Où voulez-vous la placer ? ( ↔ Horizontalement ) : ");
 	        String posColonneLettre = Console.inputStringScanner();
 	        posColonne = Integer.parseInt(posColonneLettre);
-	
+
 	        System.out.print("Où voulez-vous la placer ? ( ↕ Verticalement ) : ");
 	        String posLigneLettre = Console.inputStringScanner();
 	        posLigne = Integer.parseInt(posLigneLettre);
-	        
+
 	        mot.setCoordoneeDebut(new Coordonee(posLigne, posColonne));
-	        
+
 	        System.out.println("Dans quel sens voulez-vous que le mot continue ?");
 	        System.out.println("1. Horizontalement");
 	        System.out.println("2. Verticalment");
@@ -124,12 +124,12 @@ public class MaitreDuJeu {
 	        	case 1:
 	        		mot.setDirection(Direction.HORIZONTAL);
 	        		break;
-	        	case 2: 
+	        	case 2:
 	        		mot.setDirection(Direction.VERTICAL);
 	        		break;
 	        }
         }
-        
+
         System.out.print("Quel lettre voulez-vous jouer ? : ");
         String choixlettre = Console.inputStringScanner().toUpperCase();
 
@@ -144,7 +144,7 @@ public class MaitreDuJeu {
             choixlettre = Console.inputStringScanner().toUpperCase();
             affichage = choixlettre;
         }
-        
+
         LettreAlphabetFrancais lettre = joueur.getChevalet().getTuileAvecLettre(choixlettre);
         if (Boolean.TRUE.equals(joker)) {
             lettre = joueur.getChevalet().getTuileAvecLettre("JOKER");
@@ -152,8 +152,8 @@ public class MaitreDuJeu {
         mot.ajouterLettre(lettre);
         joueur.retirerLettreDuChevalet(lettre);
     }
-		
-    
+
+
 
     public Mot jouerMot(Plateau plateau, Joueur joueur) {
         Chevalet chevalet = joueur.getChevalet();
@@ -180,7 +180,7 @@ public class MaitreDuJeu {
                 NombreLettrePosee++;
             }
         }
-        
+
         if (tour > 0) {
 	        if (NombreLettrePosee > 1) {
 	            if (directionMot.equals(Direction.HORIZONTAL)) {
@@ -265,5 +265,17 @@ public class MaitreDuJeu {
                 ligne++;
             }
         }
+    }
+
+    public Sac getSac() {
+        return sac;
+    }
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    public Joueur getJoueur() {
+        return joueur;
     }
 }

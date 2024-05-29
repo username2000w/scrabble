@@ -7,7 +7,7 @@ public enum Bonus {
 	LETTRE_TRIPLE(" "),
 	ETOILE("★ ");
 	
-	private String symbole;
+	private final String symbole;
 	
 	Bonus(String symbole) {
 		this.symbole = symbole;

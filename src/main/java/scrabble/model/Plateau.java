@@ -39,9 +39,9 @@ public class Plateau {
 	}
 	
 	public void supprimerToutesLettres() {
-        for (int ligne = 0; ligne < plateau.length; ligne++) {
-            for (int colonne = 0; colonne < plateau[ligne].length; colonne++) {
-                plateau[ligne][colonne].viderCase();
+        for (Case[] cases : plateau) {
+            for (Case aCase : cases) {
+                aCase.viderCase();
             }
         }
     }

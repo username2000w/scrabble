@@ -5,7 +5,7 @@ import scrabble.model.utils.exception.SacVideException;
 import java.util.ArrayList;
 
 public class Chevalet {
-    private ArrayList<LettreAlphabetFrancais> lettres;
+    private final ArrayList<LettreAlphabetFrancais> lettres;
     private static final int TAILLE = 7;
 
     public Chevalet() {

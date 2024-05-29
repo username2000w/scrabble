@@ -8,6 +8,23 @@ import scrabble.model.Plateau;
 import java.util.Scanner;
 
 public class Console {
+    public static void afficherBienvenue() {
+        System.out.println("-------------------------------------------------------");
+        System.out.println("-- Bienvenue dans notre magnifique jeu de scrabble ! --");
+        System.out.println("-- développé par Maxime, Mikkel, Léo et Alexis       --");
+        System.out.println("-------------------------------------------------------");
+    }
+
+    public static void afficherFinPartie() {
+        System.out.println("------------------------");
+        System.out.println("-- FIN DE LA PARTIE ! --");
+        System.out.println("------------------------");
+        System.out.println("Merci d'avoir joué !");
+    }
+
+    public static void message(String message) {
+        System.out.println(message);
+    }
 
     public static void afficherPlateau(Plateau plateau) {
         int compteurJoker = 0;

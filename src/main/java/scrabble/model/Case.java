@@ -1,10 +1,7 @@
 package scrabble.model;
 
-import scrabble.model.utils.exception.HorsPlateauException;
-
 /**
  * Case du plateau de jeu.
- *
  * Celle-ci peut contenir une tuile et un bonus.
  * Lors de l'instanciation, la case est vide (`null`).
  */

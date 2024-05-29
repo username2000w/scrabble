@@ -9,10 +9,6 @@ public class Tuile {
         this.lettre = lettre;
     }
 
-    public LettreAlphabetFrancais getLettre() {
-        return lettre;
-    }
-
     public int getPoints() {
     	return lettre.getPoints();
     }
@@ -22,7 +18,7 @@ public class Tuile {
     }
 
     public void setLettreJoker(String affichage) {
-        Console.message("kys");
+        Console.message("Impossible de changer la lettre d'une tuile non joker");
     }
 
     public boolean estJoker() {

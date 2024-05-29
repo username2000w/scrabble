@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.gui.Console;
+
 public class Tuile {
     private final LettreAlphabetFrancais lettre;
 
@@ -20,7 +22,7 @@ public class Tuile {
     }
 
     public void setLettreJoker(String affichage) {
-    	// Do nothing
+        Console.message("kys");
     }
 
     public boolean estJoker() {

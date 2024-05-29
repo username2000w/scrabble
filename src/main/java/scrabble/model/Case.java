@@ -42,11 +42,6 @@ public class Case {
 	public void viderCase() {
         this.tuile = null; // Supprime la lettre de la case, rendant la case vide
     }
-
-	public LettreAlphabetFrancais getLettre() {
-		if (this.tuile == null) return null;
-		return this.tuile.getLettre();
-	}
 }
 
 

@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.gui.Console;
+
 public class Joker extends Tuile {
     private String affichage = "JOKER";
 
@@ -18,6 +20,7 @@ public class Joker extends Tuile {
     }
 
     public void setLettreJoker(String affichage) {
+        Console.message("kysuwu");
     	this.affichage = affichage;
     }
 

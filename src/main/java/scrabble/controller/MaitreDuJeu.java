@@ -141,7 +141,7 @@ public class MaitreDuJeu {
         if (tuile.estJoker()) {
             System.out.print("[JOKER] Par quelle lettre voulez-vous remplacer le Joker ? : ");
             String choixlettrejoker = Console.inputStringScanner().toUpperCase();
-            tuile.setLettreJoker(choixlettrejoker);
+            tuile.setLettre(LettreAlphabetFrancais.valueOf(choixlettrejoker));
         }
 
         mot.ajouterLettre(tuile);

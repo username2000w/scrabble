@@ -50,7 +50,7 @@ public class Chevalet {
 
     public Tuile getTuileAvecLettre(String tuileVoulue) {
         for (Tuile tuile : tuiles) {
-            if (tuileVoulue.equals(tuile.afficherLettre())) {
+            if (tuileVoulue.equals(tuile.toString())) {
                 return tuile;
             }
         }

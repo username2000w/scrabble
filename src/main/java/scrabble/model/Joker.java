@@ -3,7 +3,7 @@ package scrabble.model;
 import scrabble.gui.Console;
 
 public class Joker extends Tuile {
-    private String affichage = "JOKER";
+    private LettreAlphabetFrancais lettre;
 
     public Joker() {
         super(null);
@@ -15,13 +15,13 @@ public class Joker extends Tuile {
     }
 
     @Override
-    public String afficherLettre() {
-    	return affichage;
+    public String toString() {
+    	return lettre == null ? "JOKER" : lettre.afficherLettre();
     }
 
     @Override
-    public void setLettreJoker(String affichage) {
-    	this.affichage = affichage;
+    public void setLettre(LettreAlphabetFrancais lettre) {
+        this.lettre = lettre;
     }
 
     @Override

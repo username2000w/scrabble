@@ -41,7 +41,7 @@ public class Console {
                     	System.out.print(bonus);                    	
                     }
                 } else {
-                	System.out.print(tuile.afficherLettre() + " ");
+                	System.out.print(tuile.toString() + " ");
                 }
             }
             // Retour à la ligne.
@@ -51,7 +51,7 @@ public class Console {
 
     public static void afficherChevalet(Chevalet chevalet) {
         for (int i = 0; i < chevalet.getTuiles().size(); i++) {
-            System.out.print(chevalet.getTuileAvecIndex(i).afficherLettre() + " ");
+            System.out.print(chevalet.getTuileAvecIndex(i).toString() + " ");
         }
         System.out.print("\n");
     }

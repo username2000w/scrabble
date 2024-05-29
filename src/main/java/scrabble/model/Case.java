@@ -14,6 +14,7 @@ public class Case {
 
 	public Case(Bonus bonus) {
 		this.bonus = bonus;
+		this.lettre = null;
 	}
 
 	public Case() {

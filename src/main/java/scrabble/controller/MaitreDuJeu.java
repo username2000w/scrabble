@@ -10,6 +10,7 @@ public class MaitreDuJeu {
     private Sac sac;
     private Plateau plateau;
     private Joueur joueur;
+    private int tour;
 
     public MaitreDuJeu() {
         this.sac = new Sac();
@@ -120,8 +121,12 @@ public class MaitreDuJeu {
 	        String choixSens = Console.inputStringScanner();
 	        choixSensMot = Integer.parseInt(choixSens);
 	        switch (choixSensMot) {
-	        	case 1: mot.setDirection(Direction.HORIZONTAL);
-	        	case 2: mot.setDirection(Direction.VERTICAL);
+	        	case 1:
+	        		mot.setDirection(Direction.HORIZONTAL);
+	        		break;
+	        	case 2: 
+	        		mot.setDirection(Direction.VERTICAL);
+	        		break;
 	        }
         }
         
@@ -175,56 +180,59 @@ public class MaitreDuJeu {
                 NombreLettrePosee++;
             }
         }
-
         
-        if (NombreLettrePosee != 0 ) {
-            if (directionMot.equals(Direction.HORIZONTAL)) {
-                int colonneDebutMot = coordonnees.getColonne();
-                int ligneDebutMot = coordonnees.getLigne();
-                for (int ligne = ligneDebutMot; ligne == NombreLettrePosee; ligne++) {
-                    if (!plateau.getPlateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligne][colonneDebutMot + 1].estVide()) {
+        if (tour > 0) {
+	        if (NombreLettrePosee > 1) {
+	            if (directionMot.equals(Direction.HORIZONTAL)) {
+	                int colonneDebutMot = coordonnees.getColonne();
+	                int ligneDebutMot = coordonnees.getLigne();
+	                if (!plateau.getPlateau()[ligneDebutMot][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutMot][colonneDebutMot + 1].estVide() || !plateau.getPlateau()[ligneDebutMot - 1][colonneDebutMot].estVide()) {
                         System.out.println("Le mot est coorectemnt placer");
-                        placerMotSurPlateau( mot, plateau);
-                    } else {
-                        if (plateau.getPlateau()[ligne-1][colonneDebutMot].estVide() || plateau.getPlateau()[ligne+1][colonneDebutMot].estVide() &&  plateau.getPlateau()[ligne][colonneDebutMot+1].estVide()){
-                            System.out.println("Le mot doit être en contacte avec un autre mot");
-                        }
+                        placerMotSurPlateau(mot, plateau);
+                        return mot;
                     }
-                }
-            } else {
-                if (directionMot.equals(Direction.VERTICAL)) {
+	                for (int ligne = ligneDebutMot; ligne < ligneDebutMot + mot.nombreDeLettre(); ligne++) {
+	                    if (!plateau.getPlateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligne][colonneDebutMot + 1].estVide()) {
+	                        System.out.println("Le mot est coorectemnt placer");
+	                        placerMotSurPlateau(mot, plateau);
+	                        return mot;
+	                    }
+	                }
+	            } else {
                     int colonneDebutMot = coordonnees.getColonne();
                     int ligneDebutDebut = coordonnees.getLigne();
-                    for (int colonne = colonneDebutMot; colonne == NombreLettrePosee; colonne++) {
-                        if (!plateau.getPlateau()[ligneDebutDebut][colonne - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonne + 1].estVide()) {
+                    if (!plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()) {
+                        System.out.println("Le mot est coorectemnt placer");
+                        placerMotSurPlateau(mot, plateau);
+                        return mot;
+                    }
+                    for (int colonne = colonneDebutMot; colonne < colonneDebutMot + mot.nombreDeLettre(); colonne++) {
+                        if (!plateau.getPlateau()[ligneDebutDebut - 1][colonne].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonne].estVide()) {
                             System.out.println("Le mot est coorectemnt placer");
-                            placerMotSurPlateau( mot, plateau);
-                        } else {
-                            if (plateau.getPlateau()[ligneDebutDebut][colonne - 1].estVide() || plateau.getPlateau()[ligneDebutDebut][colonne + 1].estVide() &&  plateau.getPlateau()[ligneDebutDebut+1][colonne].estVide()){
-                                System.out.println("Le mot doit être en contacte avec un autre mot");
-                            }
+                            placerMotSurPlateau(mot, plateau);
+                            return mot;
                         }
                     }
-                }
-            }
+	            }
+	        } else {
+	        	int colonneDebutMot = coordonnees.getColonne();
+	            int ligneDebutDebut = coordonnees.getLigne();
+	        	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
+	        		|| !plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide()) {
+	        			System.out.println("La lettre est coorectemnt placer");
+	                    placerMotSurPlateau(mot, plateau);
+	                    return mot;
+	        	}
+	        }
         } else {
-        	int colonneDebutMot = coordonnees.getColonne();
-            int ligneDebutDebut = coordonnees.getLigne();
-        	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
-        		|| !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()) {
-        			System.out.println("La lettre est coorectemnt placer");
-                    placerMotSurPlateau( mot, plateau);
-        	} else {
-                System.out.println("Le mot doit être en contacte avec un autre mot");
-            }
-        }
-
-        
-        if (plateau.getPlateau()[7][7].estVide()) {
-            System.out.println("Le premier mot doit commencer sur l'étoile");
-            plateau.supprimerToutesLettres();
-        }
-
+        	System.out.println("coucocu");
+        	placerMotSurPlateau(mot, plateau);
+        	if (plateau.getPlateau()[7][7].estVide()) {
+                System.out.println("Le premier mot doit commencer sur l'étoile");
+                plateau.supprimerToutesLettres();
+	        }
+	    }
+        tour ++;
         return mot;
     }
 
@@ -239,8 +247,8 @@ public class MaitreDuJeu {
 
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 try {
-                    if (!plateau.getPlateau()[ligne][colonne+1].estVide()){
-                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne+1));
+                    if (plateau.getPlateau()[ligne][colonne].estVide()){
+                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
                     }
                 } catch (HorsPlateauException e) {
                     throw new RuntimeException(e);
@@ -248,8 +256,8 @@ public class MaitreDuJeu {
                 colonne++;
             } else {
                 try {
-                    if (!plateau.getPlateau()[ligne+1][colonne].estVide()){
-                        plateau.placerlettre(lettre, new Coordonee(ligne+1, colonne));
+                    if (plateau.getPlateau()[ligne][colonne].estVide()){
+                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne));
                     }
                 } catch (HorsPlateauException e) {
                     throw new RuntimeException(e);

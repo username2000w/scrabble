@@ -19,6 +19,7 @@ public class Joker extends Tuile {
     	return affichage;
     }
 
+    @Override
     public void setLettreJoker(String affichage) {
     	this.affichage = affichage;
     }

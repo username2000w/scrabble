@@ -39,7 +39,7 @@ public class SacDeJeuFrancais {
         this.faireTuilespour(2, LettreAlphabetFrancais.F);
         this.faireTuilespour(2, LettreAlphabetFrancais.H);
         this.faireTuilespour(2, LettreAlphabetFrancais.V);
-        this.faireTuileJoker(200);
+        this.faireTuileJoker(2);
         this.faireTuilespour(1, LettreAlphabetFrancais.J);
         this.faireTuilespour(1, LettreAlphabetFrancais.Q);
         this.faireTuilespour(1, LettreAlphabetFrancais.K);

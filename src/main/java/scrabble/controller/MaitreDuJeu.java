@@ -34,8 +34,7 @@ public class MaitreDuJeu {
         switch (choix) {
             case 1:
                 Mot mot = jouerMot(plateau, joueur);
-                Coordonee coordonnees = mot.getCoordoneeDebut();
-                System.out.println("Vous avez marqué " + this.calculerScoreMot(coordonnees) + " points.");
+                System.out.println("Vous avez marqué " + this.calculerScoreMot(mot) + " points.");
                 joueur.remplirChevalet(sac);
                 break;
             case 2:
@@ -51,47 +50,47 @@ public class MaitreDuJeu {
         return true;
     }
 
-    public int calculerScoreMot(Coordonee coordoneeDebutMot) {
+    public int calculerScoreMot(Mot mot) {
+        Coordonee coordoneeDebutMot = mot.getCoordoneeDebut();
         int ligneDebutMot = coordoneeDebutMot.getLigne();
         int colonneDebutMot = coordoneeDebutMot.getColonne();
+        Direction directionMot = mot.getDirection();
         int scoreMot = 0;
         Case[][] plateau = this.plateau.getPlateau();
 
-        // score de la case initiale
-        scoreMot += plateau[ligneDebutMot][colonneDebutMot].getLettre().getPoints();
+        if (directionMot.equals(Direction.HORIZONTAL)) {
+            for (int colonne = colonneDebutMot; !plateau[ligneDebutMot][colonne].estVide(); colonne++) {
+                scoreMot += plateau[ligneDebutMot][colonne].getLettre().getPoints();
 
-        for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonneDebutMot].estVide(); ligne++) {
-            scoreMot += plateau[ligneDebutMot + 1][colonneDebutMot].getLettre().getPoints();
+                if (!plateau[ligneDebutMot - 1][colonne].estVide()) {
+                    for (int ligne = ligneDebutMot; !plateau[ligne - 1][colonne].estVide(); ligne--) {
+                        scoreMot += plateau[ligne - 1][colonne].getLettre().getPoints();
+                    }
+                }
 
-            if (!plateau[ligne + 1][colonneDebutMot - 1].estVide()) {
-                for (int colonne = colonneDebutMot; !plateau[ligne + 1][colonne - 1].estVide(); colonne--) {
-                    scoreMot += plateau[ligne + 1][colonne - 1].getLettre().getPoints();
+                if (!plateau[ligneDebutMot + 1][colonne].estVide()) {
+                    for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonne].estVide(); ligne++) {
+                        scoreMot += plateau[ligne + 1][colonne].getLettre().getPoints();
+                    }
                 }
             }
+        } else {
+            for (int ligne = ligneDebutMot; !plateau[ligne][colonneDebutMot].estVide(); ligne++) {
+                scoreMot += plateau[ligne][colonneDebutMot].getLettre().getPoints();
 
-            if (!plateau[ligne + 1][colonneDebutMot + 1].estVide()) {
-                for (int colonne = colonneDebutMot; !plateau[ligne + 1][colonne + 1].estVide(); colonne++) {
-                    scoreMot += plateau[ligne + 1][colonne + 1].getLettre().getPoints();
+                if (!plateau[ligne][colonneDebutMot - 1].estVide()) {
+                    for (int colonne = colonneDebutMot; !plateau[ligne][colonne - 1].estVide(); colonne--) {
+                        scoreMot += plateau[ligne][colonne - 1].getLettre().getPoints();
+                    }
+                }
+
+                if (!plateau[ligne][colonneDebutMot + 1].estVide()) {
+                    for (int colonne = colonneDebutMot; !plateau[ligne][colonne + 1].estVide(); colonne++) {
+                        scoreMot += plateau[ligne][colonne + 1].getLettre().getPoints();
+                    }
                 }
             }
         }
-
-        for (int colonne = colonneDebutMot; !plateau[ligneDebutMot][colonne + 1].estVide(); colonne++) {
-            scoreMot += plateau[ligneDebutMot][colonneDebutMot + 1].getLettre().getPoints();
-
-            if (!plateau[ligneDebutMot - 1][colonne + 1].estVide()) {
-                for (int ligne = ligneDebutMot; !plateau[ligne - 1][colonne + 1].estVide(); ligne--) {
-                    scoreMot += plateau[ligne - 1][colonne + 1].getLettre().getPoints();
-                }
-            }
-
-            if (!plateau[ligneDebutMot + 1][colonne + 1].estVide()) {
-                for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonne + 1].estVide(); ligne++) {
-                    scoreMot += plateau[ligne + 1][colonne + 1].getLettre().getPoints();
-                }
-            }
-        }
-
         return scoreMot;
     }
 
@@ -146,7 +145,7 @@ public class MaitreDuJeu {
             lettre = joueur.getChevalet().getTuileAvecLettre("JOKER");
         }
         mot.ajouterLettre(lettre);
-		joueur.retirerLettreDuChevalet(lettre);
+        joueur.retirerLettreDuChevalet(lettre);
     }
 		
     
@@ -182,12 +181,12 @@ public class MaitreDuJeu {
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 int colonneDebutMot = coordonnees.getColonne();
                 int ligneDebutMot = coordonnees.getLigne();
-                for (int y = ligneDebutMot; y == NombreLettrePosee; y++) {
-                    if (!plateau.getPlateau()[y][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[y][colonneDebutMot + 1].estVide()) {
+                for (int ligne = ligneDebutMot; ligne == NombreLettrePosee; ligne++) {
+                    if (!plateau.getPlateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligne][colonneDebutMot + 1].estVide()) {
                         System.out.println("Le mot est coorectemnt placer");
-                        placerMot( mot, plateau);
+                        placerMotSurPlateau( mot, plateau);
                     } else {
-                        if (plateau.getPlateau()[y-1][colonneDebutMot].estVide() || plateau.getPlateau()[y+1][colonneDebutMot].estVide() &&  plateau.getPlateau()[y][colonneDebutMot+1].estVide()){
+                        if (plateau.getPlateau()[ligne-1][colonneDebutMot].estVide() || plateau.getPlateau()[ligne+1][colonneDebutMot].estVide() &&  plateau.getPlateau()[ligne][colonneDebutMot+1].estVide()){
                             System.out.println("Le mot doit être en contacte avec un autre mot");
                         }
                     }
@@ -196,12 +195,12 @@ public class MaitreDuJeu {
                 if (directionMot.equals(Direction.VERTICAL)) {
                     int colonneDebutMot = coordonnees.getColonne();
                     int ligneDebutDebut = coordonnees.getLigne();
-                    for (int x = colonneDebutMot; x == NombreLettrePosee; x++) {
-                        if (!plateau.getPlateau()[ligneDebutDebut][x - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][x + 1].estVide()) {
+                    for (int colonne = colonneDebutMot; colonne == NombreLettrePosee; colonne++) {
+                        if (!plateau.getPlateau()[ligneDebutDebut][colonne - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonne + 1].estVide()) {
                             System.out.println("Le mot est coorectemnt placer");
-                            placerMot( mot, plateau);
+                            placerMotSurPlateau( mot, plateau);
                         } else {
-                            if (plateau.getPlateau()[ligneDebutDebut][x - 1].estVide() || plateau.getPlateau()[ligneDebutDebut][x + 1].estVide() &&  plateau.getPlateau()[ligneDebutDebut+1][x].estVide()){
+                            if (plateau.getPlateau()[ligneDebutDebut][colonne - 1].estVide() || plateau.getPlateau()[ligneDebutDebut][colonne + 1].estVide() &&  plateau.getPlateau()[ligneDebutDebut+1][colonne].estVide()){
                                 System.out.println("Le mot doit être en contacte avec un autre mot");
                             }
                         }
@@ -214,12 +213,12 @@ public class MaitreDuJeu {
         	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
         		|| !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()) {
         			System.out.println("La lettre est coorectemnt placer");
-        			placerMot( mot, plateau);
+                    placerMotSurPlateau( mot, plateau);
         	} else {
                 System.out.println("Le mot doit être en contacte avec un autre mot");
             }
         }
-       
+
         
         if (plateau.getPlateau()[7][7].estVide()) {
             System.out.println("Le premier mot doit commencer sur l'étoile");
@@ -229,28 +228,33 @@ public class MaitreDuJeu {
         return mot;
     }
 
-    public void placerMot(Mot mot, Plateau plateau) {
+    public void placerMotSurPlateau(Mot mot, Plateau plateau) {
         Direction directionMot = mot.getDirection();
 
         Coordonee coordonnees = mot.getCoordoneeDebut();
-        int ligneDebutMot = coordonnees.getLigne();
-        int colonneDebutMot = coordonnees.getColonne();
+        int ligne = coordonnees.getLigne();
+        int colonne = coordonnees.getColonne();
 
         for (LettreAlphabetFrancais lettre : mot.getMot()) {
+
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 try {
-                    plateau.placerlettre(lettre, new Coordonee(ligneDebutMot, colonneDebutMot));
+                    if (!plateau.getPlateau()[ligne][colonne+1].estVide()){
+                        plateau.placerlettre(lettre, new Coordonee(ligne, colonne+1));
+                    }
                 } catch (HorsPlateauException e) {
                     throw new RuntimeException(e);
                 }
-                colonneDebutMot++;
+                colonne++;
             } else {
                 try {
-                    plateau.placerlettre(lettre, new Coordonee(ligneDebutMot, colonneDebutMot));
+                    if (!plateau.getPlateau()[ligne+1][colonne].estVide()){
+                        plateau.placerlettre(lettre, new Coordonee(ligne+1, colonne));
+                    }
                 } catch (HorsPlateauException e) {
                     throw new RuntimeException(e);
                 }
-                ligneDebutMot++;
+                ligne++;
             }
         }
     }

@@ -20,8 +20,8 @@ public class ChevaletTest {
 
   @Test
   void testTailleInitiale() {
-    int nombreDeTuiles = chevalet.getLettres().size();
-    boolean estVide = chevalet.getLettres().isEmpty();
+    int nombreDeTuiles = chevalet.getTuiles().size();
+    boolean estVide = chevalet.getTuiles().isEmpty();
 
     assertEquals(0, nombreDeTuiles);
     assertTrue(estVide);

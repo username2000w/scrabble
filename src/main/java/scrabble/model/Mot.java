@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Mot {
     private Coordonee coordoneeDebut;
     private Direction direction;
-    private ArrayList<LettreAlphabetFrancais> mot = new ArrayList<>();
+    private ArrayList<Tuile> mot = new ArrayList<>();
 
     public Mot(Coordonee coordoneeDebut, Direction direction) {
         this.coordoneeDebut = coordoneeDebut;
@@ -19,8 +19,8 @@ public class Mot {
         this(null, null);
     }
 
-    public void ajouterLettre(LettreAlphabetFrancais lettre) {
-        mot.add(lettre);
+    public void ajouterLettre(Tuile tuile) {
+        mot.add(tuile);
     }
 
     public Coordonee getCoordoneeDebut() {
@@ -39,7 +39,7 @@ public class Mot {
         this.direction = direction;
     }
 
-    public ArrayList<LettreAlphabetFrancais> getMot() {
+    public ArrayList<Tuile> getMot() {
         return mot;
     }
     

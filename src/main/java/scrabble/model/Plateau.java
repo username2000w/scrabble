@@ -22,23 +22,15 @@ public class Plateau {
 		}
 	}
 
-	public void placerlettre(LettreAlphabetFrancais lettre, Coordonee coordonee) throws HorsPlateauException {
-		this.plateau[coordonee.getLigne()][coordonee.getColonne()].setLettre(lettre);
-	}
-
-	public void placerlettreJoker(Coordonee coordonee, String affichage, int comptJoker) throws HorsPlateauException {
-		this.plateau[coordonee.getLigne()][coordonee.getColonne()].setLettreJoker(affichage, comptJoker);
+	public void placerTuile(Tuile tuile, Coordonee coordonee) throws HorsPlateauException {
+		this.plateau[coordonee.getLigne()][coordonee.getColonne()].setTuile(tuile);
 	}
 
 	public Case[][] getPlateau() {
 		return plateau;
 	}
 	
-	public void setCase(int ligne, int colonne , Case nouvelleCase) {
-	    plateau[ligne][colonne] = nouvelleCase;
-	}
-	
-	public void supprimerToutesLettres() {
+	public void supprimerToutesTuiles() {
         for (Case[] cases : plateau) {
             for (Case aCase : cases) {
                 aCase.viderCase();

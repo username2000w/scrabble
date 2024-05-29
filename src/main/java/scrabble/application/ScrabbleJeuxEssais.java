@@ -26,10 +26,10 @@ public class ScrabbleJeuxEssais {
 
         System.out.println("On place un mot sur le plateau.");
         Mot motBonjour = new Mot(new Coordonee(4,7), Direction.VERTICAL);
-        motBonjour.ajouterLettre(LettreAlphabetFrancais.P);
-        motBonjour.ajouterLettre(LettreAlphabetFrancais.A);
-        motBonjour.ajouterLettre(LettreAlphabetFrancais.T);
-        motBonjour.ajouterLettre(LettreAlphabetFrancais.E);
+        motBonjour.ajouterLettre(new Tuile(LettreAlphabetFrancais.P));
+        motBonjour.ajouterLettre(new Tuile(LettreAlphabetFrancais.A));
+        motBonjour.ajouterLettre(new Tuile(LettreAlphabetFrancais.T));
+        motBonjour.ajouterLettre(new Tuile(LettreAlphabetFrancais.E));
         maitreDuJeu.placerMotSurPlateau(motBonjour, plateau);
         Console.afficherPlateau(plateau);
 
@@ -38,9 +38,9 @@ public class ScrabbleJeuxEssais {
 
         System.out.println("On place le mot 'sel' sur le plateau en dessous de 'pate'.");
         Mot motSel = new Mot(new Coordonee(8,7), Direction.HORIZONTAL);
-        motSel.ajouterLettre(LettreAlphabetFrancais.S);
-        motSel.ajouterLettre(LettreAlphabetFrancais.E);
-        motSel.ajouterLettre(LettreAlphabetFrancais.L);
+        motSel.ajouterLettre(new Tuile(LettreAlphabetFrancais.S));
+        motSel.ajouterLettre(new Tuile(LettreAlphabetFrancais.E));
+        motSel.ajouterLettre(new Tuile(LettreAlphabetFrancais.L));
         maitreDuJeu.placerMotSurPlateau(motSel, plateau);
         Console.afficherPlateau(plateau);
 

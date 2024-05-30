@@ -9,17 +9,17 @@ import java.util.Scanner;
 
 public class Console {
     public static void afficherBienvenue() {
-        System.out.println("-------------------------------------------------------");
-        System.out.println("-- Bienvenue dans notre magnifique jeu de scrabble ! --");
-        System.out.println("-- développé par Maxime, Mikkel, Léo et Alexis       --");
-        System.out.println("-------------------------------------------------------");
+        Console.message("-------------------------------------------------------");
+        Console.message("-- Bienvenue dans notre magnifique jeu de scrabble ! --");
+        Console.message("-- développé par Maxime, Mikkel, Léo et Alexis       --");
+        Console.message("-------------------------------------------------------");
     }
 
     public static void afficherFinPartie() {
-        System.out.println("------------------------");
-        System.out.println("-- FIN DE LA PARTIE ! --");
-        System.out.println("------------------------");
-        System.out.println("Merci d'avoir joué !");
+        Console.message("------------------------");
+        Console.message("-- FIN DE LA PARTIE ! --");
+        Console.message("------------------------");
+        Console.message("Merci d'avoir joué !");
     }
 
     public static void message(String message) {
@@ -27,8 +27,6 @@ public class Console {
     }
 
     public static void afficherPlateau(Plateau plateau) {
-        int compteurJoker = 0;
-
         for (int i = 0; i < Plateau.TAILLE_PLATEAU_VERTICALE; i++) {
             for (int j = 0; j < Plateau.TAILLE_PLATEAU_HORIZONTALE; j++) {
                 Tuile tuile = plateau.getPlateau()[i][j].getTuile();
@@ -45,7 +43,7 @@ public class Console {
                 }
             }
             // Retour à la ligne.
-            System.out.println();
+            Console.message("");
         }
     }
 

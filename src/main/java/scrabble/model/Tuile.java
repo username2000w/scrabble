@@ -1,7 +1,7 @@
 package scrabble.model;
 
 public class Tuile {
-    private LettreAlphabetFrancais lettre;
+    protected LettreAlphabetFrancais lettre;
 
     public Tuile(LettreAlphabetFrancais lettre) {
         this.lettre = lettre;
@@ -21,6 +21,6 @@ public class Tuile {
     }
 
     public boolean estJoker() {
-    	return false;
+    	return this instanceof Joker;
     }
 }

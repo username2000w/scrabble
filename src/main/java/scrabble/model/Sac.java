@@ -29,7 +29,7 @@ public class Sac {
 
         // On ajout tous les jetons dans le sac.
         SacDeJeuFrancais sacDeJeuFrancais = new SacDeJeuFrancais();
-        this.tuiles = new ArrayList<>(sacDeJeuFrancais.getLettres());
+        this.tuiles = new ArrayList<>(sacDeJeuFrancais.Lettres());
 
         // On mélange le contenu du sac.
         this.melanger();

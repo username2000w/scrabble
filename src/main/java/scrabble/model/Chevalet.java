@@ -38,12 +38,12 @@ public class Chevalet {
         return this.tuiles.get(tuileIndex);
     }
 
-    public ArrayList<Tuile> getTuiles() {
+    public ArrayList<Tuile> tuiles() {
         return this.tuiles;
     }
 
     public void remplirChevalet(Sac sac) {
-        for (int tailleActuelle = this.getTuiles().size(); tailleActuelle < TAILLE; tailleActuelle++) {
+        for (int tailleActuelle = this.tuiles().size(); tailleActuelle < TAILLE; tailleActuelle++) {
             this.piocher(sac);
         }
     }

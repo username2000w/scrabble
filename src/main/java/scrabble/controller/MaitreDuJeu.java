@@ -110,7 +110,7 @@ public class MaitreDuJeu {
 	        String posLigneLettre = Console.inputStringScanner();
 	        posLigne = Integer.parseInt(posLigneLettre);
 
-	        mot.setCoordoneeDebut(new Coordonee(posLigne, posColonne));
+	        mot.changerCoordoneeDebut(new Coordonee(posLigne, posColonne));
 
 	        Console.message("Dans quel sens voulez-vous que le mot continue ?");
 	        Console.message("1. Horizontalement");
@@ -119,10 +119,10 @@ public class MaitreDuJeu {
 	        choixSensMot = Integer.parseInt(choixSens);
 	        switch (choixSensMot) {
 	        	case 1:
-	        		mot.setDirection(Direction.HORIZONTAL);
+	        		mot.changerDirection(Direction.HORIZONTAL);
 	        		break;
 	        	case 2:
-	        		mot.setDirection(Direction.VERTICAL);
+	        		mot.changerDirection(Direction.VERTICAL);
 	        		break;
 	        }
         }
@@ -141,7 +141,7 @@ public class MaitreDuJeu {
         if (tuile.estJoker()) {
             System.out.print("[JOKER] Par quelle lettre voulez-vous remplacer le Joker ? : ");
             String choixlettrejoker = Console.inputStringScanner().toUpperCase();
-            tuile.setLettre(LettreAlphabetFrancais.valueOf(choixlettrejoker));
+            tuile.changerLettre(LettreAlphabetFrancais.valueOf(choixlettrejoker));
         }
 
         mot.ajouterLettre(tuile);

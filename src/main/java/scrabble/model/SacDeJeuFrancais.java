@@ -49,7 +49,7 @@ public class SacDeJeuFrancais {
         this.faireTuilespour(1, LettreAlphabetFrancais.Z);
     }
 
-    public ArrayList<Tuile> getLettres() {
+    public ArrayList<Tuile> Lettres() {
         return this.tuiles;
     }
 

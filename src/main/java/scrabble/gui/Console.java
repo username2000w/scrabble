@@ -48,7 +48,7 @@ public class Console {
     }
 
     public static void afficherChevalet(Chevalet chevalet) {
-        for (int i = 0; i < chevalet.getTuiles().size(); i++) {
+        for (int i = 0; i < chevalet.tuiles().size(); i++) {
             System.out.print(chevalet.tuileAvecIndex(i).toString() + " ");
         }
         System.out.print("\n");

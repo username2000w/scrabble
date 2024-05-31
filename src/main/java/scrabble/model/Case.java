@@ -31,9 +31,10 @@ public class Case {
 		return this.tuile;
 	}
 
-	public void setTuile(Tuile tuile) {
+	public void changerTuile(Tuile tuile) {
 		this.tuile = tuile;
 	}
+	
 
 	public Bonus bonus() {
 		return bonus;

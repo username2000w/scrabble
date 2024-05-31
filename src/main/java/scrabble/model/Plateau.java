@@ -23,7 +23,7 @@ public class Plateau {
 	}
 
 	public void placerTuile(Tuile tuile, Coordonee coordonee) throws HorsPlateauException {
-		this.plateau[coordonee.ligne()][coordonee.colonne()].setTuile(tuile);
+		this.plateau[coordonee.ligne()][coordonee.colonne()].changerTuile(tuile);
 	}
 
 	public Case[][] plateau() {

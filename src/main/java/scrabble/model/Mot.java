@@ -31,11 +31,11 @@ public class Mot {
         return direction;
     }
 
-    public void setCoordoneeDebut(Coordonee coordoneeDebut) {
+    public void changerCoordoneeDebut(Coordonee coordoneeDebut) {
         this.coordoneeDebut = coordoneeDebut;
     }
 
-    public void setDirection(Direction direction) {
+    public void changerDirection(Direction direction) {
         this.direction = direction;
     }
 

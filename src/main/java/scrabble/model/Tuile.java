@@ -16,7 +16,7 @@ public class Tuile {
     	return lettre.afficherLettre();
     }
 
-    public void setLettre(LettreAlphabetFrancais lettre) {
+    public void changerLettre(LettreAlphabetFrancais lettre) {
         this.lettre = lettre;
     }
 

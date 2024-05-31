@@ -12,7 +12,7 @@ public class Plateau {
 	public Plateau() {
 		for (int ligne = 0; ligne < TAILLE_PLATEAU_VERTICALE; ligne++) {
 			for (int colonne = 0; colonne < TAILLE_PLATEAU_HORIZONTALE; colonne++) {
-				if (colonne == 7 && ligne == 7) {
+				if (colonne == TAILLE_PLATEAU_VERTICALE/2 && ligne == TAILLE_PLATEAU_HORIZONTALE/2) {
 					plateau[ligne][colonne] = new Case(Bonus.ETOILE);
 				}
 				else {

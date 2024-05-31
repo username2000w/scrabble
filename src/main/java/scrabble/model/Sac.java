@@ -3,6 +3,8 @@ package scrabble.model;
 import scrabble.model.utils.exception.SacVideException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Lors de l'instanciation, le sac est rempli de tuiles de scrabble
@@ -12,12 +14,8 @@ public class Sac {
     private ArrayList<Tuile> tuiles;
 
     private void melanger() {
-        for (int i = 0; i < this.tuiles.size(); i++) {
-            int index = (int) (Math.random() * this.tuiles.size());
-            Tuile temp = this.tuiles.get(i);
-            this.tuiles.set(i, this.tuiles.get(index));
-            this.tuiles.set(index, temp);
-        }
+        Collections.shuffle(tuiles);
+        
     }
 
     public void viderSac() {

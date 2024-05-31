@@ -23,11 +23,11 @@ public class Mot {
         mot.add(tuile);
     }
 
-    public Coordonee getCoordoneeDebut() {
+    public Coordonee coordoneeDebut() {
         return coordoneeDebut;
     }
 
-    public Direction getDirection() {
+    public Direction direction() {
         return direction;
     }
 

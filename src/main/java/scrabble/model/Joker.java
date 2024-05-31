@@ -8,7 +8,7 @@ public class Joker extends Tuile {
     }
 
     @Override
-    public int getPoints() {
+    public int points() {
     	return 0;
     }
 

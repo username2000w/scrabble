@@ -53,7 +53,7 @@ public class Sac {
         tuiles.add(tuile);
     }
 
-    public int getNombreDeTuiles() {
+    public int nombreDeTuiles() {
         return this.tuiles.size();
     }
 }

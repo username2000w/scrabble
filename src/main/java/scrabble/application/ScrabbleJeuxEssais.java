@@ -9,9 +9,9 @@ import scrabble.model.utils.Direction;
 public class ScrabbleJeuxEssais {
     public static void main(String[] args) {
         MaitreDuJeu maitreDuJeu = new MaitreDuJeu();
-        Joueur joueur = maitreDuJeu.getJoueur();
-        Sac sac = maitreDuJeu.getSac();
-        Plateau plateau = maitreDuJeu.getPlateau();
+        Joueur joueur = maitreDuJeu.joueur();
+        Sac sac = maitreDuJeu.sac();
+        Plateau plateau = maitreDuJeu.plateau();
 
         System.out.println("On affiche les tuiles du joueur au début.");
         afficherTuiles(joueur);
@@ -51,7 +51,7 @@ public class ScrabbleJeuxEssais {
     }
 
     private static void afficherTuiles(Joueur joueur) {
-        System.out.println(joueur.getNom() + " a les tuiles suivantes :");
-        Console.afficherChevalet(joueur.getChevalet());
+        System.out.println(joueur.nom() + " a les tuiles suivantes :");
+        Console.afficherChevalet(joueur.chevalet());
     }
 }

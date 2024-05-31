@@ -23,8 +23,8 @@ public class MaitreDuJeu {
     public boolean jouerTour() {
         joueur.remplirChevalet(sac);
         Console.afficherPlateau(plateau);
-        Console.message(joueur.getNom() + " a les tuiles suivantes :");
-        Console.afficherChevalet(joueur.getChevalet());
+        Console.message(joueur.nom() + " a les tuiles suivantes :");
+        Console.afficherChevalet(joueur.chevalet());
         Console.message("");
 
         Console.message("Que voulez-vous faire ?");
@@ -52,42 +52,42 @@ public class MaitreDuJeu {
     }
 
     public int calculerScoreMot(Mot mot) {
-        Coordonee coordoneeDebutMot = mot.getCoordoneeDebut();
-        int ligneDebutMot = coordoneeDebutMot.getLigne();
-        int colonneDebutMot = coordoneeDebutMot.getColonne();
-        Direction directionMot = mot.getDirection();
+        Coordonee coordoneeDebutMot = mot.coordoneeDebut();
+        int ligneDebutMot = coordoneeDebutMot.ligne();
+        int colonneDebutMot = coordoneeDebutMot.colonne();
+        Direction directionMot = mot.direction();
         int scoreMot = 0;
-        Case[][] plateau = this.plateau.getPlateau();
+        Case[][] plateau = this.plateau.plateau();
 
         if (directionMot.equals(Direction.HORIZONTAL)) {
             for (int colonne = colonneDebutMot; !plateau[ligneDebutMot][colonne].estVide(); colonne++) {
-                scoreMot += plateau[ligneDebutMot][colonne].getTuile().getPoints();
+                scoreMot += plateau[ligneDebutMot][colonne].tuile().points();
 
                 if (!plateau[ligneDebutMot - 1][colonne].estVide()) {
                     for (int ligne = ligneDebutMot; !plateau[ligne - 1][colonne].estVide(); ligne--) {
-                        scoreMot += plateau[ligne - 1][colonne].getTuile().getPoints();
+                        scoreMot += plateau[ligne - 1][colonne].tuile().points();
                     }
                 }
 
                 if (!plateau[ligneDebutMot + 1][colonne].estVide()) {
                     for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonne].estVide(); ligne++) {
-                        scoreMot += plateau[ligne + 1][colonne].getTuile().getPoints();
+                        scoreMot += plateau[ligne + 1][colonne].tuile().points();
                     }
                 }
             }
         } else {
             for (int ligne = ligneDebutMot; !plateau[ligne][colonneDebutMot].estVide(); ligne++) {
-                scoreMot += plateau[ligne][colonneDebutMot].getTuile().getPoints();
+                scoreMot += plateau[ligne][colonneDebutMot].tuile().points();
 
                 if (!plateau[ligne][colonneDebutMot - 1].estVide()) {
                     for (int colonne = colonneDebutMot; !plateau[ligne][colonne - 1].estVide(); colonne--) {
-                        scoreMot += plateau[ligne][colonne - 1].getTuile().getPoints();
+                        scoreMot += plateau[ligne][colonne - 1].tuile().points();
                     }
                 }
 
                 if (!plateau[ligne][colonneDebutMot + 1].estVide()) {
                     for (int colonne = colonneDebutMot; !plateau[ligne][colonne + 1].estVide(); colonne++) {
-                        scoreMot += plateau[ligne][colonne + 1].getTuile().getPoints();
+                        scoreMot += plateau[ligne][colonne + 1].tuile().points();
                     }
                 }
             }
@@ -131,12 +131,12 @@ public class MaitreDuJeu {
         String choixlettre = Console.inputStringScanner().toUpperCase();
 
 
-        while (joueur.getChevalet().getTuileAvecLettre(choixlettre) == null) {
+        while (joueur.chevalet().tuileAvecLettre(choixlettre) == null) {
             System.out.print("Veuillez selectioner une lettre dans le chevalet : ");
             choixlettre = Console.inputStringScanner().toUpperCase();
         }
 
-        Tuile tuile = joueur.getChevalet().getTuileAvecLettre(choixlettre);
+        Tuile tuile = joueur.chevalet().tuileAvecLettre(choixlettre);
 
         if (tuile.estJoker()) {
             System.out.print("[JOKER] Par quelle lettre voulez-vous remplacer le Joker ? : ");
@@ -151,7 +151,7 @@ public class MaitreDuJeu {
 
 
     public Mot jouerMot(Plateau plateau, Joueur joueur) {
-        Chevalet chevalet = joueur.getChevalet();
+        Chevalet chevalet = joueur.chevalet();
         int NombreLettrePosee = 0;
         Mot mot = new Mot();
         Coordonee coordonnees = null;
@@ -162,9 +162,9 @@ public class MaitreDuJeu {
         while (choix != 2) {
             jouerLettre(plateau, joueur, NombreLettrePosee, mot);
             if (NombreLettrePosee == 0) {
-                coordonnees = mot.getCoordoneeDebut();
+                coordonnees = mot.coordoneeDebut();
             }
-            directionMot = mot.getDirection();
+            directionMot = mot.direction();
 
             Console.message("1. Continuez à placer une lettre ");
             Console.message("2. finir le mot ");
@@ -179,44 +179,44 @@ public class MaitreDuJeu {
         if (tour > 0) {
 	        if (NombreLettrePosee > 1) {
 	            if (directionMot.equals(Direction.HORIZONTAL)) {
-	                int colonneDebutMot = coordonnees.getColonne();
-	                int ligneDebutMot = coordonnees.getLigne();
-	                if (!plateau.getPlateau()[ligneDebutMot][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutMot][colonneDebutMot + 1].estVide() || !plateau.getPlateau()[ligneDebutMot - 1][colonneDebutMot].estVide()) {
+	                int colonneDebutMot = coordonnees.colonne();
+	                int ligneDebutMot = coordonnees.ligne();
+	                if (!plateau.plateau()[ligneDebutMot][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligneDebutMot][colonneDebutMot + 1].estVide() || !plateau.plateau()[ligneDebutMot - 1][colonneDebutMot].estVide()) {
                         placerMotSurPlateau(mot, plateau);
                         return mot;
                     }
 	                for (int ligne = ligneDebutMot; ligne < ligneDebutMot + mot.nombreDeLettre(); ligne++) {
-	                    if (!plateau.getPlateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligne][colonneDebutMot + 1].estVide()) {
+	                    if (!plateau.plateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligne][colonneDebutMot + 1].estVide()) {
 	                        placerMotSurPlateau(mot, plateau);
 	                        return mot;
 	                    }
 	                }
 	            } else {
-                    int colonneDebutMot = coordonnees.getColonne();
-                    int ligneDebutDebut = coordonnees.getLigne();
-                    if (!plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()) {
+                    int colonneDebutMot = coordonnees.colonne();
+                    int ligneDebutDebut = coordonnees.ligne();
+                    if (!plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()) {
                         placerMotSurPlateau(mot, plateau);
                         return mot;
                     }
                     for (int colonne = colonneDebutMot; colonne < colonneDebutMot + mot.nombreDeLettre(); colonne++) {
-                        if (!plateau.getPlateau()[ligneDebutDebut - 1][colonne].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonne].estVide()) {
+                        if (!plateau.plateau()[ligneDebutDebut - 1][colonne].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonne].estVide()) {
                             placerMotSurPlateau(mot, plateau);
                             return mot;
                         }
                     }
 	            }
 	        } else {
-	        	int colonneDebutMot = coordonnees.getColonne();
-	            int ligneDebutDebut = coordonnees.getLigne();
-	        	if (!plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
-	        		|| !plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide()) {
+	        	int colonneDebutMot = coordonnees.colonne();
+	            int ligneDebutDebut = coordonnees.ligne();
+	        	if (!plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligneDebutDebut][colonneDebutMot+ 1].estVide()
+	        		|| !plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide()) {
 	                    placerMotSurPlateau(mot, plateau);
 	                    return mot;
 	        	}
 	        }
         } else {
         	placerMotSurPlateau(mot, plateau);
-        	if (plateau.getPlateau()[7][7].estVide()) {
+        	if (plateau.plateau()[7][7].estVide()) {
                 Console.message("Le premier mot doit commencer sur l'étoile");
                 plateau.supprimerToutesTuiles();
 	        }
@@ -226,17 +226,17 @@ public class MaitreDuJeu {
     }
 
     public void placerMotSurPlateau(Mot mot, Plateau plateau) {
-        Direction directionMot = mot.getDirection();
+        Direction directionMot = mot.direction();
 
-        Coordonee coordonnees = mot.getCoordoneeDebut();
-        int ligne = coordonnees.getLigne();
-        int colonne = coordonnees.getColonne();
+        Coordonee coordonnees = mot.coordoneeDebut();
+        int ligne = coordonnees.ligne();
+        int colonne = coordonnees.colonne();
 
         for (Tuile tuile : mot.getMot()) {
 
             if (directionMot.equals(Direction.HORIZONTAL)) {
                 try {
-                    if (plateau.getPlateau()[ligne][colonne].estVide()) {
+                    if (plateau.plateau()[ligne][colonne].estVide()) {
                         plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
                     } else {
                         colonne++;
@@ -249,7 +249,7 @@ public class MaitreDuJeu {
                 colonne++;
             } else {
                 try {
-                    if (plateau.getPlateau()[ligne][colonne].estVide()) {
+                    if (plateau.plateau()[ligne][colonne].estVide()) {
                         plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
                     } else {
                         ligne++;
@@ -264,15 +264,15 @@ public class MaitreDuJeu {
         }
     }
 
-    public Sac getSac() {
+    public Sac sac() {
         return sac;
     }
 
-    public Plateau getPlateau() {
+    public Plateau plateau() {
         return plateau;
     }
 
-    public Joueur getJoueur() {
+    public Joueur joueur() {
         return joueur;
     }
 }

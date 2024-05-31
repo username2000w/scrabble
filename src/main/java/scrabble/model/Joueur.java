@@ -9,7 +9,7 @@ public class Joueur {
         this.nom = nom;
     }
 
-    public String getNom() {
+    public String nom() {
         return nom;
     }
 
@@ -21,7 +21,7 @@ public class Joueur {
         this.chevalet.retirerLettre(tuile);
     }
 
-    public Chevalet getChevalet() {
+    public Chevalet chevalet() {
         return chevalet;
     }
 

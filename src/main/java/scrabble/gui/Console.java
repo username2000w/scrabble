@@ -29,8 +29,8 @@ public class Console {
     public static void afficherPlateau(Plateau plateau) {
         for (int i = 0; i < Plateau.TAILLE_PLATEAU_VERTICALE; i++) {
             for (int j = 0; j < Plateau.TAILLE_PLATEAU_HORIZONTALE; j++) {
-                Tuile tuile = plateau.getPlateau()[i][j].getTuile();
-                Bonus bonus = plateau.getPlateau()[i][j].getBonus();
+                Tuile tuile = plateau.plateau()[i][j].tuile();
+                Bonus bonus = plateau.plateau()[i][j].bonus();
 
                 if (tuile == null) {
                     if (bonus == null) { // si la case est vide, on affiche un carré vide.
@@ -49,7 +49,7 @@ public class Console {
 
     public static void afficherChevalet(Chevalet chevalet) {
         for (int i = 0; i < chevalet.getTuiles().size(); i++) {
-            System.out.print(chevalet.getTuileAvecIndex(i).toString() + " ");
+            System.out.print(chevalet.tuileAvecIndex(i).toString() + " ");
         }
         System.out.print("\n");
     }

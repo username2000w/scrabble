@@ -34,7 +34,7 @@ public class Chevalet {
         }
     }
 
-    public Tuile getTuileAvecIndex(int tuileIndex) {
+    public Tuile tuileAvecIndex(int tuileIndex) {
         return this.tuiles.get(tuileIndex);
     }
 
@@ -48,12 +48,13 @@ public class Chevalet {
         }
     }
 
-    public Tuile getTuileAvecLettre(String tuileVoulue) {
+    public Tuile tuileAvecLettre(String tuileVoulue) {
         for (Tuile tuile : tuiles) {
             if (tuileVoulue.equals(tuile.toString())) {
                 return tuile;
             }
         }
         return null;
+        
     }
 }

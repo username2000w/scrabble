@@ -7,8 +7,8 @@ public class Tuile {
         this.lettre = lettre;
     }
 
-    public int getPoints() {
-    	return lettre.getPoints();
+    public int points() {
+    	return lettre.points();
     }
 
     @Override

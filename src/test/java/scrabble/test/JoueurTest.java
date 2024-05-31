@@ -13,7 +13,7 @@ public class JoueurTest {
         Chevalet chevalet = new Chevalet();
         Joueur joueur = new Joueur(chevalet, "Joueur 1");
 
-        assertEquals("Joueur 1", joueur.getNom());
+        assertEquals("Joueur 1", joueur.nom());
     }
 
 

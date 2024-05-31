@@ -15,7 +15,7 @@ public class SacTest {
   @Test
   void testContient102Tuiles() {
     Sac sac = new Sac();
-    int nbTuiles = sac.getNombreDeTuiles();
+    int nbTuiles = sac.nombreDeTuiles();
     assertEquals(102, nbTuiles);
   }
 
@@ -29,7 +29,7 @@ public class SacTest {
     } catch (SacVideException e) {
       System.out.println(e.getMessage());
     }
-    assertEquals(102 - 1, sac.getNombreDeTuiles());
+    assertEquals(102 - 1, sac.nombreDeTuiles());
     
     // On en retire encore trois.
     try {
@@ -39,7 +39,7 @@ public class SacTest {
     } catch (SacVideException e) {
       System.out.println(e.getMessage());
     }
-    assertEquals(102 - 1 - 3, sac.getNombreDeTuiles());
+    assertEquals(102 - 1 - 3, sac.nombreDeTuiles());
   }
 
   /**
@@ -53,7 +53,7 @@ public class SacTest {
 
     // On pioche toutes les tuiles du sac 1.
     ArrayList<LettreAlphabetFrancais> lettreSac1 = new ArrayList<>();
-    while (sac1.getNombreDeTuiles() > 0) {
+    while (sac1.nombreDeTuiles() > 0) {
       try {
         lettreSac1.add(sac1.piocher());
       } catch (SacVideException e) {
@@ -63,7 +63,7 @@ public class SacTest {
 
     // On pioche toutes les tuiles du sac 2.
     ArrayList<LettreAlphabetFrancais> lettreSac2 = new ArrayList<>();
-    while (sac2.getNombreDeTuiles() > 0) {
+    while (sac2.nombreDeTuiles() > 0) {
       try {
         lettreSac2.add(sac2.piocher());
       } catch (SacVideException e) {

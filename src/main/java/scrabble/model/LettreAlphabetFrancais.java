@@ -34,7 +34,7 @@ public enum LettreAlphabetFrancais {
         this.points = points;
     }
 
-    public int getPoints() {
+    public int points() {
         return this.points;
     }
 

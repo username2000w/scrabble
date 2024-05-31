@@ -26,7 +26,7 @@ public class Case {
 		return this.tuile == null;
 	}
 
-	public Tuile getTuile() {
+	public Tuile tuile() {
 		if (Boolean.TRUE.equals(this.estVide())) return null;
 		return this.tuile;
 	}
@@ -35,7 +35,7 @@ public class Case {
 		this.tuile = tuile;
 	}
 
-	public Bonus getBonus() {
+	public Bonus bonus() {
 		return bonus;
 	}
 	

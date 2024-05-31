@@ -9,11 +9,11 @@ public class Coordonee {
         this.colonne = colonne;
     }
 
-    public int getLigne() {
+    public int ligne() {
         return ligne;
     }
 
-    public int getColonne() {
+    public int colonne() {
         return colonne;
     }
 }

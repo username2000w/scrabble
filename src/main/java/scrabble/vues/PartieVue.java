@@ -30,5 +30,19 @@ public class PartieVue extends HBox {
 
         // On ajoute l'image de fond à la vue.
         setBackground(fond);
+
+        // Conteneur pour le plateau et les actions (partie gauche)
+        // TODO: Séparer dans une autre classe.
+        VBox conteneur = new VBox();
+        ActionsVue actions = new ActionsVue();
+        PlateauVue plateau = new PlateauVue();
+        VBox.setVgrow(plateau, Priority.ALWAYS);
+        conteneur.getChildren().addAll(plateau, actions);
+
+        // Demander au conteneur de prendre toute la place disponible en largeur.
+        HBox.setHgrow(conteneur, Priority.ALWAYS);
+
+        PartieInformationVue infoContainer = new PartieInformationVue();
+        getChildren().addAll(conteneur, infoContainer);
     }
 }

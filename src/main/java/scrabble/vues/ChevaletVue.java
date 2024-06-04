@@ -9,18 +9,11 @@ public class ChevaletVue extends HBox {
     public ChevaletVue() {
         super();
 
-        getChildren().addAll(
-            new TuileVue("Z", 10),
-            new TuileVue("I", 1),
-            new TuileVue("G", 2),
-            new TuileVue("Y", 2),
-            new TuileVue("E", 1),
-            new TuileVue("R", 1),
-            new TuileVue(" ") // JOKER
-        );
-
         setSpacing(12);
+
         setMaxWidth(576);
+        setMinWidth(576);
+
         setMaxHeight(96);
         setPadding(new Insets(16, 38, 32, 18));
 
@@ -45,5 +38,24 @@ public class ChevaletVue extends HBox {
         ));
 
         setTranslateY(16);
+    }
+
+    public void ajouterLettre (String lettre, int valeur) {
+        getChildren().add(new TuileVue(lettre, valeur));
+    }
+
+    public void ajouterLettre () {
+        getChildren().add(new TuileVue(" "));
+    }
+
+    public void retirerLettre (String lettre) {
+        // On enlève seulement la première occurrence.
+        for (int i = 0; i < getChildren().size(); i++) {
+            TuileVue tuile = (TuileVue) getChildren().get(i);
+            if (tuile.lettre().equals(lettre)) {
+                getChildren().remove(i);
+                break;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package scrabble.vues;
 
 import javafx.scene.layout.*;
+import scrabble.controller.PartieController;
 import scrabble.gui.utils.ImageUtilitaire;
 
 /**
@@ -8,6 +9,10 @@ import scrabble.gui.utils.ImageUtilitaire;
  * Elle va contenir le plateau, les points des joueurs, les chevalets, etc.
  */
 public class PartieVue extends HBox {
+    private final ActionsVue actions;
+    private final PlateauVue plateau;
+    private final PartieInformationVue partieInformation;
+
     public PartieVue() {
         super();
 
@@ -34,15 +39,27 @@ public class PartieVue extends HBox {
         // Conteneur pour le plateau et les actions (partie gauche)
         // TODO: Séparer dans une autre classe.
         VBox conteneur = new VBox();
-        ActionsVue actions = new ActionsVue();
-        PlateauVue plateau = new PlateauVue();
+        actions = new ActionsVue();
+        plateau = new PlateauVue();
         VBox.setVgrow(plateau, Priority.ALWAYS);
         conteneur.getChildren().addAll(plateau, actions);
 
         // Demander au conteneur de prendre toute la place disponible en largeur.
         HBox.setHgrow(conteneur, Priority.ALWAYS);
 
-        PartieInformationVue infoContainer = new PartieInformationVue();
-        getChildren().addAll(conteneur, infoContainer);
+        partieInformation = new PartieInformationVue();
+        getChildren().addAll(conteneur, partieInformation);
+    }
+
+    public PlateauVue plateau() {
+        return plateau;
+    }
+
+    public PartieInformationVue partieInformation() {
+        return partieInformation;
+    }
+
+    public ChevaletVue chevalet() {
+        return actions.chevalet();
     }
 }

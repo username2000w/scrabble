@@ -1,14 +1,23 @@
 package scrabble.vues;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
+import java.util.Optional;
+
 public class PartieInformationVue extends VBox {
+    private final Button jouerMotBouton;
+
     public PartieInformationVue() {
         super();
 
-        getChildren().addAll(new Label("Joueur 1"), new Label("Joueur 2"));
+        jouerMotBouton = new Button("Jouer un mot");
+        getChildren().addAll(new Label("Joueur"), jouerMotBouton);
         setMinWidth(300);
         setMaxWidth(300);
+    }
+
+    public Button recupererJouerMotBouton() {
+        return jouerMotBouton;
     }
 }

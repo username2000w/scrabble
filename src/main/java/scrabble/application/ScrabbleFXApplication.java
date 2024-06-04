@@ -5,6 +5,12 @@ import com.pixelduke.window.ThemeWindowManagerFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scrabble.controller.JouerMotController;
+import scrabble.controller.PartieController;
+import scrabble.model.Chevalet;
+import scrabble.model.Joueur;
+import scrabble.model.Plateau;
+import scrabble.model.Sac;
 import scrabble.vues.PartieVue;
 
 public class ScrabbleFXApplication extends Application {
@@ -14,13 +20,25 @@ public class ScrabbleFXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // On définit les éléments de la partie.
+        Sac sac = new Sac();
+        Plateau plateau = new Plateau();
+        Joueur joueur = new Joueur(new Chevalet(), "Joueur 1");
+
+        // On crée la vue principale.
         PartieVue root = new PartieVue();
 
-        Scene scene = new Scene(root, 1180, 982);
-        primaryStage.setResizable(true);
+        // On assigne les controllers aux éléments de la vue.
+        new PartieController(plateau, joueur, sac, root);
+        root.partieInformation().recupererJouerMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
 
+        // On met en place la scène.
+        Scene scene = new Scene(root, 1180, 982);
         primaryStage.setTitle("Scrabble");
+        primaryStage.setResizable(true);
         primaryStage.setScene(scene);
+
+        // On affiche la fenêtre.
         primaryStage.show();
 
         // On active le mode sombre pour la fenêtre.

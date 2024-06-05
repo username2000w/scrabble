@@ -17,6 +17,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
 
     private final PartieVue vue;
     private Mot mot = null;
+    private int tour = 0;
 
     public JouerMotController(Joueur joueur, Plateau plateau, Sac sac, PartieVue vue) {
         this.plateau = plateau;
@@ -82,12 +83,16 @@ public class JouerMotController implements EventHandler<MouseEvent> {
             }
             else if (res.startsWith("FINISH@")) {
                 LettreAlphabetFrancais lettre = LettreAlphabetFrancais.valueOf(motField.getText());
+                int NombreLettrePosee = mot.nombreDeLettre();
 
                 joueur.getChevalet().retirerLettre(lettre);
                 vue.chevalet().retirerLettre(lettre.toString());
 
                 mot.ajouterLettre(lettre);
-                jouerMotSurPlateau();
+
+                if (verificationMot(mot, tour, NombreLettrePosee)) {
+                    jouerMotSurPlateau();
+                }
 
                 mot = null;
                 vue.chevalet().getChildren().clear();
@@ -100,6 +105,8 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                         vue.chevalet().ajouterLettre(nouvelleLettre.toString(), nouvelleLettre.getPoints());
                     }
                 }
+
+                tour++;
             }
             else {
                 mot = null;
@@ -143,5 +150,62 @@ public class JouerMotController implements EventHandler<MouseEvent> {
             if (directionMot.equals(Direction.HORIZONTAL)) colonne++;
             else ligne++;
         }
+    }
+
+    private boolean verificationMot(Mot mot, int tour, int NombreLettrePosee) {
+        Coordonee coordonnees = mot.getCoordoneeDebut();
+        Direction directionMot = mot.getDirection();
+        if (tour > 0) {
+            if (NombreLettrePosee > 1) {
+                if (directionMot.equals(Direction.HORIZONTAL)) {
+                    int colonneDebutMot = coordonnees.getColonne();
+                    int ligneDebutMot = coordonnees.getLigne();
+                    if (!plateau.getPlateau()[ligneDebutMot][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutMot][colonneDebutMot + 1].estVide() || !plateau.getPlateau()[ligneDebutMot - 1][colonneDebutMot].estVide()) {
+                        return true;
+                    }
+                    for (int ligne = ligneDebutMot; ligne < ligneDebutMot + mot.nombreDeLettre(); ligne++) {
+                        if (!plateau.getPlateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligne][colonneDebutMot + 1].estVide()) {
+                            return true;
+                        }
+                    }
+                } else {
+                    int colonneDebutMot = coordonnees.getColonne();
+                    int ligneDebutDebut = coordonnees.getLigne();
+                    if (!plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()) {
+                        return true;
+                    }
+                    for (int colonne = colonneDebutMot; colonne < colonneDebutMot + mot.nombreDeLettre(); colonne++) {
+                        if (!plateau.getPlateau()[ligneDebutDebut - 1][colonne].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonne].estVide()) {
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                int colonneDebutMot = coordonnees.getColonne();
+                int ligneDebutDebut = coordonnees.getLigne();
+                return !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.getPlateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()
+                        || !plateau.getPlateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.getPlateau()[ligneDebutDebut + 1][colonneDebutMot].estVide();
+            }
+        } else {
+            // Regarde si le mot est bien placé sur l'étoile
+            if (directionMot.equals(Direction.HORIZONTAL)) {
+                int ligne = coordonnees.getLigne();
+                int colonne = coordonnees.getColonne();
+                for (int colonneMot = colonne; colonneMot < colonne + mot.nombreDeLettre(); colonneMot++) {
+                    if (plateau.getPlateau()[ligne][colonneMot].getBonus() == Bonus.ETOILE) {
+                        return true;
+                    }
+                }
+            } else {
+                int ligne = coordonnees.getLigne();
+                int colonne = coordonnees.getColonne();
+                for (int ligneMot = ligne; ligneMot < ligne + mot.nombreDeLettre(); ligneMot++) {
+                    if (plateau.getPlateau()[ligneMot][colonne].getBonus() == Bonus.ETOILE) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

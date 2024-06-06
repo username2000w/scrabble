@@ -4,8 +4,8 @@ import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import scrabble.gui.utils.ImageUtilitaire;
+import scrabble.model.Plateau;
 import scrabble.model.utils.Coordonee;
 
 import java.util.HashMap;
@@ -49,7 +49,6 @@ public class PlateauVue extends Pane {
                 );
 
                 Coordonee coordonee = new Coordonee(ligne, colonne);
-                initialiserCaseSpecialPlateau(coordonee, casePlateau);
 
                 // On ajoute la case dans la hashmap plateau.
                 cases.put(coordonee, casePlateau);
@@ -57,6 +56,30 @@ public class PlateauVue extends Pane {
         }
 
         getChildren().addAll(cases.values());
+
+        for (Coordonee coordonee : Plateau.COORDONEES_ETOILE) {
+            initialiserCaseEtoile(cases.get(coordonee));
+        }
+        for (Coordonee coordonee : Plateau.COORDONEES_LETTRE_DOUBLE_SYMETRIQUE) {
+            initialiserCaseLettreDouble(cases.get(coordonee));
+            coordonee = new Coordonee(coordonee.colonne(), coordonee.ligne());
+            initialiserCaseLettreDouble(cases.get(coordonee));
+        }
+        for (Coordonee coordonee : Plateau.COORDONEES_LETTRE_TRIPLE_SYMETRIQUE) {
+            initialiserCaseLettreTriple(cases.get(coordonee));
+            coordonee = new Coordonee(coordonee.colonne(), coordonee.ligne());
+            initialiserCaseLettreTriple(cases.get(coordonee));
+        }
+        for (Coordonee coordonee : Plateau.COORDONEES_MOT_DOUBLE_SYMETRIQUE) {
+            initialiserCaseMotDouble(cases.get(coordonee));
+            coordonee = new Coordonee(coordonee.colonne(), coordonee.ligne());
+            initialiserCaseMotDouble(cases.get(coordonee));
+        }
+        for (Coordonee coordonee : Plateau.COORDONEES_MOT_TRIPLE_SYMETRIQUE) {
+            initialiserCaseMotTriple(cases.get(coordonee));
+            coordonee = new Coordonee(coordonee.colonne(), coordonee.ligne());
+            initialiserCaseMotTriple(cases.get(coordonee));
+        }
     }
 
     /**
@@ -68,25 +91,67 @@ public class PlateauVue extends Pane {
         return cases.get(coordonee);
     }
 
-    /**
-     * Permet d'initialiser le contenu d'une case située à une coordonnée donnée.
-     * Ce contenu est persistant et est toujours en bas de la pile de la case.
-     */
-    private void initialiserCaseSpecialPlateau(Coordonee coordonee, PlateauCaseVue casePlateau) {
-        // On ajoute une étoile au centre du plateau.
-        if (coordonee.equals(new Coordonee(7, 7))) {
-            StackPane stackPane = new StackPane();
-            stackPane.minWidthProperty().bind(casePlateau.widthProperty());
-            stackPane.minHeightProperty().bind(casePlateau.heightProperty());
+    private void initialiserCaseEtoile(PlateauCaseVue casePlateau) {
+        StackPane stackPane = new StackPane();
 
-            stackPane.getChildren().add(new ImageView(ImageUtilitaire.chargerImage("etoile.png")));
-            stackPane.setBackground(new Background(new BackgroundFill(
-                Color.rgb(204, 102, 102),
-                new CornerRadii(4),
-                null
-            )));
+        stackPane.getChildren().add(new ImageView(ImageUtilitaire.chargerImage("etoile.png")));
+        stackPane.setBackground(new Background(new BackgroundFill(
+            PlateauCaseVue.MD_OU_ETOILE_COULEUR,
+            new CornerRadii(4),
+            null
+        )));
 
-            casePlateau.getChildren().add(stackPane);
-        }
+        casePlateau.poser(stackPane);
+    }
+
+    private void initialiserCaseLettreDouble(PlateauCaseVue casePlateau) {
+        StackPane stackPane = new StackPane();
+
+        stackPane.getChildren().add(new Label("LD"));
+        stackPane.setBackground(new Background(new BackgroundFill(
+            PlateauCaseVue.LD_COULEUR,
+            new CornerRadii(4),
+            null
+        )));
+
+        casePlateau.poser(stackPane);
+    }
+
+    private void initialiserCaseLettreTriple(PlateauCaseVue casePlateau) {
+        StackPane stackPane = new StackPane();
+
+        stackPane.getChildren().add(new Label("LT"));
+        stackPane.setBackground(new Background(new BackgroundFill(
+            PlateauCaseVue.LT_COULEUR,
+            new CornerRadii(4),
+            null
+        )));
+
+        casePlateau.poser(stackPane);
+    }
+
+    private void initialiserCaseMotDouble(PlateauCaseVue casePlateau) {
+        StackPane stackPane = new StackPane();
+
+        stackPane.getChildren().add(new Label("MD"));
+        stackPane.setBackground(new Background(new BackgroundFill(
+            PlateauCaseVue.MD_OU_ETOILE_COULEUR,
+            new CornerRadii(4),
+            null
+        )));
+
+        casePlateau.poser(stackPane);
+    }
+    private void initialiserCaseMotTriple(PlateauCaseVue casePlateau) {
+        StackPane stackPane = new StackPane();
+
+        stackPane.getChildren().add(new Label("MT"));
+        stackPane.setBackground(new Background(new BackgroundFill(
+            PlateauCaseVue.MT_COULEUR,
+            new CornerRadii(4),
+            null
+        )));
+
+        casePlateau.poser(stackPane);
     }
 }

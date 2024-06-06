@@ -9,6 +9,7 @@ import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
 import scrabble.model.utils.exception.HorsPlateauException;
 import scrabble.vues.PartieVue;
+import scrabble.vues.PlateauCaseTuile;
 
 public class JouerMotController implements EventHandler<MouseEvent> {
     private final Plateau plateau;
@@ -154,7 +155,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                     Coordonee pos = new Coordonee(ligne, colonne);
 
                     plateau.placerTuile(tuile, pos);
-                    vue.plateau().caseSitueA(pos).assigner(tuile.toString(), tuile.points());
+                    vue.plateau().caseSitueA(pos).poser(new PlateauCaseTuile(tuile.toString(), tuile.points()));
                 } else {
                     if (directionMot.equals(Direction.HORIZONTAL)) colonne++;
                     else ligne++;
@@ -162,7 +163,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                     Coordonee pos = new Coordonee(ligne, colonne);
 
                     plateau.placerTuile(tuile, pos);
-                    vue.plateau().caseSitueA(pos).assigner(tuile.toString(), tuile.points());
+                    vue.plateau().caseSitueA(pos).poser(new PlateauCaseTuile(tuile.toString(), tuile.points()));
                 }
             } catch (HorsPlateauException e) {
                 throw new RuntimeException(e);
@@ -176,36 +177,52 @@ public class JouerMotController implements EventHandler<MouseEvent> {
     private boolean verificationMot(Mot mot, int tour, int nombreLettrePosee) {
         Coordonee coordonnees = mot.coordoneeDebut();
         Direction directionMot = mot.direction();
+
         if (tour > 0) {
             if (nombreLettrePosee > 1) {
                 if (directionMot.equals(Direction.HORIZONTAL)) {
                     int colonneDebutMot = coordonnees.colonne();
                     int ligneDebutMot = coordonnees.ligne();
-                    if (!plateau.plateau()[ligneDebutMot][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligneDebutMot][colonneDebutMot + 1].estVide() || !plateau.plateau()[ligneDebutMot - 1][colonneDebutMot].estVide()) {
-                        return true;
-                    }
+
+                    if (
+                        Boolean.TRUE.equals(
+                            !plateau.plateau()[ligneDebutMot][colonneDebutMot - 1].estVide()
+                            || !plateau.plateau()[ligneDebutMot][colonneDebutMot + 1].estVide()
+                        ) || Boolean.TRUE.equals(!plateau.plateau()[ligneDebutMot - 1][colonneDebutMot].estVide())
+                    ) return true;
+
                     for (int ligne = ligneDebutMot; ligne < ligneDebutMot + mot.nombreDeLettre(); ligne++) {
-                        if (!plateau.plateau()[ligne][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligne][colonneDebutMot + 1].estVide()) {
-                            return true;
-                        }
+                        if (
+                            Boolean.TRUE.equals(!plateau.plateau()[ligne][colonneDebutMot - 1].estVide())
+                            || Boolean.TRUE.equals(!plateau.plateau()[ligne][colonneDebutMot + 1].estVide())
+                        ) return true;
                     }
                 } else {
                     int colonneDebutMot = coordonnees.colonne();
                     int ligneDebutDebut = coordonnees.ligne();
-                    if (!plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()) {
-                        return true;
-                    }
+
+                    if (
+                        Boolean.TRUE.equals(
+                            !plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide()
+                            || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide()
+                        ) || Boolean.TRUE.equals(!plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide())
+                    ) return true;
+
                     for (int colonne = colonneDebutMot; colonne < colonneDebutMot + mot.nombreDeLettre(); colonne++) {
-                        if (!plateau.plateau()[ligneDebutDebut - 1][colonne].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonne].estVide()) {
-                            return true;
-                        }
+                        if (
+                            Boolean.TRUE.equals(!plateau.plateau()[ligneDebutDebut - 1][colonne].estVide())
+                            || Boolean.TRUE.equals(!plateau.plateau()[ligneDebutDebut + 1][colonne].estVide())
+                        ) return true;
                     }
                 }
             } else {
                 int colonneDebutMot = coordonnees.colonne();
                 int ligneDebutDebut = coordonnees.ligne();
-                return !plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide() || !plateau.plateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()
-                        || !plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide() || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide();
+
+                return !plateau.plateau()[ligneDebutDebut][colonneDebutMot - 1].estVide()
+                    || !plateau.plateau()[ligneDebutDebut][colonneDebutMot + 1].estVide()
+                    || !plateau.plateau()[ligneDebutDebut - 1][colonneDebutMot].estVide()
+                    || !plateau.plateau()[ligneDebutDebut + 1][colonneDebutMot].estVide();
             }
         } else {
             int ligne = coordonnees.ligne();

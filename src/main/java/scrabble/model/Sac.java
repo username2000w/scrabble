@@ -15,7 +15,6 @@ public class Sac {
 
     private void melanger() {
         Collections.shuffle(tuiles);
-        
     }
 
     public void viderSac() {

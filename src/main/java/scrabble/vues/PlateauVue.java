@@ -4,7 +4,9 @@ import javafx.beans.binding.DoubleExpression;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import scrabble.gui.utils.ImageUtilitaire;
+import scrabble.gui.utils.PoliceTexteUtilitaire;
 import scrabble.model.Plateau;
 import scrabble.model.utils.Coordonee;
 
@@ -104,54 +106,36 @@ public class PlateauVue extends Pane {
         casePlateau.poser(stackPane);
     }
 
-    private void initialiserCaseLettreDouble(PlateauCaseVue casePlateau) {
+    private void initialiserCaseAvecTexte (PlateauCaseVue casePlateau, Color couleur, String texte) {
         StackPane stackPane = new StackPane();
+        Label label = new Label(texte);
 
-        stackPane.getChildren().add(new Label("LD"));
+        label.setFont(PoliceTexteUtilitaire.utiliserReadexPro(18));
+        label.setTextFill(Color.WHITE);
+
+        stackPane.getChildren().add(label);
         stackPane.setBackground(new Background(new BackgroundFill(
-            PlateauCaseVue.LD_COULEUR,
+            couleur,
             new CornerRadii(4),
             null
         )));
 
         casePlateau.poser(stackPane);
+    }
+
+    private void initialiserCaseLettreDouble(PlateauCaseVue casePlateau) {
+        initialiserCaseAvecTexte(casePlateau, PlateauCaseVue.LD_COULEUR, "LD");
     }
 
     private void initialiserCaseLettreTriple(PlateauCaseVue casePlateau) {
-        StackPane stackPane = new StackPane();
-
-        stackPane.getChildren().add(new Label("LT"));
-        stackPane.setBackground(new Background(new BackgroundFill(
-            PlateauCaseVue.LT_COULEUR,
-            new CornerRadii(4),
-            null
-        )));
-
-        casePlateau.poser(stackPane);
+        initialiserCaseAvecTexte(casePlateau, PlateauCaseVue.LT_COULEUR, "LT");
     }
 
     private void initialiserCaseMotDouble(PlateauCaseVue casePlateau) {
-        StackPane stackPane = new StackPane();
-
-        stackPane.getChildren().add(new Label("MD"));
-        stackPane.setBackground(new Background(new BackgroundFill(
-            PlateauCaseVue.MD_OU_ETOILE_COULEUR,
-            new CornerRadii(4),
-            null
-        )));
-
-        casePlateau.poser(stackPane);
+        initialiserCaseAvecTexte(casePlateau, PlateauCaseVue.MD_OU_ETOILE_COULEUR, "MD");
     }
+
     private void initialiserCaseMotTriple(PlateauCaseVue casePlateau) {
-        StackPane stackPane = new StackPane();
-
-        stackPane.getChildren().add(new Label("MT"));
-        stackPane.setBackground(new Background(new BackgroundFill(
-            PlateauCaseVue.MT_COULEUR,
-            new CornerRadii(4),
-            null
-        )));
-
-        casePlateau.poser(stackPane);
+        initialiserCaseAvecTexte(casePlateau, PlateauCaseVue.MT_COULEUR, "MT");
     }
 }

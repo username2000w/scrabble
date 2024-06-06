@@ -7,6 +7,7 @@ import scrabble.composants.BoutonMelanger;
 
 public class ActionsVue extends HBox {
     private final ChevaletVue chevalet;
+    private final BoutonMelanger boutonMelanger;
 
     public ActionsVue() {
         super();
@@ -14,13 +15,17 @@ public class ActionsVue extends HBox {
         chevalet = new ChevaletVue();
         setMargin(chevalet, new Insets(0, 0, 0, 32));
 
-        BoutonMelanger melangerBouton = new BoutonMelanger();
-        getChildren().addAll(chevalet, melangerBouton);
+        boutonMelanger = new BoutonMelanger();
+        getChildren().addAll(chevalet, boutonMelanger);
 
         setAlignment(Pos.CENTER);
     }
 
     public ChevaletVue chevalet() {
         return chevalet;
+    }
+
+    public BoutonMelanger boutonMelanger() {
+        return boutonMelanger;
     }
 }

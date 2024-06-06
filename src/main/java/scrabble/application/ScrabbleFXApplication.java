@@ -3,16 +3,16 @@ package scrabble.application;
 import com.pixelduke.window.ThemeWindowManager;
 import com.pixelduke.window.ThemeWindowManagerFactory;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scrabble.controller.JouerMotController;
 import scrabble.controller.PartieController;
 import scrabble.controller.PasserTourController;
-import scrabble.model.Chevalet;
-import scrabble.model.Joueur;
-import scrabble.model.Plateau;
-import scrabble.model.Sac;
+import scrabble.gui.utils.ChevaletVueUtilitaire;
+import scrabble.model.*;
 import scrabble.vues.PartieVue;
+import scrabble.vues.TuileVue;
 
 public class ScrabbleFXApplication extends Application {
     public static void main(String[] args) {
@@ -33,6 +33,7 @@ public class ScrabbleFXApplication extends Application {
         new PartieController(plateau, joueur, sac, root);
         root.partieInformation().jouerUnMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
         root.partieInformation().passerTourBouton().setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
+        root.boutonMelanger().setOnMouseClicked(event -> ChevaletVueUtilitaire.melangerTuiles(root, joueur));
 
         // On met en place la scène.
         Scene scene = new Scene(root, 1180, 982);

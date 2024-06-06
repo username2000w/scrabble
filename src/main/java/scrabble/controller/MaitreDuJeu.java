@@ -9,7 +9,7 @@ import scrabble.model.utils.exception.HorsPlateauException;
 public class MaitreDuJeu {
     private Sac sac;
     private Plateau plateau;
-    private Joueur joueur;
+    private final Joueur joueur;
     private int tour;
 
     public MaitreDuJeu() {

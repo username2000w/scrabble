@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scrabble.controller.JouerMotController;
 import scrabble.controller.PartieController;
+import scrabble.controller.PasserTourController;
 import scrabble.model.Chevalet;
 import scrabble.model.Joueur;
 import scrabble.model.Plateau;
@@ -30,7 +31,8 @@ public class ScrabbleFXApplication extends Application {
 
         // On assigne les controllers aux éléments de la vue.
         new PartieController(plateau, joueur, sac, root);
-        root.partieInformation().recupererJouerMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
+        root.partieInformation().jouerUnMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
+        root.partieInformation().passerTourBouton().setOnMouseClicked(new PasserTourController(root, joueur.getChevalet(), sac));
 
         // On met en place la scène.
         Scene scene = new Scene(root, 1180, 982);

@@ -20,10 +20,11 @@ public class Chevalet {
         }
     }
 
-    public void echanger(Sac sac, int tuileIndex) {
+    public LettreAlphabetFrancais echanger(Sac sac, int tuileIndex) {
         LettreAlphabetFrancais lettre = this.lettres.remove(tuileIndex);
         sac.ajouter(lettre);
         this.piocher(sac);
+        return lettre;
     }
 
     public void retirerLettre(LettreAlphabetFrancais lettre) {

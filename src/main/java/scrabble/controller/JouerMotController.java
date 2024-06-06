@@ -55,7 +55,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
         }
         else {
             TextField motField = new TextField();
-            motField.setPromptText("Lettre");
+            motField.setPromptText("Lettre (ou JOKER)");
             dialog.getDialogPane().setContent(motField);
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.NEXT, ButtonType.FINISH, ButtonType.CANCEL);
 
@@ -75,20 +75,14 @@ public class JouerMotController implements EventHandler<MouseEvent> {
             if (res.startsWith("NEXT@")) {
                 LettreAlphabetFrancais lettre = LettreAlphabetFrancais.valueOf(motField.getText());
 
-                joueur.getChevalet().retirerLettre(lettre);
-                vue.chevalet().retirerLettre(lettre.toString());
-
-                mot.ajouterLettre(lettre);
+                gererLettre(lettre);
                 this.handle(event);
             }
             else if (res.startsWith("FINISH@")) {
                 LettreAlphabetFrancais lettre = LettreAlphabetFrancais.valueOf(motField.getText());
+
                 int NombreLettrePosee = mot.nombreDeLettre();
-
-                joueur.getChevalet().retirerLettre(lettre);
-                vue.chevalet().retirerLettre(lettre.toString());
-
-                mot.ajouterLettre(lettre);
+                gererLettre(lettre);
 
                 if (verificationMot(mot, tour, NombreLettrePosee)) {
                     jouerMotSurPlateau();
@@ -99,7 +93,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                 joueur.getChevalet().remplirChevalet(sac);
                 for (LettreAlphabetFrancais nouvelleLettre : joueur.getChevalet().getLettres()) {
                     if (nouvelleLettre == LettreAlphabetFrancais.JOKER) {
-                        vue.chevalet().ajouterLettre();
+                        vue.chevalet().ajouterLettreJoker();
                     }
                     else {
                         vue.chevalet().ajouterLettre(nouvelleLettre.toString(), nouvelleLettre.getPoints());
@@ -111,6 +105,33 @@ public class JouerMotController implements EventHandler<MouseEvent> {
             else {
                 mot = null;
             }
+        }
+    }
+
+    /**
+     * Retire la lettre du chevalet du joueur et l'ajoute au mot.
+     * On gère le cas du JOKER en même temps.
+     * @param lettre
+     */
+    private void gererLettre(LettreAlphabetFrancais lettre) {
+        joueur.getChevalet().retirerLettre(lettre);
+        if (lettre == LettreAlphabetFrancais.JOKER) {
+            vue.chevalet().retirerLettre(" "); // JOKER = espace vide
+
+            // text input dialog
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Modifier votre joker en une lettre");
+            String lettreJoker = dialog.showAndWait().get();
+
+            if (lettreJoker.length() != 1) {
+                throw new IllegalArgumentException("Le joker doit être remplacé par une seule lettre.");
+            }
+
+            mot.ajouterLettre(LettreAlphabetFrancais.valueOf(lettreJoker));
+        }
+        else {
+            vue.chevalet().retirerLettre(lettre.toString());
+            mot.ajouterLettre(lettre);
         }
     }
 

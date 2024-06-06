@@ -29,11 +29,6 @@ public class BoutonMelanger extends StackPane {
                 new Insets(1)
         )));
 
-        setOnMouseClicked(event -> {
-            // TODO: Refactor dans un controller.
-            System.out.println("TODO: Mélanger les tuiles du chevalet");
-        });
-
         setBorder(new Border(new BorderStroke(
                 Color.rgb(130, 27, 32),
                 BorderStrokeStyle.SOLID,

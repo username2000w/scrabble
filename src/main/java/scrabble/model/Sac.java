@@ -45,7 +45,7 @@ public class Sac {
 
         Tuile tuile = this.tuiles.remove(0);
         melanger();
-        return tuile.lettre();
+        return tuile;
     }
 
     /**

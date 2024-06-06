@@ -20,10 +20,6 @@ public class Tuile {
         this.lettre = lettre;
     }
 
-    public LettreAlphabetFrancais lettre() {
-        return lettre;
-    }
-
     public boolean estJoker() {
     	return this instanceof Joker;
     }

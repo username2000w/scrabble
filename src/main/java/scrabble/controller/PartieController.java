@@ -10,8 +10,8 @@ public class PartieController {
         Chevalet chevalet = joueur.getChevalet();
         ChevaletVue chevaletVue = vue.chevalet();
 
-        for (LettreAlphabetFrancais lettre : chevalet.getLettres()) {
-            chevaletVue.ajouterLettre(lettre.toString(), lettre.getPoints());
+        for (Tuile tuile : chevalet.getTuiles()) {
+            chevaletVue.ajouterLettre(tuile);
         }
     }
 }

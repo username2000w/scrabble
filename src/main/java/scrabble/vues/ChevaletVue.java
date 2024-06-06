@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import scrabble.model.Tuile;
 
 public class ChevaletVue extends HBox {
     public ChevaletVue() {
@@ -40,20 +41,12 @@ public class ChevaletVue extends HBox {
         setTranslateY(16);
     }
 
-    public void ajouterLettre (String lettre, int valeur) {
-        getChildren().add(new TuileVue(lettre, valeur));
+    public void ajouterLettre (Tuile tuile) {
+        getChildren().add(new TuileVue(tuile.toString(), tuile.getPoints()));
     }
 
-    public void ajouterLettreA (String lettre, int valeur, int index) {
-        getChildren().set(index, new TuileVue(lettre, valeur));
-    }
-
-    public void ajouterLettreJokerA (int index) {
-        getChildren().set(index, new TuileVue(" "));
-    }
-
-    public void ajouterLettreJoker () {
-        getChildren().add(new TuileVue(" "));
+    public void ajouterLettreA (Tuile tuile, int index) {
+        getChildren().set(index, new TuileVue(tuile.toString(), tuile.getPoints()));
     }
 
     public void retirerLettre (String lettre) {

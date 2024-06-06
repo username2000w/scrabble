@@ -2,14 +2,14 @@ package scrabble.controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import scrabble.gui.Console;
 import scrabble.model.Chevalet;
-import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
+import scrabble.model.Tuile;
 import scrabble.vues.PartieVue;
 import scrabble.vues.TuileVue;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PasserTourController implements EventHandler<MouseEvent> {
     private final PartieVue vue;
@@ -26,8 +26,8 @@ public class PasserTourController implements EventHandler<MouseEvent> {
 
             selection.forEach(tuileVue -> {
                 int tuileIndex = vue.chevalet().getChildren().indexOf(tuileVue);
-                LettreAlphabetFrancais lettre = chevalet.echanger(sac, tuileIndex);
-                vue.chevalet().ajouterLettreA(lettre.toString(), lettre.getPoints(), tuileIndex);
+                Tuile tuile = chevalet.echanger(sac, tuileIndex);
+                vue.chevalet().ajouterLettreA(tuile, tuileIndex);
 
             });
 
@@ -71,12 +71,12 @@ public class PasserTourController implements EventHandler<MouseEvent> {
         if (selection.contains(tuile)) {
             // On retire la tuile de la sélection.
             selection.remove(tuile);
-            System.out.println("Tuile désélectionnée : " + tuile.lettre());
+            Console.message("Tuile désélectionnée : " + tuile.lettre());
         }
         else {
             // On ajoute la tuile à la sélection.
             selection.add(tuile);
-            System.out.println("Tuile sélectionnée : " + tuile.lettre());
+            Console.message("Tuile sélectionnée : " + tuile.lettre());
         }
     };
 }

@@ -73,31 +73,30 @@ public class JouerMotController implements EventHandler<MouseEvent> {
 
             String res = dialog.showAndWait().get();
             if (res.startsWith("NEXT@")) {
-                LettreAlphabetFrancais lettre = LettreAlphabetFrancais.valueOf(motField.getText());
+                String lettre = motField.getText();
+                if (lettre.equals("JOKER")) {
+                    lettre = " "; // = JOKER
+                }
 
-                gererLettre(lettre);
+                Tuile tuile = joueur.getChevalet().getTuileAvecLettre(lettre);
+                if (tuile != null) gererLettre(tuile);
                 this.handle(event);
             }
             else if (res.startsWith("FINISH@")) {
-                LettreAlphabetFrancais lettre = LettreAlphabetFrancais.valueOf(motField.getText());
+                Tuile tuile = joueur.getChevalet().getTuileAvecLettre(motField.getText());
 
-                int NombreLettrePosee = mot.nombreDeLettre();
-                gererLettre(lettre);
+                int nombreLettrePosee = mot.nombreDeLettre();
+                gererLettre(tuile);
 
-                if (verificationMot(mot, tour, NombreLettrePosee)) {
+                if (verificationMot(mot, tour, nombreLettrePosee)) {
                     jouerMotSurPlateau();
                 }
 
                 mot = null;
                 vue.chevalet().getChildren().clear();
                 joueur.getChevalet().remplirChevalet(sac);
-                for (LettreAlphabetFrancais nouvelleLettre : joueur.getChevalet().getLettres()) {
-                    if (nouvelleLettre == LettreAlphabetFrancais.JOKER) {
-                        vue.chevalet().ajouterLettreJoker();
-                    }
-                    else {
-                        vue.chevalet().ajouterLettre(nouvelleLettre.toString(), nouvelleLettre.getPoints());
-                    }
+                for (Tuile nouvelleTuile : joueur.getChevalet().getTuiles()) {
+                    vue.chevalet().ajouterLettre(nouvelleTuile);
                 }
 
                 tour++;
@@ -111,11 +110,11 @@ public class JouerMotController implements EventHandler<MouseEvent> {
     /**
      * Retire la lettre du chevalet du joueur et l'ajoute au mot.
      * On gère le cas du JOKER en même temps.
-     * @param lettre
+     * @param tuile
      */
-    private void gererLettre(LettreAlphabetFrancais lettre) {
-        joueur.getChevalet().retirerLettre(lettre);
-        if (lettre == LettreAlphabetFrancais.JOKER) {
+    private void gererLettre(Tuile tuile) {
+        joueur.getChevalet().retirerLettre(tuile);
+        if (tuile.estJoker()) {
             vue.chevalet().retirerLettre(" "); // JOKER = espace vide
 
             // text input dialog
@@ -127,11 +126,14 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                 throw new IllegalArgumentException("Le joker doit être remplacé par une seule lettre.");
             }
 
-            mot.ajouterLettre(LettreAlphabetFrancais.valueOf(lettreJoker));
+            Joker joker = (Joker) tuile;
+            joker.setLettre(LettreAlphabetFrancais.valueOf(lettreJoker));
+
+            mot.ajouterLettre(joker);
         }
         else {
-            vue.chevalet().retirerLettre(lettre.toString());
-            mot.ajouterLettre(lettre);
+            vue.chevalet().retirerLettre(tuile.toString());
+            mot.ajouterLettre(tuile);
         }
     }
 
@@ -147,13 +149,13 @@ public class JouerMotController implements EventHandler<MouseEvent> {
         int ligne = coordonnees.getLigne();
         int colonne = coordonnees.getColonne();
 
-        for (LettreAlphabetFrancais lettre : mot.getMot()) {
+        for (Tuile tuile : mot.getMot()) {
             try {
                 if (Boolean.TRUE.equals(plateau.getPlateau()[ligne][colonne].estVide())) {
                     Coordonee pos = new Coordonee(ligne, colonne);
 
-                    plateau.placerlettre(lettre, pos);
-                    vue.plateau().caseSitueA(pos).assigner(lettre.toString(), lettre.getPoints());
+                    plateau.placerTuile(tuile, pos);
+                    vue.plateau().caseSitueA(pos).assigner(tuile.toString(), tuile.getPoints());
                 } else {
                     if (directionMot.equals(Direction.HORIZONTAL)) colonne++;
                     else ligne++;
@@ -161,8 +163,8 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                     System.out.println("Une lettre est déjà présente à cet endroit, on décale la lettre.");
                     Coordonee pos = new Coordonee(ligne, colonne);
 
-                    plateau.placerlettre(lettre, pos);
-                    vue.plateau().caseSitueA(pos).assigner(lettre.toString(), lettre.getPoints());
+                    plateau.placerTuile(tuile, pos);
+                    vue.plateau().caseSitueA(pos).assigner(tuile.toString(), tuile.getPoints());
                 }
             } catch (HorsPlateauException e) {
                 throw new RuntimeException(e);

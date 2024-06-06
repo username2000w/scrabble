@@ -15,7 +15,9 @@ public class ChevaletVue extends HBox {
         setMaxWidth(576);
         setMinWidth(576);
 
-        setMaxHeight(96);
+        setMaxHeight(116);
+        setMinHeight(116);
+
         setPadding(new Insets(16, 38, 32, 18));
 
         setBackground(new Background(new BackgroundFill(

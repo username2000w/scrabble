@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.HorsPlateauException;
 import scrabble.vues.PartieVue;
 import scrabble.vues.PlateauCaseTuile;
@@ -91,6 +92,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
 
                 if (verificationMot(mot, tour, nombreLettrePosee)) {
                     jouerMotSurPlateau();
+                    modifierScore();
                 }
 
                 mot = null;
@@ -244,5 +246,12 @@ public class JouerMotController implements EventHandler<MouseEvent> {
             }
         }
         return false;
+    }
+
+    private void modifierScore() {
+        int scoreMot = Score.calculerScoreMot(mot, plateau);
+        int scoreActuel = Integer.parseInt(vue.partieInformation().scoreLabel().getText());
+
+        vue.partieInformation().scoreLabel().setText(String.valueOf(scoreActuel + scoreMot));
     }
 }

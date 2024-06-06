@@ -14,6 +14,6 @@ public class Joker extends Tuile {
 
     @Override
     public String toString() {
-    	return lettre == null ? "JOKER" : lettre.afficherLettre();
+    	return lettre == null ? " " : lettre.afficherLettre();
     }
 }

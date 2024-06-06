@@ -41,7 +41,9 @@ public class Sac {
             throw new SacVideException("Le sac est vide.");
         }
 
-        return this.tuiles.remove(0);
+        Tuile tuile = this.tuiles.remove(0);
+        melanger();
+        return tuile;
     }
 
     /**
@@ -49,6 +51,7 @@ public class Sac {
      */
     public void ajouter(Tuile tuile) {
         tuiles.add(tuile);
+        melanger();
     }
 
     public int nombreDeTuiles() {

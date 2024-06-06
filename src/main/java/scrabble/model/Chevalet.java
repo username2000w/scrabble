@@ -3,6 +3,7 @@ package scrabble.model;
 import scrabble.model.utils.exception.SacVideException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Chevalet {
     private final ArrayList<Tuile> tuiles;
@@ -20,10 +21,11 @@ public class Chevalet {
         }
     }
 
-    public void echanger(Sac sac, int tuileIndex) {
+    public Tuile echanger(Sac sac, int tuileIndex) {
         Tuile tuile = this.tuiles.remove(tuileIndex);
         sac.ajouter(tuile);
         this.piocher(sac);
+        return tuile;
     }
 
     public void retirerLettre(Tuile lettre) {

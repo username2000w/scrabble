@@ -1,6 +1,7 @@
 package scrabble.vues;
 
 import javafx.scene.layout.*;
+import scrabble.composants.BoutonMelanger;
 import scrabble.controller.PartieController;
 import scrabble.gui.utils.ImageUtilitaire;
 
@@ -61,5 +62,9 @@ public class PartieVue extends HBox {
 
     public ChevaletVue chevalet() {
         return actions.chevalet();
+    }
+
+    public BoutonMelanger boutonMelanger() {
+        return actions.boutonMelanger();
     }
 }

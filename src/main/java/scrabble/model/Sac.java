@@ -43,7 +43,9 @@ public class Sac {
             throw new SacVideException("Le sac est vide.");
         }
 
-        return this.lettres.remove(0);
+        LettreAlphabetFrancais lettre = this.lettres.remove(0);
+        melanger();
+        return lettre;
     }
 
     /**
@@ -51,6 +53,7 @@ public class Sac {
      */
     public void ajouter(LettreAlphabetFrancais tuile) {
         lettres.add(tuile);
+        melanger();
     }
 
     public int getNombreDeTuiles() {

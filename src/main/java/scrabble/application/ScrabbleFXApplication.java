@@ -32,7 +32,7 @@ public class ScrabbleFXApplication extends Application {
         // On assigne les controllers aux éléments de la vue.
         new PartieController(plateau, joueur, sac, root);
         root.partieInformation().jouerUnMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
-        root.partieInformation().passerTourBouton().setOnMouseClicked(new PasserTourController(root, joueur.getChevalet(), sac));
+        root.partieInformation().passerTourBouton().setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
 
         // On met en place la scène.
         Scene scene = new Scene(root, 1180, 982);

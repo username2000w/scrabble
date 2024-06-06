@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 public class SacDeJeuFrancais {
 
-    private ArrayList<LettreAlphabetFrancais> lettres = new ArrayList<>();
+    private final ArrayList<Tuile> tuiles = new ArrayList<>();
 
     private void faireTuilespour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
         for (int i = 0; i < nombreDeTuile; i++) {
-            this.lettres.add(lettre);
+            this.tuiles.add(new Tuile(lettre));
+        }
+    }
+
+    private void faireTuileJoker(int nombreDeTuile) {
+        for (int i = 0; i < nombreDeTuile; i++) {
+            this.tuiles.add(new Joker());
         }
     }
 
@@ -33,7 +39,7 @@ public class SacDeJeuFrancais {
         this.faireTuilespour(2, LettreAlphabetFrancais.F);
         this.faireTuilespour(2, LettreAlphabetFrancais.H);
         this.faireTuilespour(2, LettreAlphabetFrancais.V);
-        this.faireTuilespour(2, LettreAlphabetFrancais.JOKER);
+        this.faireTuileJoker(2);
         this.faireTuilespour(1, LettreAlphabetFrancais.J);
         this.faireTuilespour(1, LettreAlphabetFrancais.Q);
         this.faireTuilespour(1, LettreAlphabetFrancais.K);
@@ -43,8 +49,8 @@ public class SacDeJeuFrancais {
         this.faireTuilespour(1, LettreAlphabetFrancais.Z);
     }
 
-    public ArrayList<LettreAlphabetFrancais> getLettres() {
-        return this.lettres;
+    public ArrayList<Tuile> getLettres() {
+        return this.tuiles;
     }
 
 }

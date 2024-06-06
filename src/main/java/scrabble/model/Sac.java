@@ -9,27 +9,27 @@ import java.util.ArrayList;
  * qui sont ensuite mélangées.
  */
 public class Sac {
-    private ArrayList<LettreAlphabetFrancais> lettres;
+    private ArrayList<Tuile> tuiles;
 
     private void melanger() {
-        for (int i = 0; i < this.lettres.size(); i++) {
-            int index = (int) (Math.random() * this.lettres.size());
-            LettreAlphabetFrancais temp = this.lettres.get(i);
-            this.lettres.set(i, this.lettres.get(index));
-            this.lettres.set(index, temp);
+        for (int i = 0; i < this.tuiles.size(); i++) {
+            int index = (int) (Math.random() * this.tuiles.size());
+            Tuile temp = this.tuiles.get(i);
+            this.tuiles.set(i, this.tuiles.get(index));
+            this.tuiles.set(index, temp);
         }
     }
 
     public void viderSac() {
-        this.lettres.clear();
+        this.tuiles.clear();
     }
 
     public Sac() {
-        this.lettres = new ArrayList<>();
+        this.tuiles = new ArrayList<>();
 
         // On ajout tous les jetons dans le sac.
         SacDeJeuFrancais sacDeJeuFrancais = new SacDeJeuFrancais();
-        this.lettres = new ArrayList<>(sacDeJeuFrancais.getLettres());
+        this.tuiles = new ArrayList<>(sacDeJeuFrancais.getLettres());
 
         // On mélange le contenu du sac.
         this.melanger();
@@ -38,25 +38,25 @@ public class Sac {
     /**
      * Piocher la première tuile actuellement dans le sac.
      */
-    public LettreAlphabetFrancais piocher() throws SacVideException {
-        if (this.lettres.isEmpty()) {
+    public Tuile piocher() throws SacVideException {
+        if (this.tuiles.isEmpty()) {
             throw new SacVideException("Le sac est vide.");
         }
 
-        LettreAlphabetFrancais lettre = this.lettres.remove(0);
+        Tuile tuile = this.tuiles.remove(0);
         melanger();
-        return lettre;
+        return tuile.lettre();
     }
 
     /**
      * Ajouter une tuile à la fin du sac.
      */
-    public void ajouter(LettreAlphabetFrancais tuile) {
-        lettres.add(tuile);
+    public void ajouter(Tuile tuile) {
+        tuiles.add(tuile);
         melanger();
     }
 
     public int getNombreDeTuiles() {
-        return this.lettres.size();
+        return this.tuiles.size();
     }
 }

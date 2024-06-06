@@ -1,20 +1,17 @@
 package scrabble.model;
 
-import scrabble.model.utils.exception.HorsPlateauException;
-
 /**
  * Case du plateau de jeu.
- *
  * Celle-ci peut contenir une tuile et un bonus.
  * Lors de l'instanciation, la case est vide (`null`).
  */
 public class Case {
 	private final Bonus bonus;
-	private LettreAlphabetFrancais lettre;
+	private Tuile tuile;
 
 	public Case(Bonus bonus) {
 		this.bonus = bonus;
-		this.lettre = null;
+		this.tuile = null;
 	}
 
 	public Case() {
@@ -26,25 +23,16 @@ public class Case {
    * @return `true` si la case est vide, `false` sinon.
    */
 	public Boolean estVide() {
-		return this.lettre == null;
+		return this.tuile == null;
 	}
 
-	public LettreAlphabetFrancais getLettre() {
+	public Tuile getTuile() {
 		if (Boolean.TRUE.equals(this.estVide())) return null;
-		return this.lettre;
+		return this.tuile;
 	}
 
-	public void setLettre(LettreAlphabetFrancais lettre) {
-		this.lettre = lettre;
-	}
-
-	public void setLettreJoker(String affichage, int comptJoker) {
-		this.lettre = LettreAlphabetFrancais.JOKER;
-		if (comptJoker == 0) {
-			this.lettre.setJoker1(affichage);
-		} else {
-			this.lettre.setJoker2(affichage);
-		}
+	public void setTuile(Tuile tuile) {
+		this.tuile = tuile;
 	}
 
 	public Bonus getBonus() {
@@ -52,7 +40,7 @@ public class Case {
 	}
 	
 	public void viderCase() {
-        this.lettre = null; // Supprime la lettre de la case, rendant la case vide
+        this.tuile = null; // Supprime la lettre de la case, rendant la case vide
     }
 }
 

@@ -1,36 +1,89 @@
 package scrabble.model;
 
+import javafx.scene.layout.CornerRadii;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.exception.HorsPlateauException;
+
+import java.util.ArrayList;
 
 public class Plateau {
 	public static final int TAILLE_PLATEAU_HORIZONTALE = 15;
 	public static final int TAILLE_PLATEAU_VERTICALE = 15;
-
 	private Case[][] plateau = new Case[TAILLE_PLATEAU_VERTICALE][TAILLE_PLATEAU_HORIZONTALE];
+
+	public static final Coordonee[] COORDONEES_ETOILE = {
+			new Coordonee(TAILLE_PLATEAU_VERTICALE/2, TAILLE_PLATEAU_VERTICALE/2)
+	};
+	public static final Coordonee[] COORDONEES_LETTRE_DOUBLE_SYMETRIQUE = {
+			new Coordonee(0, 3),
+			new Coordonee(0, 11),
+			new Coordonee(3, 7),
+			new Coordonee(3, 14),
+			new Coordonee(11, 7),
+			new Coordonee(11, 14),
+			new Coordonee(2, 6),
+			new Coordonee(2, 8),
+			new Coordonee(6, 6),
+			new Coordonee(6, 8),
+			new Coordonee(6, 12),
+			new Coordonee(8, 8),
+			new Coordonee(8, 12),
+	};
+	public static final Coordonee[] COORDONEES_LETTRE_TRIPLE_SYMETRIQUE = {
+			new Coordonee(1, 5),
+			new Coordonee(1, 9),
+			new Coordonee(5, 5),
+			new Coordonee(5, 9),
+			new Coordonee(5, 13),
+			new Coordonee(9, 9),
+			new Coordonee(9, 13),
+	};
+	public static final Coordonee[] COORDONEES_MOT_DOUBLE_SYMETRIQUE = {
+			new Coordonee(1, 1),
+			new Coordonee(2, 2),
+			new Coordonee(3, 3),
+			new Coordonee(4, 4),
+			new Coordonee(1, 13),
+			new Coordonee(2, 12),
+			new Coordonee(3, 11),
+			new Coordonee(4, 10),
+			new Coordonee(10, 10),
+			new Coordonee(11, 11),
+			new Coordonee(12, 12),
+			new Coordonee(13, 13),
+	};
+	public static final Coordonee[] COORDONEES_MOT_TRIPLE_SYMETRIQUE = {
+			new Coordonee(0, 0),
+			new Coordonee(0, 7),
+			new Coordonee(0, 14),
+			new Coordonee(7, 14),
+			new Coordonee(14, 14),
+	};
 
 	public Plateau() {
 		for (int ligne = 0; ligne < TAILLE_PLATEAU_VERTICALE; ligne++) {
 			for (int colonne = 0; colonne < TAILLE_PLATEAU_HORIZONTALE; colonne++) {
-				if (colonne == TAILLE_PLATEAU_VERTICALE/2 && ligne == TAILLE_PLATEAU_HORIZONTALE/2) {
-					plateau[ligne][colonne] = new Case(Bonus.ETOILE);
-				}
-				else if (colonne == 3 && ligne == 0 || colonne == 11 && ligne == 0 || colonne == 0 && ligne == 3 || colonne == 7 && ligne == 3 || colonne == 14 && ligne == 3 || colonne == 0 && ligne == 11 || colonne == 7 && ligne == 11 || colonne == 14 && ligne == 11 || colonne == 3 && ligne == 14 || colonne == 11 && ligne == 14 || colonne == 6 && ligne == 2 || colonne == 8 && ligne == 2 || colonne == 2 && ligne == 6 || colonne == 6 && ligne == 6 || colonne == 8 && ligne == 6 || colonne == 12 && ligne == 6 || colonne == 2 && ligne == 8 || colonne == 6 && ligne == 8 || colonne == 8 && ligne == 8 || colonne == 12 && ligne == 8 || colonne == 6 && ligne == 12 || colonne == 8 && ligne == 12 || colonne == 3 && ligne == 7 || colonne == 11 && ligne == 7 ) {
-					plateau[ligne][colonne] = new Case(Bonus.LETTRE_DOUBLE);
-				}
-				else if (colonne == 0 && ligne == 0 || colonne == 7 && ligne == 0 || colonne == 14 && ligne == 0 || colonne == 0 && ligne == 7 || colonne == 14 && ligne == 7 || colonne == 0 && ligne == 14 || colonne == 7 && ligne == 14 || colonne == 14 && ligne == 14) {
-					plateau[ligne][colonne] = new Case(Bonus.MOT_TRIPLE);
-				}
-				else if (colonne == 5 && ligne == 1 || colonne == 9 && ligne == 1 || colonne == 1 && ligne == 5 || colonne == 5 && ligne == 5 || colonne == 9 && ligne == 5 || colonne == 13 && ligne == 5 || colonne == 1 && ligne == 9 || colonne == 5 && ligne == 9 || colonne == 9 && ligne == 9 || colonne == 13 && ligne == 9 || colonne == 5 && ligne == 13 || colonne == 9 && ligne == 13) {
-					plateau[ligne][colonne] = new Case(Bonus.LETTRE_TRIPLE);
-				}
-				else if (colonne == 1 && ligne == 1 || colonne == 13 && ligne == 1 || colonne == 2 && ligne == 2 || colonne == 12 && ligne == 2 || colonne == 3 && ligne == 3 || colonne == 11 && ligne == 3 || colonne == 4 && ligne == 4 || colonne == 10 && ligne == 4 || colonne == 7 && ligne == 7 || colonne == 1 && ligne == 13 || colonne == 13 && ligne == 13 || colonne == 2 && ligne == 12 || colonne == 12 && ligne == 12 || colonne == 3 && ligne == 11 || colonne == 11 && ligne == 11 || colonne == 4 && ligne == 10 || colonne == 10 && ligne == 10) {
-					plateau[ligne][colonne] = new Case(Bonus.MOT_DOUBLE);
-				}
-				else {
-					plateau[ligne][colonne] = new Case();
-				}
+				plateau[ligne][colonne] = new Case();
 			}
+		}
+		for (Coordonee coordonee : COORDONEES_ETOILE) {
+			plateau[coordonee.ligne()][coordonee.colonne()] = new Case(Bonus.ETOILE);
+		}
+		for (Coordonee coordonee : COORDONEES_LETTRE_DOUBLE_SYMETRIQUE) {
+			plateau[coordonee.ligne()][coordonee.colonne()] = new Case(Bonus.LETTRE_DOUBLE);
+			plateau[coordonee.colonne()][coordonee.ligne()] = new Case(Bonus.LETTRE_DOUBLE);
+		}
+		for (Coordonee coordonee : COORDONEES_LETTRE_TRIPLE_SYMETRIQUE) {
+			plateau[coordonee.ligne()][coordonee.colonne()] = new Case(Bonus.LETTRE_TRIPLE);
+			plateau[coordonee.colonne()][coordonee.ligne()] = new Case(Bonus.LETTRE_TRIPLE);
+		}
+		for (Coordonee coordonee : COORDONEES_MOT_DOUBLE_SYMETRIQUE) {
+			plateau[coordonee.ligne()][coordonee.colonne()] = new Case(Bonus.MOT_DOUBLE);
+			plateau[coordonee.colonne()][coordonee.ligne()] = new Case(Bonus.MOT_DOUBLE);
+		}
+		for (Coordonee coordonee : COORDONEES_MOT_TRIPLE_SYMETRIQUE) {
+			plateau[coordonee.ligne()][coordonee.colonne()] = new Case(Bonus.MOT_TRIPLE);
+			plateau[coordonee.colonne()][coordonee.ligne()] = new Case(Bonus.MOT_TRIPLE);
 		}
 	}
 

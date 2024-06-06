@@ -1,6 +1,5 @@
 package scrabble.test;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scrabble.model.Bonus;
 import scrabble.model.Case;

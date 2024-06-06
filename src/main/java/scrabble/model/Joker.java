@@ -1,7 +1,5 @@
 package scrabble.model;
 
-import scrabble.gui.Console;
-
 public class Joker extends Tuile {
     public Joker() {
         super(null);

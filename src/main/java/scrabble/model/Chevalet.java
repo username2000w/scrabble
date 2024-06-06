@@ -3,7 +3,6 @@ package scrabble.model;
 import scrabble.model.utils.exception.SacVideException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Chevalet {
     private final ArrayList<Tuile> tuiles;

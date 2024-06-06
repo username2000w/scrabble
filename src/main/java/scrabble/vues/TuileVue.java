@@ -10,7 +10,7 @@ public class TuileVue extends Pane {
     private final String lettre;
     private final int points;
 
-    private static final int TUILE_TAILLE_PX = 64;
+    public static final int TUILE_TAILLE_PX = 64;
     private static final Color TUILE_BORD_COULEUR = Color.rgb(107, 10, 26);
 
     public TuileVue (String lettre, int points) {

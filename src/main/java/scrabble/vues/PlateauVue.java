@@ -1,7 +1,11 @@
 package scrabble.vues;
 
 import javafx.beans.binding.DoubleExpression;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import scrabble.gui.utils.ImageUtilitaire;
 import scrabble.model.utils.Coordonee;
 
 import java.util.HashMap;
@@ -44,8 +48,11 @@ public class PlateauVue extends Pane {
                     .add(tailleCase.add(2).multiply(ligne))
                 );
 
+                Coordonee coordonee = new Coordonee(ligne, colonne);
+                initialiserCaseSpecialPlateau(coordonee, casePlateau);
+
                 // On ajoute la case dans la hashmap plateau.
-                cases.put(new Coordonee(ligne, colonne), casePlateau);
+                cases.put(coordonee, casePlateau);
             }
         }
 
@@ -59,5 +66,27 @@ public class PlateauVue extends Pane {
      */
     public PlateauCaseVue caseSitueA(Coordonee coordonee) {
         return cases.get(coordonee);
+    }
+
+    /**
+     * Permet d'initialiser le contenu d'une case située à une coordonnée donnée.
+     * Ce contenu est persistant et est toujours en bas de la pile de la case.
+     */
+    private void initialiserCaseSpecialPlateau(Coordonee coordonee, PlateauCaseVue casePlateau) {
+        // On ajoute une étoile au centre du plateau.
+        if (coordonee.equals(new Coordonee(7, 7))) {
+            StackPane stackPane = new StackPane();
+            stackPane.minWidthProperty().bind(casePlateau.widthProperty());
+            stackPane.minHeightProperty().bind(casePlateau.heightProperty());
+
+            stackPane.getChildren().add(new ImageView(ImageUtilitaire.chargerImage("etoile.png")));
+            stackPane.setBackground(new Background(new BackgroundFill(
+                Color.rgb(204, 102, 102),
+                new CornerRadii(4),
+                null
+            )));
+
+            casePlateau.getChildren().add(stackPane);
+        }
     }
 }

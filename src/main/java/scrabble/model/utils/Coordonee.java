@@ -40,4 +40,20 @@ public class Coordonee {
         Coordonee other = (Coordonee) obj;
         return Objects.equals(colonne, other.colonne) && Objects.equals(ligne, other.ligne);
     }
+
+    public Coordonee avancer(Direction direction) {
+        return switch (direction) {
+            case HORIZONTAL -> new Coordonee(ligne, colonne + 1);
+            case VERTICAL -> new Coordonee(ligne + 1, colonne);
+            default -> throw new IllegalArgumentException("Direction inconnue");
+        };
+    }
+
+    public Coordonee reculer(Direction direction) {
+        return switch (direction) {
+            case HORIZONTAL -> new Coordonee(ligne, colonne - 1);
+            case VERTICAL -> new Coordonee(ligne - 1, colonne);
+            default -> throw new IllegalArgumentException("Direction inconnue");
+        };
+    }
 }

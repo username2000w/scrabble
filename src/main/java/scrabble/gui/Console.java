@@ -27,19 +27,19 @@ public class Console {
     }
 
     public static void afficherPlateau(Plateau plateau) {
-        for (int i = 0; i < Plateau.TAILLE_PLATEAU_VERTICALE; i++) {
-            for (int j = 0; j < Plateau.TAILLE_PLATEAU_HORIZONTALE; j++) {
-                Tuile tuile = plateau.plateau()[i][j].tuile();
-                Bonus bonus = plateau.plateau()[i][j].bonus();
+        for (int ligne = 0; ligne < Plateau.TAILLE_PLATEAU_VERTICALE; ligne++) {
+            for (int colonne = 0; colonne < Plateau.TAILLE_PLATEAU_HORIZONTALE; colonne++) {
+                Tuile tuile = plateau.plateau()[ligne][colonne].tuile();
+                Bonus bonus = plateau.plateau()[ligne][colonne].bonus();
 
                 if (tuile == null) {
                     if (bonus == null) { // si la case est vide, on affiche un carré vide.
                         System.out.print("□ ");
                     } else {
-                    	System.out.print(bonus);                    	
+                    	System.out.print(bonus);
                     }
                 } else {
-                	System.out.print(tuile.toString() + " ");
+                	System.out.print(tuile + " ");
                 }
             }
             // Retour à la ligne.

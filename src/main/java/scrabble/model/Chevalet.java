@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Chevalet {
     private final ArrayList<Tuile> tuiles;
-    private static final int TAILLE = 7;
+    public static final int TAILLE = 7;
 
     public Chevalet() {
         this.tuiles = new ArrayList<>();

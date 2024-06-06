@@ -53,46 +53,45 @@ public class MaitreDuJeu {
 
     public int calculerScoreMot(Mot mot) {
         Coordonee coordoneeDebutMot = mot.coordoneeDebut();
-        int ligneDebutMot = coordoneeDebutMot.ligne();
-        int colonneDebutMot = coordoneeDebutMot.colonne();
         Direction directionMot = mot.direction();
-        int scoreMot = 0;
         Case[][] plateau = this.plateau.plateau();
 
-        if (directionMot.equals(Direction.HORIZONTAL)) {
-            for (int colonne = colonneDebutMot; !plateau[ligneDebutMot][colonne].estVide(); colonne++) {
-                scoreMot += plateau[ligneDebutMot][colonne].tuile().points();
+        int scoreMot = 0;
 
-                if (!plateau[ligneDebutMot - 1][colonne].estVide()) {
-                    for (int ligne = ligneDebutMot; !plateau[ligne - 1][colonne].estVide(); ligne--) {
-                        scoreMot += plateau[ligne - 1][colonne].tuile().points();
-                    }
-                }
+        // Calcul du score du mot de base avec multiplicateurs
+        int multiplicateurMot = 1;
 
-                if (!plateau[ligneDebutMot + 1][colonne].estVide()) {
-                    for (int ligne = ligneDebutMot; !plateau[ligne + 1][colonne].estVide(); ligne++) {
-                        scoreMot += plateau[ligne + 1][colonne].tuile().points();
-                    }
+        for (Coordonee coordonee = coordoneeDebutMot; !plateau[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
+            int multiplicateurLettre = 1;
+
+            if (plateau[coordonee.ligne()][coordonee.colonne()].bonus() != null) {
+                multiplicateurLettre = plateau[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurLettre();
+                multiplicateurMot = plateau[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurMot();
+            }
+
+            scoreMot += plateau[coordonee.ligne()][coordonee.colonne()].tuile().points() * multiplicateurLettre;
+        }
+        scoreMot *= multiplicateurMot;
+
+        // Calcul des mots formés par le mot de base avec multiplicateurs
+        for (Coordonee coordonee = coordoneeDebutMot; !plateau[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
+            Coordonee coordoneeCoteDroit = coordonee.avancer(directionMot.oppose());
+            if (!this.plateau.casePlateau(coordoneeCoteDroit).estVide()) {
+                for (Coordonee coordoneeMotCote = coordoneeCoteDroit; !this.plateau.casePlateau(coordoneeMotCote).estVide(); coordoneeMotCote = coordoneeMotCote.avancer(directionMot.oppose())) {
+                    scoreMot += this.plateau.casePlateau(coordoneeMotCote).tuile().points();
                 }
             }
-        } else {
-            for (int ligne = ligneDebutMot; !plateau[ligne][colonneDebutMot].estVide(); ligne++) {
-                scoreMot += plateau[ligne][colonneDebutMot].tuile().points();
 
-                if (!plateau[ligne][colonneDebutMot - 1].estVide()) {
-                    for (int colonne = colonneDebutMot; !plateau[ligne][colonne - 1].estVide(); colonne--) {
-                        scoreMot += plateau[ligne][colonne - 1].tuile().points();
-                    }
-                }
-
-                if (!plateau[ligne][colonneDebutMot + 1].estVide()) {
-                    for (int colonne = colonneDebutMot; !plateau[ligne][colonne + 1].estVide(); colonne++) {
-                        scoreMot += plateau[ligne][colonne + 1].tuile().points();
-                    }
+            Coordonee coordoneeCoteGauche = coordonee.reculer(directionMot.oppose());
+            if (!this.plateau.casePlateau(coordoneeCoteGauche).estVide()) {
+                for (Coordonee coordoneeMotCote = coordoneeCoteGauche; !this.plateau.casePlateau(coordoneeMotCote).estVide(); coordoneeMotCote = coordoneeMotCote.reculer(directionMot.oppose())) {
+                    scoreMot += this.plateau.casePlateau(coordoneeMotCote).tuile().points();
                 }
             }
         }
-        return scoreMot;
+
+        int scrabble = mot.nombreDeLettre() == Chevalet.TAILLE ? 50 : 0;
+        return scoreMot + scrabble;
     }
 
     public void jouerLettre(Plateau plateau, Joueur joueur, int NombreLettrePosee, Mot mot) {

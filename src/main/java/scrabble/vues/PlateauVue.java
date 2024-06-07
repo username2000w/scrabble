@@ -106,6 +106,24 @@ public class PlateauVue extends Pane {
         casePlateau.poser(stackPane);
     }
 
+    /**
+     * @param caseVue La case dont l'on veut la position.
+     * @return `null` si la case n'est pas dans la HashMap.
+     */
+    public Coordonee coordoneeDeCaseVue (PlateauCaseVue caseVue) {
+        Coordonee coordonee = null;
+
+        for (Map.Entry<Coordonee, PlateauCaseVue> caseActuelle : cases.entrySet()) {
+            // On a retrouvé la case dans le plateau.
+            if (caseVue.equals(caseActuelle.getValue())) {
+                coordonee = caseActuelle.getKey();
+                break; // On sort de la boucle.
+            }
+        }
+
+        return coordonee;
+    }
+
     private void initialiserCaseAvecTexte (PlateauCaseVue casePlateau, Color couleur, String texte) {
         StackPane stackPane = new StackPane();
         Label label = new Label(texte);

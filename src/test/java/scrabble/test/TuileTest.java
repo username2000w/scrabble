@@ -18,8 +18,11 @@ public class TuileTest {
 
     @Test
     public void testPoints() {
-        Tuile tuile = new Tuile(LettreAlphabetFrancais.B);
-        assertEquals(3, tuile.points());
+        Tuile tuileB = new Tuile(LettreAlphabetFrancais.B);
+        assertEquals(3, tuileB.points());
+
+        Tuile tuileA = new Tuile(LettreAlphabetFrancais.A);
+        assertEquals(1, tuileA.points());
     }
 
     @Test

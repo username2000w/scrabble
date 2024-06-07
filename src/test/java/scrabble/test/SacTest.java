@@ -112,4 +112,11 @@ public class SacTest {
         sac.ajouter(new Tuile(LettreAlphabetFrancais.A));
         assertEquals(1, sac.nombreDeTuiles());
     }
+
+    @Test
+    public void testExceptionSacVide() {
+        Sac sac = new Sac();
+        sac.viderSac();
+        assertThrows(SacVideException.class, sac::piocher);
+    }
 }

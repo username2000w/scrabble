@@ -4,6 +4,7 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.HorsPlateauException;
 
 public class MaitreDuJeu {
@@ -36,7 +37,7 @@ public class MaitreDuJeu {
         switch (choix) {
             case 1:
                 Mot mot = jouerMot(plateau, joueur);
-                Console.message("Vous avez marqué " + this.calculerScoreMot(mot) + " points.");
+                Console.message("Vous avez marqué " + Score.calculerScoreMot(mot, plateau) + " points.");
                 break;
             case 2:
                 Console.message("Quelle tuile voulez-vous échanger ? (Numéro de l'emplacement)");

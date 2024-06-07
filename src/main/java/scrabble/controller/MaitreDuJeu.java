@@ -4,6 +4,7 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.HorsPlateauException;
 
 public class MaitreDuJeu {
@@ -36,7 +37,7 @@ public class MaitreDuJeu {
         switch (choix) {
             case 1:
                 Mot mot = jouerMot(plateau, joueur);
-                Console.message("Vous avez marqué " + this.calculerScoreMot(mot) + " points.");
+                Console.message("Vous avez marqué " + Score.calculerScoreMot(mot, plateau) + " points.");
                 break;
             case 2:
                 Console.message("Quelle tuile voulez-vous échanger ? (Numéro de l'emplacement)");
@@ -49,49 +50,6 @@ public class MaitreDuJeu {
                 Console.message("Choix invalide.");
         }
         return true;
-    }
-
-    public int calculerScoreMot(Mot mot) {
-        Coordonee coordoneeDebutMot = mot.coordoneeDebut();
-        Direction directionMot = mot.direction();
-        Case[][] plateau = this.plateau.plateau();
-
-        int scoreMot = 0;
-
-        // Calcul du score du mot de base avec multiplicateurs
-        int multiplicateurMot = 1;
-
-        for (Coordonee coordonee = coordoneeDebutMot; !plateau[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
-            int multiplicateurLettre = 1;
-
-            if (plateau[coordonee.ligne()][coordonee.colonne()].bonus() != null) {
-                multiplicateurLettre = plateau[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurLettre();
-                multiplicateurMot = plateau[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurMot();
-            }
-
-            scoreMot += plateau[coordonee.ligne()][coordonee.colonne()].tuile().points() * multiplicateurLettre;
-        }
-        scoreMot *= multiplicateurMot;
-
-        // Calcul des mots formés par le mot de base avec multiplicateurs
-        for (Coordonee coordonee = coordoneeDebutMot; !plateau[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
-            Coordonee coordoneeCoteDroit = coordonee.avancer(directionMot.oppose());
-            if (!this.plateau.casePlateau(coordoneeCoteDroit).estVide()) {
-                for (Coordonee coordoneeMotCote = coordoneeCoteDroit; !this.plateau.casePlateau(coordoneeMotCote).estVide(); coordoneeMotCote = coordoneeMotCote.avancer(directionMot.oppose())) {
-                    scoreMot += this.plateau.casePlateau(coordoneeMotCote).tuile().points();
-                }
-            }
-
-            Coordonee coordoneeCoteGauche = coordonee.reculer(directionMot.oppose());
-            if (!this.plateau.casePlateau(coordoneeCoteGauche).estVide()) {
-                for (Coordonee coordoneeMotCote = coordoneeCoteGauche; !this.plateau.casePlateau(coordoneeMotCote).estVide(); coordoneeMotCote = coordoneeMotCote.reculer(directionMot.oppose())) {
-                    scoreMot += this.plateau.casePlateau(coordoneeMotCote).tuile().points();
-                }
-            }
-        }
-
-        int scrabble = mot.nombreDeLettre() == Chevalet.TAILLE ? 50 : 0;
-        return scoreMot + scrabble;
     }
 
     public void jouerLettre(Plateau plateau, Joueur joueur, int NombreLettrePosee, Mot mot) {

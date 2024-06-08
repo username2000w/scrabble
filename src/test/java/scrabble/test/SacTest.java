@@ -73,7 +73,6 @@ public class SacTest {
         int tailleSac = 102;
 
         Sac sac1 = new Sac();
-        Sac sac2 = sac1;
 
         ArrayList<Tuile> tuiles1 = new ArrayList<>();
         ArrayList<Tuile> tuiles2 = new ArrayList<>();
@@ -81,7 +80,7 @@ public class SacTest {
         try {
             for (int i = 0; i < tailleSac; ++i) {
                 tuiles1.add(sac1.piocher());
-                tuiles2.add(sac2.piocher());
+                tuiles2.add(sac1.piocher());
             }
         } catch (SacVideException e) {
             System.out.println(e.getMessage());
@@ -89,7 +88,7 @@ public class SacTest {
         assertNotEquals(tuiles1, tuiles2);
 
         // Tenter de piocher une tuile supplémentaire pour déclencher l'exception
-        assertThrows(SacVideException.class, () -> sac1.piocher());
+        assertThrows(SacVideException.class, sac1::piocher);
     }
 
 

@@ -3,16 +3,13 @@ package scrabble.application;
 import com.pixelduke.window.ThemeWindowManager;
 import com.pixelduke.window.ThemeWindowManagerFactory;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import scrabble.controller.JouerMotController;
 import scrabble.controller.PartieController;
 import scrabble.controller.PasserTourController;
-import scrabble.gui.utils.ChevaletVueUtilitaire;
+import scrabble.controller.ChevaletVueController;
 import scrabble.model.*;
 import scrabble.vues.PartieVue;
-import scrabble.vues.TuileVue;
 
 public class ScrabbleFXApplication extends Application {
     public static void main(String[] args) {
@@ -28,12 +25,16 @@ public class ScrabbleFXApplication extends Application {
 
         // On crée la vue principale.
         PartieVue root = new PartieVue();
+        ChevaletVueController chevaletVueController = new ChevaletVueController(root, joueur, plateau, sac);
 
-        // On assigne les controllers aux éléments de la vue.
-        new PartieController(plateau, joueur, sac, root);
-        root.partieInformation().jouerUnMotBouton().setOnMouseClicked(new JouerMotController(joueur, plateau, sac, root));
-        root.partieInformation().passerTourBouton().setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
-        root.boutonMelanger().setOnMouseClicked(event -> ChevaletVueUtilitaire.melangerTuiles(root, joueur));
+        // On remplit le sac du joueur au début de la partie.
+        joueur.remplirChevalet(sac);
+        // On actualise le contenu dans l'IHM.
+        chevaletVueController.rafraichirContenu();
+
+        // On peut passer son tour dès le début de la partie.
+        root.partieInformation().utiliserPasserTourBouton(1).setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
+        root.boutonMelanger().setOnMouseClicked(event -> chevaletVueController.melangerTuiles());
 
         // On met en place la scène.
         Scene scene = new Scene(root, 1180, 982);

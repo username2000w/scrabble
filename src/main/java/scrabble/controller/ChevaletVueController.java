@@ -113,9 +113,9 @@ public class ChevaletVueController {
 
                             // On pose la tuile temporairement sur le plateau.
                             PlateauCaseTuile plateauCaseTuile = new PlateauCaseTuile(lettre, tuileVue.points());
-                            PlateauCaseTuileController plateauCaseTuileController = new PlateauCaseTuileController(plateauCaseTuile, root, plateauCase);
+                            //PlateauCaseTuileController plateauCaseTuileController = new PlateauCaseTuileController(plateauCaseTuile, root, plateauCase);
                             plateauCase.poser(plateauCaseTuile);
-                            plateauCaseTuileController.assignerGlisserDeposerEcouteurs();
+                            //plateauCaseTuileController.assignerGlisserDeposerEcouteurs();
                             // On ajoute la tuile à la liste des tuiles en cours.
                             casesEnCours.put(coordonee, new Tuile(lettre, tuileVue.points()));
 

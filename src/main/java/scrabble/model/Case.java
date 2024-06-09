@@ -35,17 +35,13 @@ public class Case {
 		this.tuile = tuile;
 	}
 
-	public void enleverTuile() {
+	public void viderCase() {
 		this.tuile = null;
 	}
 
 	public Bonus bonus() {
 		return bonus;
 	}
-	
-	public void viderCase() {
-        this.tuile = null; // Supprime la lettre de la case, rendant la case vide
-    }
 }
 
 

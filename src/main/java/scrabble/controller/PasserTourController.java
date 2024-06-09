@@ -1,11 +1,13 @@
 package scrabble.controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import scrabble.gui.Console;
 import scrabble.model.Chevalet;
 import scrabble.model.Sac;
 import scrabble.model.Tuile;
+import scrabble.model.utils.exception.SacVideException;
 import scrabble.vues.PartieVue;
 import scrabble.vues.TuileVue;
 
@@ -20,13 +22,18 @@ public class PasserTourController implements EventHandler<MouseEvent> {
 
     public PasserTourController (PartieVue vue, Chevalet chevalet, Sac sac) {
         this.vue = vue;
-        vue.partieInformation().validerEchangeBouton().setOnMouseClicked(event -> {
+        vue.partieInformation().validerBouton().setOnMouseClicked(event -> {
             if (!actif) return;
             if (selection.isEmpty()) return;
 
             selection.forEach(tuileVue -> {
                 int tuileIndex = vue.chevalet().getChildren().indexOf(tuileVue);
-                Tuile tuile = chevalet.echanger(sac, tuileIndex);
+                Tuile tuile = null;
+                try {
+                    tuile = chevalet.echanger(sac, tuileIndex);
+                } catch (SacVideException e) {
+                    throw new RuntimeException(e);
+                }
                 vue.chevalet().ajouterLettreA(tuile, tuileIndex);
 
             });
@@ -34,7 +41,7 @@ public class PasserTourController implements EventHandler<MouseEvent> {
             // On désactive l'état "passer tour".
             actif = false;
             selection.clear();
-            vue.partieInformation().validerEchangeBouton().setVisible(false);
+            vue.partieInformation().validerBouton().setVisible(false);
         });
     }
 
@@ -43,7 +50,7 @@ public class PasserTourController implements EventHandler<MouseEvent> {
         // Inverse l'état actif du bouton "Passer son tour".
         actif = !actif;
         // On décide d'afficher ou non le bouton pour valider l'échange.
-        vue.partieInformation().validerEchangeBouton().setVisible(actif);
+        vue.partieInformation().validerBouton().setVisible(actif);
 
         // Si on désactive l'échange...
         if (!actif) {

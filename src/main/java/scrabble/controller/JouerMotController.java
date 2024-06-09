@@ -12,12 +12,12 @@ import scrabble.model.utils.exception.HorsPlateauException;
 import scrabble.vues.PartieVue;
 import scrabble.vues.PlateauCaseTuile;
 
-public class JouerMotController implements EventHandler<MouseEvent> {
+public class JouerMotController {
     private final Plateau plateau;
     private final Joueur joueur;
     private final Sac sac;
-
     private final PartieVue vue;
+
     private Mot mot = null;
     private int tour = 0;
 
@@ -25,36 +25,29 @@ public class JouerMotController implements EventHandler<MouseEvent> {
         this.plateau = plateau;
         this.joueur = joueur;
         this.sac = sac;
-
         this.vue = vue;
     }
 
-    @Override
-    public void handle(MouseEvent event) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Jouer un mot");
+    /**
+     * 1ère étape pour poser un mot : la première lettre posée va déterminer ce qui en découle.
+     */
+    public void initialisation (Coordonee coordonee, Tuile tuile) {
+
+    }
+
+    public void commencer (Direction direction) {
+
 
         if (mot == null) {
-            TextField xField = new TextField();
-            xField.setPromptText("ligne");
-            TextField yField = new TextField();
-            yField.setPromptText("colonne");
-            TextField directionField = new TextField();
-            directionField.setPromptText("Direction (HORIZONTAL, VERTICAL)");
-            VBox vbox = new VBox();
-            vbox.getChildren().addAll(new Label("Coordonnées"), xField, yField, directionField);
-            dialog.getDialogPane().setContent(vbox);
-            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.NEXT, ButtonType.CANCEL);
-            dialog.showAndWait();
-
-            int ligne = Integer.parseInt(xField.getText());
-            int colonne = Integer.parseInt(yField.getText());
-            Coordonee coordonee = new Coordonee(ligne, colonne);
-            Direction direction = Direction.valueOf(directionField.getText());
-
-            mot = new Mot(coordonee, direction);
-            this.handle(event);
+           //nt ligne = Integer.parseInt(xField.getText());
+           //nt colonne = Integer.parseInt(yField.getText());
+           //oordonee coordonee = new Coordonee(ligne, colonne);
+           //irection direction = Direction.valueOf(directionField.getText());
+//
+           //ot = new Mot(coordonee, direction);
+           //his.handle(event);
         }
+        /*
         else {
             TextField motField = new TextField();
             motField.setPromptText("Lettre (ou JOKER)");
@@ -100,14 +93,14 @@ public class JouerMotController implements EventHandler<MouseEvent> {
                 joueur.chevalet().remplirChevalet(sac);
                 for (Tuile nouvelleTuile : joueur.chevalet().tuiles()) {
                     vue.chevalet().ajouterLettre(nouvelleTuile);
-                }
+           w     }
 
                 tour++;
             }
             else {
                 mot = null;
             }
-        }
+        }*/
     }
 
     /**
@@ -116,6 +109,7 @@ public class JouerMotController implements EventHandler<MouseEvent> {
      */
     private void gererLettre(Tuile tuile) {
         joueur.chevalet().retirerLettre(tuile);
+        /*
         if (tuile.estJoker()) {
             vue.chevalet().retirerLettre(" "); // JOKER = espace vide
 
@@ -133,10 +127,10 @@ public class JouerMotController implements EventHandler<MouseEvent> {
 
             mot.ajouterLettre(joker);
         }
-        else {
+        else {*/
             vue.chevalet().retirerLettre(tuile.toString());
             mot.ajouterLettre(tuile);
-        }
+        //}
     }
 
     /**

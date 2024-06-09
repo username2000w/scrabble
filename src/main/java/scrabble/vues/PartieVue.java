@@ -1,8 +1,8 @@
 package scrabble.vues;
 
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import scrabble.composants.BoutonMelanger;
-import scrabble.controller.PartieController;
 import scrabble.gui.utils.ImageUtilitaire;
 
 /**
@@ -66,5 +66,15 @@ public class PartieVue extends HBox {
 
     public BoutonMelanger boutonMelanger() {
         return actions.boutonMelanger();
+    }
+
+    public String ouvrirJokerSelection() {
+        TextInputDialog dialog = new TextInputDialog();
+
+        dialog.setTitle("Sélectionner une lettre");
+        dialog.setHeaderText("Sélectionner une lettre pour le joker");
+        dialog.setContentText("Lettre : ");
+
+        return dialog.showAndWait().orElse(null);
     }
 }

@@ -87,7 +87,6 @@ public class MaitreDuJeu {
         System.out.print("Quel lettre voulez-vous jouer ? : ");
         String choixlettre = Console.inputStringScanner().toUpperCase();
 
-
         while (joueur.chevalet().tuileAvecLettre(choixlettre) == null) {
             System.out.print("Veuillez selectioner une lettre dans le chevalet : ");
             choixlettre = Console.inputStringScanner().toUpperCase();
@@ -98,7 +97,7 @@ public class MaitreDuJeu {
         if (tuile.estJoker()) {
             System.out.print("[JOKER] Par quelle lettre voulez-vous remplacer le Joker ? : ");
             String choixlettrejoker = Console.inputStringScanner().toUpperCase();
-            tuile.changerLettre(LettreAlphabetFrancais.valueOf(choixlettrejoker));
+            tuile.remplacerLettre(choixlettrejoker);
         }
 
         mot.ajouterLettre(tuile);

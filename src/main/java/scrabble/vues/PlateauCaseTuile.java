@@ -10,8 +10,22 @@ import javafx.scene.text.FontWeight;
 import scrabble.gui.utils.PoliceTexteUtilitaire;
 
 public class PlateauCaseTuile extends Pane {
+    /**
+     * Par défaut, une case n'est pas définitivement posée.
+     * 1. Une tuile est "drag 'n drop" sur le plateau ;
+     * 2. On crée un objet PlateauCaseTuile pour le plateau et on supprime la tuile du chevalet ;
+     * 3. Une fois que le mot est validé, la case est "définitivement posée".
+     */
+    private boolean estDefinitivementPosee = false;
+
+    private final String lettre;
+    private final int points;
+
     public PlateauCaseTuile(String lettre, int points) {
         super();
+
+        this.lettre = lettre;
+        this.points = points;
 
         Label contenuLabel = new Label(lettre);
         contenuLabel.setFont(PoliceTexteUtilitaire.utiliserReadexPro(24));
@@ -33,5 +47,21 @@ public class PlateauCaseTuile extends Pane {
             new CornerRadii(4), // 8px (+ 4 pour éviter de passer sur le bord)
             null
         )));
+    }
+
+    public boolean estDefinitivementPosee() {
+        return estDefinitivementPosee;
+    }
+
+    public void estDefinitivementPosee(boolean estDefinitivementPosee) {
+        this.estDefinitivementPosee = estDefinitivementPosee;
+    }
+
+    public String lettre() {
+        return lettre;
+    }
+
+    public int points() {
+        return points;
     }
 }

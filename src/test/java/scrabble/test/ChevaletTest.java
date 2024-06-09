@@ -115,7 +115,17 @@ public class ChevaletTest {
         chevalet.retirerLettre(new Tuile(LettreAlphabetFrancais.B));
     }
 
-    public Tuile getTuileB() {
-        return tuileB;
+    @Test
+    void testAjouterLettre() {
+        // Test avec une tuile A
+        chevalet.tuiles().clear();
+        chevalet.ajouterLettre(tuileA);
+
+        assertTrue(chevalet.tuiles().contains(tuileA));
+
+        chevalet.ajouterLettre(tuileB);
+        chevalet.melangerChevalet();
+
+        assertTrue(chevalet.tuiles().contains(tuileB));
     }
 }

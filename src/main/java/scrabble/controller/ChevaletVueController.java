@@ -2,9 +2,11 @@ package scrabble.controller;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.exception.SacVideException;
 import scrabble.vues.*;
 
 import java.util.ArrayList;
@@ -179,6 +181,14 @@ public class ChevaletVueController {
                                     }
 
                                     System.out.println(tuiles.stream().map(Tuile::lettre).reduce("", String::concat));
+                                    casesEnCours.clear();
+                                    try {
+                                        joueur.remplirChevalet(sac);
+                                    } catch (SacVideException ex) {
+                                        Console.message("Le sac est vide.");
+                                    }
+                                    rafraichirContenu();
+                                    root.partieInformation().validerBouton().setOpacity(.5);
                                 });
                                 root.partieInformation().validerBouton().setOpacity(1);
                             }

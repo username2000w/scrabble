@@ -13,12 +13,8 @@ public class Chevalet {
         this.tuiles = new ArrayList<>();
     }
 
-    public void piocher(Sac sac) {
-        try {
-            this.tuiles.add(sac.piocher());
-        } catch (SacVideException e) {
-            System.out.println(e.getMessage());
-        }
+    public void piocher(Sac sac) throws SacVideException {
+        this.tuiles.add(sac.piocher());
     }
 
     public Tuile echanger(Sac sac, int tuileIndex) {
@@ -28,11 +24,15 @@ public class Chevalet {
         return tuile;
     }
 
+    public void ajouterLettre(Tuile lettre) {
+        if (tuiles.size() < TAILLE) {
+            tuiles.add(lettre);
+        }
+    }
+
     public void retirerLettre(Tuile lettre) {
         if (tuiles.contains(lettre)) {
             tuiles.remove(lettre);
-        } else {
-            System.out.println("La lettre spécifiée n'est pas présente dans le chevalet.");
         }
     }
 

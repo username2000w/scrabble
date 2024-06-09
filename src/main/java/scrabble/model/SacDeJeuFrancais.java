@@ -14,7 +14,7 @@ public class SacDeJeuFrancais {
 
     private void faireTuileJoker(int nombreDeTuile) {
         for (int i = 0; i < nombreDeTuile; i++) {
-            this.tuiles.add(new Joker());
+            this.tuiles.add(new Tuile());
         }
     }
 

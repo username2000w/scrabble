@@ -91,6 +91,10 @@ public class Plateau {
 		this.plateau[coordonee.ligne()][coordonee.colonne()].changerTuile(tuile);
 	}
 
+	public void enleverTuile(Coordonee coordonee) {
+		this.plateau[coordonee.ligne()][coordonee.colonne()].enleverTuile();
+	}
+
 	public Case[][] plateau() {
 		return plateau;
 	}

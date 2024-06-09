@@ -44,11 +44,11 @@ public class ChevaletVue extends HBox {
     }
 
     public void ajouterLettre (Tuile tuile) {
-        getChildren().add(new TuileVue(tuile.toString(), tuile.points()));
+        getChildren().add(new TuileVue(tuile.lettre(), tuile.points()));
     }
 
     public void ajouterLettreA (Tuile tuile, int index) {
-        getChildren().set(index, new TuileVue(tuile.toString(), tuile.points()));
+        getChildren().set(index, new TuileVue(tuile.lettre(), tuile.points()));
     }
 
     public void retirerLettre (String lettre) {

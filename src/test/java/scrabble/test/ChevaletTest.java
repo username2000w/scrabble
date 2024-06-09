@@ -3,18 +3,25 @@ package scrabble.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scrabble.model.Chevalet;
-import scrabble.model.LettreAlphabetFrancais;
-import scrabble.model.Sac;
-import scrabble.model.Tuile;
+import scrabble.model.*;
+
 import scrabble.model.utils.exception.SacVideException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ChevaletTest {
-    private final Chevalet chevalet = new Chevalet();
-    private final Sac sac = new Sac();
-    private Tuile tuileA = new Tuile(LettreAlphabetFrancais.A);
-    private Tuile tuileB = new Tuile(LettreAlphabetFrancais.B);
+    private Chevalet chevalet;
+    private Sac sac;;
+    private Tuile tuileA;
+    private Tuile tuileB;
+
+    @BeforeEach
+    void debut() {
+        chevalet = new Chevalet();
+        sac = new Sac();
+        tuileA = new Tuile(LettreAlphabetFrancais.A);
+        tuileB = new Tuile(LettreAlphabetFrancais.B);
+    }
 
     @Test
     void testTailleInitiale() {
@@ -38,13 +45,7 @@ public class ChevaletTest {
         }
         assertTrue(chevalet.tuiles().contains(tuileA));
 
-        sac.viderSac();
-        try {
-            chevalet.piocher(sac);
-        } catch (SacVideException e) {
-            throw new RuntimeException(e);
-        }
-        assertEquals(1, chevalet.tuiles().size());
+        assertThrows(SacVideException.class, () -> chevalet.piocher(sac));
     }
 
     // TODO : faire fonctionner ce test
@@ -112,5 +113,9 @@ public class ChevaletTest {
         assertFalse(chevalet.tuiles().contains(tuileA));
 
         chevalet.retirerLettre(new Tuile(LettreAlphabetFrancais.B));
+    }
+
+    public Tuile getTuileB() {
+        return tuileB;
     }
 }

@@ -27,7 +27,7 @@ class JokerTest {
     }
 
     @Test
-    public void testEstJoker() {
+    void testEstJoker() {
         // Teste si la tuile est un joker
         assert estUnJokerVide.estJoker();
         assert estUnJokerJ.estJoker();
@@ -35,16 +35,22 @@ class JokerTest {
     }
 
     @Test
-    public void testNestPasUnJoker() {
+    void testNestPasUnJoker() {
         // Teste si la tuile n'est pas un joker
         assert !nEstPasUnJoker.estJoker();
     }
 
     @Test
-    public void testAffichageUnJoker() {
+    void testAffichageJoker() {
         // Teste l'affichage d'un joker
-        assertEquals(" ", estUnJokerVide.toString());
-        assertEquals("J", estUnJokerJ.toString());
-        assertEquals("K", estUnJokerK.toString());
+        assertEquals(" ", estUnJokerVide.lettre());
+        assertEquals("J", estUnJokerJ.lettre());
+        assertEquals("K", estUnJokerK.lettre());
+    }
+
+    @Test
+    void testAffichageLettre() {
+        // Teste l'affichage d'une lettre
+        assertEquals("B", nEstPasUnJoker.lettre());
     }
 }

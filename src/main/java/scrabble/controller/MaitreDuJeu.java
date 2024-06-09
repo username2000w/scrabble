@@ -58,8 +58,9 @@ public class MaitreDuJeu {
         Console.message("Que voulez-vous faire ?");
         Console.message(" - 1. Jouer un mot");
         Console.message(" - 2. Échanger une tuile");
-        Console.message(" - 3. Passer son tour");
-        Console.message(" - 4. Quitter");
+        Console.message(" - 3. Mélanger le chevalet");
+        Console.message(" - 4. Passer son tour");
+        Console.message(" - 5. Quitter");
 
         int choix = Console.inputIntScanner();
         switch (choix) {
@@ -80,9 +81,12 @@ public class MaitreDuJeu {
                 }
                 break;
             case 3:
-            	 Console.message("Votre score est de " + joueurActuelle.score() + " points.");
+            	joueurActuelle.chevalet().melangerChevalet();
             	break;
             case 4:
+            	 Console.message("Votre score est de " + joueurActuelle.score() + " points.");
+            	break;
+            case 5:
                 return false;
             default:
                 Console.message("Choix invalide.");

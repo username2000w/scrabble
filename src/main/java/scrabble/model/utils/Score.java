@@ -1,5 +1,6 @@
 package scrabble.model.utils;
 
+import scrabble.gui.Console;
 import scrabble.model.Case;
 import scrabble.model.Chevalet;
 import scrabble.model.Mot;
@@ -14,21 +15,31 @@ public class Score {
         int scoreMot = 0;
 
         // Calcul du score du mot de base avec multiplicateurs
+        scoreMot = calculMotDeBase(coordoneeDebutMot, cases, directionMot, scoreMot);
+
+        // Calcul des mots formés par le mot de base avec multiplicateurs
+        scoreMot = calculMotForme(plateau, coordoneeDebutMot, cases, directionMot, scoreMot);
+
+        int scrabble = mot.nombreDeLettre() == Chevalet.TAILLE ? 50 : 0;
+        return scoreMot + scrabble;
+    }
+
+    private static int calculMotDeBase(Coordonee coordoneeDebutMot, Case[][] cases, Direction directionMot, int scoreMot) {
         int multiplicateurMot = 1;
 
         for (Coordonee coordonee = coordoneeDebutMot; !cases[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
             int multiplicateurLettre = 1;
 
             if (cases[coordonee.ligne()][coordonee.colonne()].bonus() != null) {
-                multiplicateurLettre = cases[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurLettre();
-                multiplicateurMot = cases[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurMot();
+                 multiplicateurLettre = cases[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurLettre();
+                 multiplicateurMot = cases[coordonee.ligne()][coordonee.colonne()].bonus().multiplicateurMot();
             }
-
             scoreMot += cases[coordonee.ligne()][coordonee.colonne()].tuile().points() * multiplicateurLettre;
         }
-        scoreMot *= multiplicateurMot;
+        return scoreMot * multiplicateurMot;
+    }
 
-        // Calcul des mots formés par le mot de base avec multiplicateurs
+    private static int calculMotForme(Plateau plateau, Coordonee coordoneeDebutMot, Case[][] cases, Direction directionMot, int scoreMot) {
         for (Coordonee coordonee = coordoneeDebutMot; !cases[coordonee.ligne()][coordonee.colonne()].estVide(); coordonee = coordonee.avancer(directionMot)) {
             Coordonee coordoneeCoteDroit = coordonee.avancer(directionMot.oppose());
             if (!plateau.casePlateau(coordoneeCoteDroit).estVide()) {
@@ -44,9 +55,6 @@ public class Score {
                 }
             }
         }
-
-        int scrabble = mot.nombreDeLettre() == Chevalet.TAILLE ? 50 : 0;
-        return scoreMot + scrabble;
+        return scoreMot;
     }
-
 }

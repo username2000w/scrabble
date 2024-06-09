@@ -1,10 +1,7 @@
 package scrabble.model;
 
-import javafx.scene.layout.CornerRadii;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.exception.HorsPlateauException;
-
-import java.util.ArrayList;
 
 public class Plateau {
 	public static final int TAILLE_PLATEAU_HORIZONTALE = 15;
@@ -92,7 +89,7 @@ public class Plateau {
 	}
 
 	public void enleverTuile(Coordonee coordonee) {
-		this.plateau[coordonee.ligne()][coordonee.colonne()].enleverTuile();
+		this.plateau[coordonee.ligne()][coordonee.colonne()].viderCase();
 	}
 
 	public Case[][] plateau() {

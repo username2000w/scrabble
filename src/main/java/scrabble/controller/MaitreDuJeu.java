@@ -21,7 +21,9 @@ public class MaitreDuJeu {
         this.sac = new Sac();
         this.plateau = new Plateau();
         this.joueurActuelle = new Joueur(new Chevalet(), "Joueur 1");
+        joueurActuelle.changerNom();
         this.joueurAprès = new Joueur(new Chevalet(), "Joueur 2");
+        joueurAprès.changerNom();
         this.joueurIntermediaire = new Joueur(new Chevalet(), "Joueur 3");
         this.joueurActuelle.remplirChevalet(sac);
         // v3 => Compter plusieurs joueurs

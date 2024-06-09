@@ -6,6 +6,7 @@ import scrabble.model.Chevalet;
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Sac;
 import scrabble.model.Tuile;
+import scrabble.model.utils.exception.SacVideException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,11 +31,19 @@ public class ChevaletTest {
         // Test avec une tuile A
         sac.viderSac();
         sac.ajouter(tuileA);
-        chevalet.piocher(sac);
+        try {
+            chevalet.piocher(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         assertTrue(chevalet.tuiles().contains(tuileA));
 
         sac.viderSac();
-        chevalet.piocher(sac);
+        try {
+            chevalet.piocher(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(1, chevalet.tuiles().size());
     }
 
@@ -73,7 +82,11 @@ public class ChevaletTest {
         for (int i = 0; i < Chevalet.TAILLE; i++) {
             sac.ajouter(new Tuile(LettreAlphabetFrancais.A));
         }
-        chevalet.remplirChevalet(sac);
+        try {
+            chevalet.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(Chevalet.TAILLE, chevalet.tuiles().size());
     }
 

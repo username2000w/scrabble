@@ -1,10 +1,7 @@
 package scrabble.vues;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.FontWeight;
-import scrabble.gui.utils.PoliceTexteUtilitaire;
 
 public class PlateauCaseVue extends Pane {
     public static final Color LD_COULEUR = Color.rgb(87, 149, 191);
@@ -26,5 +23,12 @@ public class PlateauCaseVue extends Pane {
         node.minWidthProperty().bind(widthProperty());
         node.minHeightProperty().bind(heightProperty());
         getChildren().add(node);
+    }
+
+    /**
+     * Retourne la tuile qui a été retirée de la case.
+     */
+    public void retirerCaseTuile() {
+        getChildren().removeIf(node -> node instanceof PlateauCaseTuile);
     }
 }

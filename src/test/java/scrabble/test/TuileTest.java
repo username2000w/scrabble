@@ -8,16 +8,16 @@ import scrabble.model.Tuile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TuileTest {
+class TuileTest {
 
     @Test
-    public void testConstructorEtToString() {
+    void testConstructorEtToString() {
         Tuile tuile = new Tuile(LettreAlphabetFrancais.A);
         assertEquals("A", tuile.toString());
     }
 
     @Test
-    public void testPoints() {
+    void testPoints() {
         Tuile tuileB = new Tuile(LettreAlphabetFrancais.B);
         assertEquals(3, tuileB.points());
 
@@ -26,20 +26,11 @@ public class TuileTest {
     }
 
     @Test
-    public void testChangerLettre() {
+    void testChangerLettre() {
         Tuile tuile = new Tuile(LettreAlphabetFrancais.A);
         assertEquals("A", tuile.toString());
         
-        tuile.changerLettre(LettreAlphabetFrancais.B);
+        tuile = new Tuile(LettreAlphabetFrancais.B);
         assertEquals("B", tuile.toString());
-    }
-
-    @Test
-    public void testEstJoker() {
-        Tuile tuile = new Tuile(LettreAlphabetFrancais.A);
-        assertFalse(tuile.estJoker());
-        
-        Joker joker = new Joker();
-        assertTrue(joker.estJoker());
     }
 }

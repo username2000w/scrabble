@@ -5,6 +5,7 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.SacVideException;
 
 public class ScrabbleJeuxEssais {
@@ -44,7 +45,7 @@ public class ScrabbleJeuxEssais {
         Console.afficherPlateau(plateau);
 
         System.out.println("On affiche le score du mot.");
-        //System.out.println(maitreDuJeu.calculerScoreMot(motBonjour));
+        System.out.println(Score.calculerScoreMot(motBonjour, plateau));
 
         System.out.println("On place le mot 'sel' sur le plateau en dessous de 'pate'.");
         Mot motSel = new Mot(new Coordonee(8,7), Direction.HORIZONTAL);
@@ -55,8 +56,8 @@ public class ScrabbleJeuxEssais {
         Console.afficherPlateau(plateau);
 
         System.out.println("On affiche le score du mot.");
-        //System.out.println(maitreDuJeu.calculerScoreMot(motSel));
-        System.out.println("On a bien le score du mot 'sel' qui est 3 mais vu qu'on a completé le mot 'pate'" +
+        System.out.println(Score.calculerScoreMot(motSel, plateau));
+        System.out.println("On a bien le score du mot 'sel' qui est 3 mais vu qu'on a completé le mot 'pate' " +
                 "on récupere ses points aussi qui sont de 6, ce qui fais bien 3 + 6 = 9.");
     }
 

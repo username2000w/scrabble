@@ -11,57 +11,67 @@ import scrabble.model.utils.exception.SacVideException;
 public class MaitreDuJeu {
     private Sac sac;
     private Plateau plateau;
-    private final Joueur joueur;
+    private Joueur joueurActuelle;
+    private Joueur joueurAprès;
+    private Joueur joueurIntermediaire;
     private int tour;
+    int scoreMot =0;
 
-    public MaitreDuJeu() {
+    public MaitreDuJeu() throws SacVideException {
         this.sac = new Sac();
         this.plateau = new Plateau();
-        this.joueur = new Joueur(new Chevalet(), "Joueur 1");
-        try {
-            this.joueur.remplirChevalet(sac);
-        } catch (SacVideException e) {
-            throw new RuntimeException(e);
-        }
+        this.joueurActuelle = new Joueur(new Chevalet(), "Joueur 1");
+        this.joueurAprès = new Joueur(new Chevalet(), "Joueur 2");
+        this.joueurIntermediaire = new Joueur(new Chevalet(), "Joueur 3");
+        this.joueurActuelle.remplirChevalet(sac);
         // v3 => Compter plusieurs joueurs
     }
+    
+    public void changerTour() {
+    	joueurIntermediaire = joueurActuelle;
+        joueurActuelle = joueurAprès;
+        joueurAprès = joueurIntermediaire;
+        
+    }
 
-    public boolean jouerTour() {
-        try {
-            joueur.remplirChevalet(sac);
-        } catch (SacVideException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean jouerTour() throws SacVideException {
+        joueurActuelle.remplirChevalet(sac);
+        joueurAprès.remplirChevalet(sac);
         Console.afficherPlateau(plateau);
-        Console.message(joueur.nom() + " a les tuiles suivantes :");
-        Console.afficherChevalet(joueur.chevalet());
+        Console.message(joueurActuelle.nom() + " a les tuiles suivantes :");
+        Console.afficherChevalet(joueurActuelle.chevalet());
         Console.message("");
 
         Console.message("Que voulez-vous faire ?");
         Console.message(" - 1. Jouer un mot");
         Console.message(" - 2. Échanger une tuile");
-        Console.message(" - 3. Quitter");
+        Console.message(" - 3. Passer son tour");
+        Console.message(" - 4. Quitter");
 
         int choix = Console.inputIntScanner();
         switch (choix) {
             case 1:
-                Mot mot = jouerMot(plateau, joueur);
-                Console.message("Vous avez marqué " + Score.calculerScoreMot(mot, plateau) + " points.");
+                Mot mot = jouerMot(plateau, joueurActuelle);
+                int score = Score.calculerScoreMot(mot, plateau);
+                Console.message("Vous avez marqué " + score + " points.");
+                joueurActuelle.ajouterScore(score);
+                Console.message("Votre score est de " + joueurActuelle.score() + " points.");
                 break;
             case 2:
                 Console.message("Quelle tuile voulez-vous échanger ? (Numéro de l'emplacement)");
                 int input = Console.inputIntScanner();
-                try {
-                    joueur.echanger(sac, input-1);
-                } catch (SacVideException e) {
-                    Console.message("Le sac est vide.");
-                }
+                joueurActuelle.echanger(sac, input-1);
                 break;
             case 3:
+            	 Console.message("Votre score est de " + joueurActuelle.score() + " points.");
+            	break;
+            case 4:
                 return false;
             default:
                 Console.message("Choix invalide.");
+        
         }
+        changerTour();
         return true;
     }
 
@@ -242,6 +252,6 @@ public class MaitreDuJeu {
     }
 
     public Joueur joueur() {
-        return joueur;
+        return joueurActuelle;
     }
 }

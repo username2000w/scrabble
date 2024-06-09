@@ -198,6 +198,7 @@ public class ChevaletVueController {
                                         Console.message("Le sac est vide.");
                                     }
                                     rafraichirContenu();
+                                    root.partieInformation().utiliserPasserTourBouton(1).setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
                                     root.partieInformation().validerBouton().setOpacity(.5);
                                 });
                                 root.partieInformation().validerBouton().setOpacity(1);

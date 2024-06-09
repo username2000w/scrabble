@@ -222,7 +222,7 @@ public class ChevaletVueController {
                                 // On vide la liste des tuiles en cours.
                                 casesEnCours.clear();
                                 // On rétablit à l'état par défaut.
-                                root.partieInformation().utiliserPasserTourBouton(1);
+                                root.partieInformation().utiliserPasserTourBouton(1).setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
                                 root.partieInformation().validerBouton().setOpacity(.5);
                             });
                             annulerBouton.setOpacity(1);

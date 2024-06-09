@@ -3,6 +3,7 @@ package scrabble.model;
 import scrabble.model.utils.exception.SacVideException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Chevalet {
@@ -58,5 +59,9 @@ public class Chevalet {
         }
         return null;
         
+    }
+    
+    public void melangerChevalet() {
+        Collections.shuffle(tuiles);
     }
 }

@@ -6,6 +6,8 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.Score;
+import scrabble.model.utils.exception.HorsPlateauException;
 import scrabble.model.utils.exception.SacVideException;
 import scrabble.vues.*;
 
@@ -32,12 +34,6 @@ public class ChevaletVueController {
      * a été déplacée en dehors du chevalet : probablement dans le plateau.
      */
     private static final int DRAG_Y_EN_DEHORS_CHEVALET = -20;
-
-    /**
-     * Le controller du mot en cours.
-     * `null` lorsqu'un mot n'est pas en cours d'assemblage.
-     */
-    private JouerMotController motEnCours = null;
 
     /**
      * Tuiles du chevalet qu'on est actuellement
@@ -136,16 +132,13 @@ public class ChevaletVueController {
                                         boolean memeLigne = caseX.get() == tuileActuelle.getKey().ligne();
                                         boolean memeColonne = caseY.get() == tuileActuelle.getKey().colonne();
                                         if (!memeLigne && !memeColonne) {
-                                            System.out.println("Les tuiles ne sont pas alignées.");
+                                            Console.message("Les tuiles ne sont pas alignées.");
                                             return;
                                         }
 
                                         // On détermine la direction.
                                         direction = memeLigne ? Direction.HORIZONTAL : Direction.VERTICAL;
                                     }
-
-                                    System.out.println("Les tuiles sont alignées.");
-                                    System.out.println(direction);
 
                                     boolean estSansEspace = true;
                                     ArrayList<Tuile> tuiles = new ArrayList<>();
@@ -176,11 +169,28 @@ public class ChevaletVueController {
                                     }
 
                                     if (!estSansEspace) {
-                                        System.out.println("Il y a un espace entre les tuiles.");
+                                        Console.message("Il y a un espace entre les tuiles.");
                                         return;
                                     }
 
-                                    System.out.println(tuiles.stream().map(Tuile::lettre).reduce("", String::concat));
+                                    Mot mot = new Mot(coordoneeDebut, direction);
+                                    assert direction != null;
+                                    assert coordoneeDebut != null;
+                                    Coordonee coordoneeBoucle = coordoneeDebut.reculer(direction);
+                                    for (Tuile tuile : tuiles) {
+                                        mot.ajouterLettre(tuile);
+                                        try {
+                                            coordoneeBoucle = coordoneeBoucle.avancer(direction);
+                                            plateau.placerTuile(tuile, coordoneeBoucle);
+                                        } catch (HorsPlateauException ex) {
+                                            throw new RuntimeException(ex);
+                                        }
+                                    }
+
+                                    int scoreMot = Score.calculerScoreMot(mot, plateau);
+                                    int scoreActuel = Integer.parseInt(root.partieInformation().scoreLabel().getText());
+                                    root.partieInformation().scoreLabel().setText(String.valueOf(scoreActuel + scoreMot));
+
                                     casesEnCours.clear();
                                     try {
                                         joueur.remplirChevalet(sac);

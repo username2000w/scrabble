@@ -14,11 +14,15 @@ public class Joueur {
     }
 
     public void echanger(Sac sac, int tuileIndex) {
-        this.chevalet.echanger(sac, tuileIndex);
+        chevalet.echanger(sac, tuileIndex);
     }
 
     public void retirerLettreDuChevalet(Tuile tuile) {
-        this.chevalet.retirerLettre(tuile);
+        chevalet.retirerLettre(tuile);
+    }
+
+    public void ajouterLettreAuChevalet(Tuile tuile) {
+        chevalet.ajouterLettre(tuile);
     }
 
     public Chevalet chevalet() {
@@ -26,6 +30,6 @@ public class Joueur {
     }
 
     public void remplirChevalet(Sac sac) {
-        this.chevalet.remplirChevalet(sac);
+        chevalet.remplirChevalet(sac);
     }
 }

@@ -24,7 +24,6 @@ public class MaitreDuJeu {
         joueurActuelle.changerNom();
         this.joueurAprès = new Joueur(new Chevalet(), "Joueur 2");
         joueurAprès.changerNom();
-        this.joueurIntermediaire = new Joueur(new Chevalet(), "Joueur 3");
         this.joueurActuelle.remplirChevalet(sac);
         // v3 => Compter plusieurs joueurs
     }

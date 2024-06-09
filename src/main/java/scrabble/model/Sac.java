@@ -3,7 +3,6 @@ package scrabble.model;
 import scrabble.model.utils.exception.SacVideException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -26,7 +25,7 @@ public class Sac {
 
         // On ajout tous les jetons dans le sac.
         SacDeJeuFrancais sacDeJeuFrancais = new SacDeJeuFrancais();
-        this.tuiles = new ArrayList<>(sacDeJeuFrancais.Lettres());
+        this.tuiles = new ArrayList<>(sacDeJeuFrancais.lettres());
 
         // On mélange le contenu du sac.
         this.melanger();

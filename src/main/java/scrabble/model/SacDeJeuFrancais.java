@@ -1,12 +1,12 @@
 package scrabble.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SacDeJeuFrancais {
-
     private final ArrayList<Tuile> tuiles = new ArrayList<>();
 
-    private void faireTuilespour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
+    private void faireTuilesPour(int nombreDeTuile, LettreAlphabetFrancais lettre) {
         for (int i = 0; i < nombreDeTuile; i++) {
             this.tuiles.add(new Tuile(lettre));
         }
@@ -19,38 +19,36 @@ public class SacDeJeuFrancais {
     }
 
     public SacDeJeuFrancais() { 
-
-        this.faireTuilespour(15, LettreAlphabetFrancais.E);
-        this.faireTuilespour(9, LettreAlphabetFrancais.A);
-        this.faireTuilespour(8, LettreAlphabetFrancais.I);
-        this.faireTuilespour(6, LettreAlphabetFrancais.N);
-        this.faireTuilespour(6, LettreAlphabetFrancais.O);
-        this.faireTuilespour(6, LettreAlphabetFrancais.R);
-        this.faireTuilespour(6, LettreAlphabetFrancais.S);
-        this.faireTuilespour(6, LettreAlphabetFrancais.T);
-        this.faireTuilespour(6, LettreAlphabetFrancais.U);
-        this.faireTuilespour(5, LettreAlphabetFrancais.L);
-        this.faireTuilespour(3, LettreAlphabetFrancais.D);
-        this.faireTuilespour(2, LettreAlphabetFrancais.G);
-        this.faireTuilespour(3, LettreAlphabetFrancais.M);
-        this.faireTuilespour(2, LettreAlphabetFrancais.B);
-        this.faireTuilespour(2, LettreAlphabetFrancais.C);
-        this.faireTuilespour(2, LettreAlphabetFrancais.P);
-        this.faireTuilespour(2, LettreAlphabetFrancais.F);
-        this.faireTuilespour(2, LettreAlphabetFrancais.H);
-        this.faireTuilespour(2, LettreAlphabetFrancais.V);
+        this.faireTuilesPour(15, LettreAlphabetFrancais.E);
+        this.faireTuilesPour(9, LettreAlphabetFrancais.A);
+        this.faireTuilesPour(8, LettreAlphabetFrancais.I);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.N);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.O);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.R);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.S);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.T);
+        this.faireTuilesPour(6, LettreAlphabetFrancais.U);
+        this.faireTuilesPour(5, LettreAlphabetFrancais.L);
+        this.faireTuilesPour(3, LettreAlphabetFrancais.D);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.G);
+        this.faireTuilesPour(3, LettreAlphabetFrancais.M);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.B);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.C);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.P);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.F);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.H);
+        this.faireTuilesPour(2, LettreAlphabetFrancais.V);
         this.faireTuileJoker(2);
-        this.faireTuilespour(1, LettreAlphabetFrancais.J);
-        this.faireTuilespour(1, LettreAlphabetFrancais.Q);
-        this.faireTuilespour(1, LettreAlphabetFrancais.K);
-        this.faireTuilespour(1, LettreAlphabetFrancais.W);
-        this.faireTuilespour(1, LettreAlphabetFrancais.X);
-        this.faireTuilespour(1, LettreAlphabetFrancais.Y);
-        this.faireTuilespour(1, LettreAlphabetFrancais.Z);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.J);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.Q);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.K);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.W);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.X);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.Y);
+        this.faireTuilesPour(1, LettreAlphabetFrancais.Z);
     }
 
-    public ArrayList<Tuile> Lettres() {
+    public List<Tuile> lettres() {
         return this.tuiles;
     }
-
 }

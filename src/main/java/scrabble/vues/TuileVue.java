@@ -19,14 +19,14 @@ public class TuileVue extends Pane {
         this.lettre = lettre;
         this.points = points;
 
-        Label lettreLabel = new Label(lettre);
-        lettreLabel.setFont(PoliceTexteUtilitaire.utiliserReadexPro(24));
-        // On centre la lettre dans la tuile en utilisant ses positions.
-        lettreLabel.layoutXProperty().bind(widthProperty().subtract(lettreLabel.widthProperty()).divide(2));
-        lettreLabel.layoutYProperty().bind(heightProperty().subtract(lettreLabel.heightProperty()).divide(2));
-        getChildren().add(lettreLabel);
-
         if (points > 0) {
+            Label lettreLabel = new Label(lettre);
+            lettreLabel.setFont(PoliceTexteUtilitaire.utiliserReadexPro(24));
+            // On centre la lettre dans la tuile en utilisant ses positions.
+            lettreLabel.layoutXProperty().bind(widthProperty().subtract(lettreLabel.widthProperty()).divide(2));
+            lettreLabel.layoutYProperty().bind(heightProperty().subtract(lettreLabel.heightProperty()).divide(2));
+            getChildren().add(lettreLabel);
+
             Label pointsLabel = new Label(String.valueOf(points));
             pointsLabel.setFont(PoliceTexteUtilitaire.utiliserReadexPro(12));
             // On la met en bas à droite de la tuile (décalage de 4px).

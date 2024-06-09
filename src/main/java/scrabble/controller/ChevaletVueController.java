@@ -190,7 +190,12 @@ public class ChevaletVueController {
                                     root.plateau().caseSitueA(tuileActuelle.getKey()).retirerCaseTuile();
 
                                     // On la remet dans le chevalet du joueur.
-                                    joueur.ajouterLettreAuChevalet(tuileActuelle.getValue());
+                                    Tuile tuile = tuileActuelle.getValue();
+
+                                    // Si joker, on remet un joker sans lettre utilisée.
+                                    if (tuile.estJoker()) tuile = new Tuile();
+
+                                    joueur.ajouterLettreAuChevalet(tuile);
                                 }
 
                                 rafraichirContenu();

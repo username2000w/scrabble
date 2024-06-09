@@ -34,7 +34,10 @@ public class Case {
 	public void changerTuile(Tuile tuile) {
 		this.tuile = tuile;
 	}
-	
+
+	public void enleverTuile() {
+		this.tuile = null;
+	}
 
 	public Bonus bonus() {
 		return bonus;

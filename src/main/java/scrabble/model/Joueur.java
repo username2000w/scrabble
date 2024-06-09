@@ -47,7 +47,6 @@ public class Joueur {
     }
     
     public void changerNom() {
-    	System.out.println("Nom du joueur: " );
         Scanner scanner = new Scanner(System.in);
         String nouveauNom = scanner.nextLine();
         this.nom = nouveauNom;

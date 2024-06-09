@@ -32,4 +32,9 @@ public class Tuile {
     public boolean estJoker() {
     	return lettre.equals(" ") && points == 0;
     }
+
+    @Override
+    public String toString() {
+    	return lettre;
+    }
 }

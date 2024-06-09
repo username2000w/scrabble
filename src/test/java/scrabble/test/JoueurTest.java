@@ -3,6 +3,7 @@ package scrabble.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import scrabble.model.*;
+import scrabble.model.utils.exception.SacVideException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,7 +54,11 @@ class JoueurTest {
         for (int i = 0; i < Chevalet.TAILLE; i++) {
             sac.ajouter(new Tuile(LettreAlphabetFrancais.A));
         }
-        joueur.remplirChevalet(sac);
+        try {
+            joueur.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(Chevalet.TAILLE, joueur.chevalet().tuiles().size());
     }
 }

@@ -2,7 +2,6 @@ package scrabble.test;
 
 import org.junit.jupiter.api.Test;
 
-import scrabble.model.Joker;
 import scrabble.model.LettreAlphabetFrancais;
 import scrabble.model.Tuile;
 

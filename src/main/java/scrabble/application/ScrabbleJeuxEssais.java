@@ -57,8 +57,8 @@ public class ScrabbleJeuxEssais {
 
         System.out.println("On affiche le score du mot.");
         System.out.println(Score.calculerScoreMot(motSel, plateau));
-        System.out.println("On a bien le score du mot 'sel' qui est 3 mais vu qu'on a completé le mot 'pate' " +
-                "on récupere ses points aussi qui sont de 6, ce qui fais bien 3 + 6 = 9.");
+        System.out.println("On a bien le score du mot 'sel' qui est 4 mais vu qu'on a completé le mot 'pate' " +
+                "on récupere ses points aussi qui sont de 6, ce qui fais bien 4 + 6 = 10.");
     }
 
     private static void afficherTuiles(Joueur joueur) {

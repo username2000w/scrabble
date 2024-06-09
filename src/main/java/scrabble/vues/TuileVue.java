@@ -63,6 +63,9 @@ public class TuileVue extends Pane {
         ));
     }
 
+    /**
+     * Joker.
+     */
     public TuileVue (String lettre) {
         this(lettre, 0);
     }
@@ -73,5 +76,9 @@ public class TuileVue extends Pane {
 
     public int points() {
         return points;
+    }
+
+    public boolean estJoker() {
+        return points == 0;
     }
 }

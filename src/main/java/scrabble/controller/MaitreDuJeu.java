@@ -3,41 +3,53 @@ package scrabble.controller;
 import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
+import scrabble.model.utils.DictionaireFrancais;
 import scrabble.model.utils.Direction;
 import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.HorsPlateauException;
 import scrabble.model.utils.exception.SacVideException;
 
 public class MaitreDuJeu {
-    private Sac sac;
-    private Plateau plateau;
+    private final Sac sac;
+    private final Plateau plateau;
     private Joueur joueurActuelle;
     private Joueur joueurAprès;
     private Joueur joueurIntermediaire;
+    private final DictionaireFrancais dictionaire;
     private int tour;
-    int scoreMot =0;
 
-    public MaitreDuJeu() throws SacVideException {
+    public MaitreDuJeu() {
         this.sac = new Sac();
         this.plateau = new Plateau();
         this.joueurActuelle = new Joueur(new Chevalet(), "Joueur 1");
         joueurActuelle.changerNom();
         this.joueurAprès = new Joueur(new Chevalet(), "Joueur 2");
         joueurAprès.changerNom();
-        this.joueurActuelle.remplirChevalet(sac);
-        // v3 => Compter plusieurs joueurs
+        try {
+            this.joueurActuelle.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
+        this.dictionaire = new DictionaireFrancais();
     }
-    
+
     public void changerTour() {
     	joueurIntermediaire = joueurActuelle;
         joueurActuelle = joueurAprès;
         joueurAprès = joueurIntermediaire;
-        
     }
 
-    public boolean jouerTour() throws SacVideException {
-        joueurActuelle.remplirChevalet(sac);
-        joueurAprès.remplirChevalet(sac);
+    public boolean jouerTour() {
+        try {
+            joueurActuelle.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            joueurAprès.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         Console.afficherPlateau(plateau);
         Console.message(joueurActuelle.nom() + " a les tuiles suivantes :");
         Console.afficherChevalet(joueurActuelle.chevalet());
@@ -61,7 +73,11 @@ public class MaitreDuJeu {
             case 2:
                 Console.message("Quelle tuile voulez-vous échanger ? (Numéro de l'emplacement)");
                 int input = Console.inputIntScanner();
-                joueurActuelle.echanger(sac, input-1);
+                try {
+                    joueurActuelle.echanger(sac, input-1);
+                } catch (SacVideException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case 3:
             	 Console.message("Votre score est de " + joueurActuelle.score() + " points.");
@@ -70,13 +86,12 @@ public class MaitreDuJeu {
                 return false;
             default:
                 Console.message("Choix invalide.");
-        
         }
         changerTour();
         return true;
     }
 
-    public void jouerLettre(Plateau plateau, Joueur joueur, int NombreLettrePosee, Mot mot) {
+    public void demanderLettre(Joueur joueur, int NombreLettrePosee, Mot mot) {
         int posColonne;
         int posLigne;
         int choixSensMot;
@@ -140,7 +155,7 @@ public class MaitreDuJeu {
         Console.message("Vous allez jouer un mot.");
         int choix = 0;
         while (choix != 2) {
-            jouerLettre(plateau, joueur, NombreLettrePosee, mot);
+            demanderLettre(joueur, NombreLettrePosee, mot);
             if (NombreLettrePosee == 0) {
                 coordonnees = mot.coordoneeDebut();
             }
@@ -209,39 +224,34 @@ public class MaitreDuJeu {
         Direction directionMot = mot.direction();
 
         Coordonee coordonnees = mot.coordoneeDebut();
-        int ligne = coordonnees.ligne();
-        int colonne = coordonnees.colonne();
-
-        for (Tuile tuile : mot.getMot()) {
-
-            if (directionMot.equals(Direction.HORIZONTAL)) {
+        if (motValide(mot)) {
+            for (Tuile tuile : mot.getMot()) {
                 try {
-                    if (plateau.plateau()[ligne][colonne].estVide()) {
-                        plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
+                    if (plateau.plateau()[coordonnees.ligne()][coordonnees.colonne()].estVide()) {
+                        plateau.placerTuile(tuile, coordonnees);
                     } else {
-                        colonne++;
                         Console.message("Une lettre est déjà présente à cet endroit, on décale la lettre.");
-                        plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
+                        plateau.placerTuile(tuile, coordonnees.avancer(directionMot));
                     }
                 } catch (HorsPlateauException e) {
                     throw new RuntimeException(e);
                 }
-                colonne++;
-            } else {
-                try {
-                    if (plateau.plateau()[ligne][colonne].estVide()) {
-                        plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
-                    } else {
-                        ligne++;
-                        Console.message("Une lettre est déjà présente à cet endroit, on décale la lettre.");
-                        plateau.placerTuile(tuile, new Coordonee(ligne, colonne));
-                    }
-                } catch (HorsPlateauException e) {
-                    throw new RuntimeException(e);
-                }
-                ligne++;
+                coordonnees = coordonnees.avancer(directionMot);
             }
         }
+    }
+
+    public boolean motValide(Mot mot) {
+        Mot motNouveau = new Mot();
+
+        for (Tuile tuile : mot.getMot()) {
+            motNouveau.ajouterLettre(tuile);
+        }
+        for (Coordonee coordonee = mot.coordoneeDebut().reculer(mot.direction()); !plateau.casePlateau(coordonee).estVide(); coordonee = coordonee.reculer(mot.direction())) {
+            motNouveau.getMot().add(0, plateau.casePlateau(coordonee).tuile());
+        }
+
+    	return dictionaire.contient(motNouveau.toString());
     }
 
     public Sac sac() {

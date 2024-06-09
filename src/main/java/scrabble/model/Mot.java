@@ -1,6 +1,7 @@
 package scrabble.model;
 
 import scrabble.model.utils.Coordonee;
+import scrabble.model.utils.DictionaireFrancais;
 import scrabble.model.utils.Direction;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Mot {
     private Coordonee coordoneeDebut;
     private Direction direction;
-    private ArrayList<Tuile> mot = new ArrayList<>();
+    private final ArrayList<Tuile> mot = new ArrayList<>();
 
     public Mot(Coordonee coordoneeDebut, Direction direction) {
         this.coordoneeDebut = coordoneeDebut;
@@ -45,5 +46,15 @@ public class Mot {
     
     public int nombreDeLettre() {
     	return mot.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder mot = new StringBuilder();
+        for (Tuile tuile : this.mot) {
+            mot.append(tuile.lettre().toLowerCase());
+        }
+
+        return String.valueOf(mot);
     }
 }

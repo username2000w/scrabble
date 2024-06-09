@@ -17,7 +17,7 @@ public class Chevalet {
         this.tuiles.add(sac.piocher());
     }
 
-    public Tuile echanger(Sac sac, int tuileIndex) {
+    public Tuile echanger(Sac sac, int tuileIndex) throws SacVideException {
         Tuile tuile = this.tuiles.remove(tuileIndex);
         sac.ajouter(tuile);
         this.piocher(sac);
@@ -44,7 +44,7 @@ public class Chevalet {
         return this.tuiles;
     }
 
-    public void remplirChevalet(Sac sac) {
+    public void remplirChevalet(Sac sac) throws SacVideException {
         for (int tailleActuelle = this.tuiles().size(); tailleActuelle < TAILLE; tailleActuelle++) {
             this.piocher(sac);
         }

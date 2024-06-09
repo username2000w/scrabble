@@ -6,6 +6,7 @@ import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
 import scrabble.model.utils.Score;
 import scrabble.model.utils.exception.HorsPlateauException;
+import scrabble.model.utils.exception.SacVideException;
 
 public class MaitreDuJeu {
     private Sac sac;
@@ -17,12 +18,20 @@ public class MaitreDuJeu {
         this.sac = new Sac();
         this.plateau = new Plateau();
         this.joueur = new Joueur(new Chevalet(), "Joueur 1");
-        this.joueur.remplirChevalet(sac);
+        try {
+            this.joueur.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         // v3 => Compter plusieurs joueurs
     }
 
     public boolean jouerTour() {
-        joueur.remplirChevalet(sac);
+        try {
+            joueur.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            throw new RuntimeException(e);
+        }
         Console.afficherPlateau(plateau);
         Console.message(joueur.nom() + " a les tuiles suivantes :");
         Console.afficherChevalet(joueur.chevalet());
@@ -42,7 +51,11 @@ public class MaitreDuJeu {
             case 2:
                 Console.message("Quelle tuile voulez-vous échanger ? (Numéro de l'emplacement)");
                 int input = Console.inputIntScanner();
-                joueur.echanger(sac, input-1);
+                try {
+                    joueur.echanger(sac, input-1);
+                } catch (SacVideException e) {
+                    Console.message("Le sac est vide.");
+                }
                 break;
             case 3:
                 return false;

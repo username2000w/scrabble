@@ -5,10 +5,11 @@ import com.pixelduke.window.ThemeWindowManagerFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import scrabble.controller.PartieController;
 import scrabble.controller.PasserTourController;
 import scrabble.controller.ChevaletVueController;
+import scrabble.gui.Console;
 import scrabble.model.*;
+import scrabble.model.utils.exception.SacVideException;
 import scrabble.vues.PartieVue;
 
 public class ScrabbleFXApplication extends Application {
@@ -27,8 +28,13 @@ public class ScrabbleFXApplication extends Application {
         PartieVue root = new PartieVue();
         ChevaletVueController chevaletVueController = new ChevaletVueController(root, joueur, plateau, sac);
 
-        // On remplit le sac du joueur au début de la partie.
-        joueur.remplirChevalet(sac);
+        // On remplit le chevalet du joueur.
+        try {
+            joueur.remplirChevalet(sac);
+        } catch (SacVideException e) {
+            Console.message("Le sac est vide.");
+        }
+
         // On actualise le contenu dans l'IHM.
         chevaletVueController.rafraichirContenu();
 

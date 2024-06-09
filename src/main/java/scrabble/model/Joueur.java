@@ -1,5 +1,7 @@
 package scrabble.model;
 
+import scrabble.model.utils.exception.SacVideException;
+
 public class Joueur {
     private final Chevalet chevalet;
     private final String nom;
@@ -13,7 +15,7 @@ public class Joueur {
         return nom;
     }
 
-    public void echanger(Sac sac, int tuileIndex) {
+    public void echanger(Sac sac, int tuileIndex) throws SacVideException {
         chevalet.echanger(sac, tuileIndex);
     }
 
@@ -29,7 +31,7 @@ public class Joueur {
         return chevalet;
     }
 
-    public void remplirChevalet(Sac sac) {
+    public void remplirChevalet(Sac sac) throws SacVideException {
         chevalet.remplirChevalet(sac);
     }
 }

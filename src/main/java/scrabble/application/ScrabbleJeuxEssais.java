@@ -5,6 +5,7 @@ import scrabble.gui.Console;
 import scrabble.model.*;
 import scrabble.model.utils.Coordonee;
 import scrabble.model.utils.Direction;
+import scrabble.model.utils.exception.SacVideException;
 
 public class ScrabbleJeuxEssais {
     public static void main(String[] args) {
@@ -17,11 +18,20 @@ public class ScrabbleJeuxEssais {
         afficherTuiles(joueur);
 
         System.out.println("On échange la première tuile et on affiche.");
-        joueur.echanger(sac,0);
+
+        try {
+            joueur.echanger(sac,0);
+        } catch (SacVideException e) {
+            System.out.println("Le sac est vide.");
+        }
         afficherTuiles(joueur);
 
         System.out.println("On échange la troisième tuile et on affiche.");
-        joueur.echanger(sac,2);
+        try {
+            joueur.echanger(sac,2);
+        } catch (SacVideException e) {
+            System.out.println("Le sac est vide.");
+        }
         afficherTuiles(joueur);
 
         System.out.println("On place un mot sur le plateau.");

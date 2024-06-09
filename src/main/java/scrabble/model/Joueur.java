@@ -1,10 +1,12 @@
 package scrabble.model;
 
+import java.util.Scanner;
+
 import scrabble.model.utils.exception.SacVideException;
 
 public class Joueur {
     private final Chevalet chevalet;
-    private final String nom;
+    private String nom;
     private int score = 0;
 
     public Joueur(Chevalet chevalet, String nom) {
@@ -42,6 +44,13 @@ public class Joueur {
     
     public int score() {
     	return score;
+    }
+    
+    public void changerNom() {
+    	System.out.println("Nom du joueur: " );
+        Scanner scanner = new Scanner(System.in);
+        String nouveauNom = scanner.nextLine();
+        this.nom = nouveauNom;
     }
 
 }

@@ -16,7 +16,7 @@ class JoueurTest {
     @BeforeEach
     void demarrage() {
         Chevalet chevalet = new Chevalet();
-        joueur = new Joueur(chevalet, "Test");
+        joueur = new Joueur(chevalet, "Joueur1");
         sac = new Sac();
         tuileA = new Tuile(LettreAlphabetFrancais.A);
         tuileB = new Tuile(LettreAlphabetFrancais.B);
@@ -24,7 +24,7 @@ class JoueurTest {
 
     @Test
     void testNom() {
-        assertEquals("Test", joueur.nom());
+        assertEquals("Joueur1", joueur.nom());
     }
 
     // TODO : faire fonctionner ce test
@@ -45,6 +45,12 @@ class JoueurTest {
     }
 
     @Test
+    void testAjouterLettreAuChevalet() {
+        joueur.ajouterLettreAuChevalet(tuileA);
+        assertTrue(joueur.chevalet().tuiles().contains(tuileA));
+    }
+
+    @Test
     void testChevalet() {
         assertNotNull(joueur.chevalet());
     }
@@ -60,5 +66,16 @@ class JoueurTest {
             throw new RuntimeException(e);
         }
         assertEquals(Chevalet.TAILLE, joueur.chevalet().tuiles().size());
+    }
+
+    @Test
+    void testAjouterScore() {
+        assertEquals(0, joueur.score());
+
+        joueur.ajouterScore(10);
+        assertEquals(10, joueur.score());
+
+        joueur.ajouterScore(5);
+        assertEquals(15, joueur.score());
     }
 }

@@ -29,15 +29,15 @@ class JokerTest {
     @Test
     void testEstJoker() {
         // Teste si la tuile est un joker
-        assert estUnJokerVide.estJoker();
-        assert estUnJokerJ.estJoker();
-        assert estUnJokerK.estJoker();
+        assertTrue(estUnJokerVide.estJoker());
+        assertTrue(estUnJokerJ.estJoker());
+        assertTrue(estUnJokerK.estJoker());
     }
 
     @Test
     void testNestPasUnJoker() {
         // Teste si la tuile n'est pas un joker
-        assert !nEstPasUnJoker.estJoker();
+        assertFalse(nEstPasUnJoker.estJoker());
     }
 
     @Test

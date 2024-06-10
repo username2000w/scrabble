@@ -14,6 +14,11 @@ public class Score {
 
         int scoreMot = 0;
 
+        while (!plateau.casePlateau(coordoneeDebutMot.reculer(directionMot)).estVide() &&
+                coordoneeDebutMot.colonne() > 0 && coordoneeDebutMot.ligne() > 0) {
+            coordoneeDebutMot = coordoneeDebutMot.reculer(directionMot);
+        }
+
         // Calcul du score du mot de base avec multiplicateurs
         scoreMot = calculMotDeBase(coordoneeDebutMot, cases, directionMot, scoreMot);
 

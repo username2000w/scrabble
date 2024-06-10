@@ -23,10 +23,10 @@ public class MaitreDuJeu {
         this.plateau = new Plateau();
         this.joueurActuelle = new Joueur(new Chevalet(), "Joueur 1");
         System.out.println("Nom du joueur 1: " );
-        joueurActuelle.changerNom();
+        //joueurActuelle.changerNom();
         this.joueurAprès = new Joueur(new Chevalet(), "Joueur 2");
         System.out.println("Nom du joueur 2: " );
-        joueurAprès.changerNom();
+        //joueurAprès.changerNom();
         try {
             this.joueurActuelle.remplirChevalet(sac);
         } catch (SacVideException e) {

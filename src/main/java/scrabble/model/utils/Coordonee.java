@@ -45,7 +45,6 @@ public class Coordonee {
         return switch (direction) {
             case HORIZONTAL -> new Coordonee(ligne, colonne + 1);
             case VERTICAL -> new Coordonee(ligne + 1, colonne);
-            default -> throw new IllegalArgumentException("Direction inconnue");
         };
     }
 
@@ -53,7 +52,6 @@ public class Coordonee {
         return switch (direction) {
             case HORIZONTAL -> new Coordonee(ligne, colonne - 1);
             case VERTICAL -> new Coordonee(ligne - 1, colonne);
-            default -> throw new IllegalArgumentException("Direction inconnue");
         };
     }
 }

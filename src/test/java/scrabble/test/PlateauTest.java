@@ -12,7 +12,7 @@ import scrabble.model.utils.exception.HorsPlateauException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlateauTest {
+class PlateauTest {
 
     private Plateau plateau;
 
@@ -22,7 +22,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testInitialisationPlateau() {
+    void testInitialisationPlateau() {
         assertEquals(15, Plateau.TAILLE_PLATEAU_HORIZONTALE);
         assertEquals(15, Plateau.TAILLE_PLATEAU_VERTICALE);
 
@@ -34,14 +34,14 @@ public class PlateauTest {
     }
 
     @Test
-    public void testCoordoneesEtoile() {
+    void testCoordoneesEtoile() {
         for (Coordonee coordonee : Plateau.COORDONEES_ETOILE) {
             assertEquals(Bonus.ETOILE, plateau.casePlateau(coordonee).bonus());
         }
     }
 
     @Test
-    public void testCoordoneesLettreDouble() {
+    void testCoordoneesLettreDouble() {
         for (Coordonee coordonee : Plateau.COORDONEES_LETTRE_DOUBLE_SYMETRIQUE) {
             assertEquals(Bonus.LETTRE_DOUBLE, plateau.casePlateau(coordonee).bonus());
             assertEquals(Bonus.LETTRE_DOUBLE, plateau.casePlateau(new Coordonee(coordonee.colonne(), coordonee.ligne())).bonus());
@@ -49,7 +49,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testCoordoneesLettreTriple() {
+    void testCoordoneesLettreTriple() {
         for (Coordonee coordonee : Plateau.COORDONEES_LETTRE_TRIPLE_SYMETRIQUE) {
             assertEquals(Bonus.LETTRE_TRIPLE, plateau.casePlateau(coordonee).bonus());
             assertEquals(Bonus.LETTRE_TRIPLE, plateau.casePlateau(new Coordonee(coordonee.colonne(), coordonee.ligne())).bonus());
@@ -57,7 +57,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testCoordoneesMotDouble() {
+    void testCoordoneesMotDouble() {
         for (Coordonee coordonee : Plateau.COORDONEES_MOT_DOUBLE_SYMETRIQUE) {
             assertEquals(Bonus.MOT_DOUBLE, plateau.casePlateau(coordonee).bonus());
             assertEquals(Bonus.MOT_DOUBLE, plateau.casePlateau(new Coordonee(coordonee.colonne(), coordonee.ligne())).bonus());
@@ -65,7 +65,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testCoordoneesMotTriple() {
+    void testCoordoneesMotTriple() {
         for (Coordonee coordonee : Plateau.COORDONEES_MOT_TRIPLE_SYMETRIQUE) {
             assertEquals(Bonus.MOT_TRIPLE, plateau.casePlateau(coordonee).bonus());
             assertEquals(Bonus.MOT_TRIPLE, plateau.casePlateau(new Coordonee(coordonee.colonne(), coordonee.ligne())).bonus());
@@ -73,7 +73,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testPlacerTuile() throws HorsPlateauException {
+    void testPlacerTuile() throws HorsPlateauException {
         Tuile tuile = new Tuile(LettreAlphabetFrancais.A);
         Coordonee coordonee = new Coordonee(7, 7);
         plateau.placerTuile(tuile, coordonee);
@@ -81,7 +81,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testSupprimerToutesTuiles() throws HorsPlateauException {
+    void testSupprimerToutesTuiles() throws HorsPlateauException {
         Tuile tuile = new Tuile(LettreAlphabetFrancais.A);
         Coordonee coordonee = new Coordonee(7, 7);
         plateau.placerTuile(tuile, coordonee);
@@ -92,7 +92,7 @@ public class PlateauTest {
     }
 
     @Test
-    public void testCasePlateau() {
+    void testCasePlateau() {
         Coordonee coordonee = new Coordonee(0, 0);
         assertNotNull(plateau.casePlateau(coordonee));
     }

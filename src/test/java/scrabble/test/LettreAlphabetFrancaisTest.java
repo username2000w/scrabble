@@ -5,7 +5,7 @@ import scrabble.model.LettreAlphabetFrancais;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LettreAlphabetFrancaisTest {
+class LettreAlphabetFrancaisTest {
 
     @Test
     void testPoints() {

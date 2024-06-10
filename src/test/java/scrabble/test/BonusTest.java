@@ -4,20 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import scrabble.model.Bonus;
 
-public class BonusTest {
+class BonusTest {
 
     @Test
-    public void testSymbole() {
+    void testSymbole() {
         // Teste les symboles des bonus
         assertEquals("3 ", Bonus.MOT_TRIPLE.toString());
         assertEquals("2 ", Bonus.MOT_DOUBLE.toString());
-        assertEquals("D ", Bonus.LETTRE_DOUBLE.toString());
-        assertEquals("T ", Bonus.LETTRE_TRIPLE.toString());
+        assertEquals("d ", Bonus.LETTRE_DOUBLE.toString());
+        assertEquals("t ", Bonus.LETTRE_TRIPLE.toString());
         assertEquals("★ ", Bonus.ETOILE.toString());
     }
 
     @Test
-    public void testMultiplicateurLettre() {
+    void testMultiplicateurLettre() {
         // Teste les multiplicateurs de lettre
         assertEquals(1, Bonus.MOT_TRIPLE.multiplicateurLettre());
         assertEquals(1, Bonus.MOT_DOUBLE.multiplicateurLettre());
@@ -27,7 +27,7 @@ public class BonusTest {
     }
 
     @Test
-    public void testMultiplicateurMot() {
+    void testMultiplicateurMot() {
         // Teste les multiplicateurs de mot
         assertEquals(3, Bonus.MOT_TRIPLE.multiplicateurMot());
         assertEquals(2, Bonus.MOT_DOUBLE.multiplicateurMot());

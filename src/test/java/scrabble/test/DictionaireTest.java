@@ -6,7 +6,7 @@ import scrabble.model.utils.DictionaireFrancais;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DictionaireTest {
+class DictionaireTest {
 
     @Test
     void mot_dgshsg_pas_dans_le_dictionaire() {

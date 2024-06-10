@@ -8,21 +8,21 @@ import scrabble.model.Tuile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CaseTest {
+class CaseTest {
 
     private final Case caseAvecBonus = new Case(Bonus.LETTRE_DOUBLE);;
     private final Case caseSansBonus = new Case();;
     private final Tuile tuile  = new Tuile(LettreAlphabetFrancais.A);
 
     @Test
-    public void testCaseInitialementVide() {
+    void testCaseInitialementVide() {
         // Teste si une case est vide à l'initialisation
         assertTrue(caseAvecBonus.estVide());
         assertTrue(caseSansBonus.estVide());
     }
 
     @Test
-    public void testChangerTuile() {
+    void testChangerTuile() {
         // Teste le changement de tuile sur une case vide
         caseAvecBonus.changerTuile(tuile);
 
@@ -31,7 +31,7 @@ public class CaseTest {
     }
 
     @Test
-    public void testViderCase() {
+    void testViderCase() {
         // Teste le vidage d'une case
         caseAvecBonus.changerTuile(tuile);
         assertFalse(caseAvecBonus.estVide());
@@ -43,20 +43,20 @@ public class CaseTest {
     }
 
     @Test
-    public void testTuileSurCaseVide() {
+    void testTuileSurCaseVide() {
         // Teste la récupération de la tuile sur une case vide
         assertNull(caseAvecBonus.tuile());
     }
 
     @Test
-    public void testBonus() {
+    void testBonus() {
         // Teste le bonus sur une case
         assertEquals(Bonus.LETTRE_DOUBLE, caseAvecBonus.bonus());
         assertNull(caseSansBonus.bonus());
     }
 
     @Test
-    public void testConstructeurSansParametre() {
+    void testConstructeurSansParametre() {
         // Teste le constructeur sans paramètre
         Case nouvelleCase = new Case();
         assertNull(nouvelleCase.bonus());

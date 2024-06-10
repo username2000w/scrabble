@@ -12,7 +12,7 @@ import scrabble.model.utils.Score;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ScoreTest {
+class ScoreTest {
 
     @Test
     void testMotSelEtPate() {

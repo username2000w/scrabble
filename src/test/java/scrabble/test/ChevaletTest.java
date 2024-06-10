@@ -9,7 +9,7 @@ import scrabble.model.utils.exception.SacVideException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ChevaletTest {
+class ChevaletTest {
     private Chevalet chevalet;
     private Sac sac;;
     private Tuile tuileA;

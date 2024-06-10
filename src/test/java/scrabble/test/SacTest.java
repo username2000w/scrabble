@@ -11,7 +11,7 @@ import scrabble.model.utils.exception.SacVideException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SacTest {
+class SacTest {
 
     @Test
     void testContient102Tuiles() {
@@ -105,7 +105,7 @@ public class SacTest {
     }
 
     @Test
-    public void testAjouterTuile() {
+    void testAjouterTuile() {
         Sac sac = new Sac();
         sac.viderSac();
         sac.ajouter(new Tuile(LettreAlphabetFrancais.A));
@@ -113,7 +113,7 @@ public class SacTest {
     }
 
     @Test
-    public void testExceptionSacVide() {
+    void testExceptionSacVide() {
         Sac sac = new Sac();
         sac.viderSac();
         assertThrows(SacVideException.class, sac::piocher);

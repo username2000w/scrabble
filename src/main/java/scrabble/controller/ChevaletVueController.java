@@ -194,6 +194,7 @@ public class ChevaletVueController {
                                     casesEnCours.clear();
                                     try {
                                         joueur.remplirChevalet(sac);
+                                        root.partieInformation().sacVue().changerNombreDeTuiles(sac.nombreDeTuiles());
                                     } catch (SacVideException ex) {
                                         Console.message("Le sac est vide.");
                                     }

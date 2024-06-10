@@ -41,7 +41,7 @@ public class PasserTourController implements EventHandler<MouseEvent> {
             // On désactive l'état "passer tour".
             actif = false;
             selection.clear();
-            vue.partieInformation().validerBouton().setVisible(false);
+            vue.partieInformation().validerBouton().setOpacity(.5);
         });
     }
 
@@ -50,7 +50,7 @@ public class PasserTourController implements EventHandler<MouseEvent> {
         // Inverse l'état actif du bouton "Passer son tour".
         actif = !actif;
         // On décide d'afficher ou non le bouton pour valider l'échange.
-        vue.partieInformation().validerBouton().setVisible(actif);
+        vue.partieInformation().validerBouton().setOpacity(actif ? 1 : .5);
 
         // Si on désactive l'échange...
         if (!actif) {

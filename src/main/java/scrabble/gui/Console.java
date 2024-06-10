@@ -56,15 +56,13 @@ public class Console {
 
     public static String inputStringScanner() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
 
-        return input;
+        return scanner.nextLine();
     }
 
     public static int inputIntScanner() {
         Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
 
-        return input;
+        return scanner.nextInt();
     }
 }

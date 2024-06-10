@@ -2,12 +2,14 @@ package scrabble.vues;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import scrabble.gui.utils.PoliceTexteUtilitaire;
 
 public class PartieInformationVue extends VBox {
     private final Button validerBouton;
-    private final Button passerTourBouton;
-    private final Button annulerBouton;
+    private final Button actionSecondaire;
     private final Label scoreLabel;
+    private final SacVue sacVue;
 
     public PartieInformationVue() {
         super();
@@ -15,34 +17,29 @@ public class PartieInformationVue extends VBox {
         validerBouton = new Button("OK");
         validerBouton.setOpacity(.5);
 
-        passerTourBouton = new Button("SKIP");
-        annulerBouton = new Button("CANCEL");
+        actionSecondaire = new Button();
 
         scoreLabel = new Label("0");
-        scoreLabel.setStyle("-fx-text-fill: white; -fx-font-size: 69px; -fx-font-weight: bold; -fx-font-family: 'Arial';");
+        scoreLabel.setTextFill(Color.WHITE);
+        scoreLabel.setFont(PoliceTexteUtilitaire.utiliserReadexPro(80));
 
+        sacVue = new SacVue();
 
-        getChildren().addAll(new Label("Joueur"), scoreLabel, validerBouton);
+        getChildren().addAll(new Label("Joueur"), scoreLabel, validerBouton, actionSecondaire, sacVue);
         setMinWidth(300);
         setMaxWidth(300);
     }
 
     public Button utiliserAnnulerBouton(double opacite) {
-        getChildren().remove(passerTourBouton);
-        if (!getChildren().contains(annulerBouton)) {
-            getChildren().add(annulerBouton);
-        }
-        annulerBouton.setOpacity(opacite);
-        return annulerBouton;
+        actionSecondaire.setText("ANNULER");
+        actionSecondaire.setOpacity(opacite);
+        return actionSecondaire;
     }
 
     public Button utiliserPasserTourBouton(double opacite) {
-        getChildren().remove(annulerBouton);
-        if (!getChildren().contains(passerTourBouton)) {
-            getChildren().add(passerTourBouton);
-        }
-        passerTourBouton.setOpacity(opacite);
-        return passerTourBouton;
+        actionSecondaire.setText("PASSER");
+        actionSecondaire.setOpacity(opacite);
+        return actionSecondaire;
     }
 
     public Button validerBouton() {
@@ -51,5 +48,9 @@ public class PartieInformationVue extends VBox {
 
     public Label scoreLabel() {
         return scoreLabel;
+    }
+
+    public SacVue sacVue() {
+    	return sacVue;
     }
 }

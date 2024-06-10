@@ -41,6 +41,7 @@ public class ScrabbleFXApplication extends Application {
         // On peut passer son tour dès le début de la partie.
         root.partieInformation().utiliserPasserTourBouton(1).setOnMouseClicked(new PasserTourController(root, joueur.chevalet(), sac));
         root.boutonMelanger().setOnMouseClicked(event -> chevaletVueController.melangerTuiles());
+        root.partieInformation().sacVue().changerNombreDeTuiles(sac.nombreDeTuiles());
 
         // On met en place la scène.
         Scene scene = new Scene(root, 1180, 982);
